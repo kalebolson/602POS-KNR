@@ -1,0 +1,11 @@
+class Store()
+{
+    Inventory inv
+    List(Cashier) cashiers
+    List(Transaction) transactions
+    List(Registers) registers
+
+    
+
+
+}
