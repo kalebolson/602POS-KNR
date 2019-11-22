@@ -5,6 +5,7 @@ class Cashier
     String firstName
     String lastName
     boolean administrator
+    Shift shift
 
     Cashier(ID,PW,firstname,lastname,admin)
         set cashierID = ID
@@ -17,10 +18,15 @@ class Cashier
     Cashier(ID,PW)
         set cashierID = ID
         set password = PW
-	set firstName = cashier
+	      set firstName = cashier
         set lastName = cashier
         set administrator = false
-        
+
+    setShift()
+        shift = new Shift(self)
+    getShift()
+        get shift
+
     getID()
         get cashier id
 
@@ -42,5 +48,7 @@ class Cashier
 
     ##verifies whether to do administrative tasks under this profile
     isAdmin()
-        get administrator    
+        get administrator
+
+
 }
