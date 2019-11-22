@@ -1,0 +1,8 @@
+class Money {
+	DecimalFormat df
+	
+	formatCurrency()
+	addTax()
+	calculateSubTotal()
+	calculateTotal()
+}

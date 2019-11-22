@@ -1,0 +1,82 @@
+class Transaction {
+	int transactionID
+	LocalDateTime transactionDate
+	DateTimeFormatter dtf
+	ArrayList<Product> items
+	Cashier cashier
+	double cashTendered
+	double changeRecieved
+	Inventory currentInv
+	
+	returnAllToInventory(transactionID)
+		get a receipt of items from a given transactionID
+		add all items from a given transaction back to the products ArrayList in the Inventory class
+	
+	returnProductToInventory(transactionID, Product)
+		look up a receipt of items from a given transactionID
+		add specified item from a given transactionID back to the products ArrayList in the Inventory class
+		
+	refundProduct(transactionID, Product)
+		get a receipt of items from a given transactionID
+		subtract the item price from the receipt total
+		calculate new total
+		set new changeReceived based on new total
+		
+		if product is sellable
+			returnProductToInventory(transactionID, Product)
+		end
+		
+		removeProduct(transactionID, Product)
+		
+	addProduct(Product)
+		add item to end of ArrayList<Product> items
+		
+	removeProduct(transactionID, Product)
+		look up a receipt of items from a given transactionID
+	
+	displaySubTotal()
+		call Money Class calculateSubTotal()
+		print subTotal
+		
+	displayTotal()
+		call Money class calculateTotal()
+		print total
+		
+	printReceipt(transactionID)
+		print items sold, their price, sub total, sales tax, and total for a given transactionID
+	
+	getTransactionID()
+		return transactionID
+	
+	setTransactionID(integer)
+		set integer = transactionID
+		
+	getTransactionDate()
+		return formatted transactionDate
+	
+	getItem(integer) 
+		return item from ArrayList<Product> items at given index
+		
+	setItem(integer, Product)
+		add item to ArrayList<Product> items at specified index
+		
+	getCashier()
+		return cashier
+	
+	setCashier(cashier)
+		set this cashier = cashier
+	
+	getCashTendered()
+		return cashTendered
+	
+	setCashTendered(double)
+		set cashTendered = double
+	
+	getChangeReceived()
+		return changeReceived
+		
+	setChangeReceived(double)
+		set changeReceived = double
+		
+	
+}
