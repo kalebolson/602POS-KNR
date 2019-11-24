@@ -1,8 +1,30 @@
 class Money {
-	DecimalFormat df
+	DecimalFormat df = new DecimalFormat("$###,###.00")
+	final SALES_TAX
+	double subtotal
+	double total
 	
-	formatCurrency()
-	addTax()
-	calculateSubTotal()
-	calculateTotal()
+	public Money()
+		subtotal = 0
+		total = 0
+		
+	addTax(subtotal)
+		total = 0
+		total = subtotal + (subtotal * SALES_TAX)
+		
+	calculateSubtotal(ArrayList<Product> cart)
+		for (int i = 0; i < cart.size(); i++)
+			subTotal += cart.get(i).getPrice()
+		end
+		return subtotal
+		
+	calculateTotal(ArrayList<Product> cart)
+		total = 0
+		calculateSubtotal(cart)
+		addTax(subtotal)
+		return total
+		
+		
+	toString()
+		return "Subtotal: " + df.format(subtotal) + "\nTotal: " + df.format(total)
 }
