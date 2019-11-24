@@ -1,13 +1,22 @@
 class Transaction {
-	int transactionID
-	LocalDateTime transactionDate
+	static int count = 0
+	static int transactionID
+	LocalDateTime localDateTime
 	DateTimeFormatter dtf
-	ArrayList<Product> items
+	String transactionDate
+	ArrayList<Product> cart
 	Cashier cashier
 	double cashTendered
 	double changeRecieved
 	Inventory currentInv
 	
+	public Transaction()
+		transactionID = ++count
+		localDateTime = LocalDateTime.now()
+		format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")
+		transactionDate = localDateTime.format(dtf)
+		
+		
 	returnAllToInventory(transactionID)
 		get a receipt of items from a given transactionID
 		add all items from a given transaction back to the products ArrayList in the Inventory class
@@ -29,7 +38,7 @@ class Transaction {
 		removeProduct(transactionID, Product)
 		
 	addProduct(Product)
-		add item to end of ArrayList<Product> items
+		add item to end of ArrayList<Product> cart
 		
 	removeProduct(transactionID, Product)
 		look up a receipt of items from a given transactionID
@@ -55,10 +64,10 @@ class Transaction {
 		return formatted transactionDate
 	
 	getItem(integer) 
-		return item from ArrayList<Product> items at given index
+		return item from ArrayList<Product> cart at given index
 		
 	setItem(integer, Product)
-		add item to ArrayList<Product> items at specified index
+		add item to ArrayList<Product> cart at specified index
 		
 	getCashier()
 		return cashier
