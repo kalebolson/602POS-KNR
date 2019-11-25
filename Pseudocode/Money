@@ -9,13 +9,14 @@ class Money {
 		total = 0
 		
 	addTax(subtotal)
-		total = 0
-		total = subtotal + (subtotal * SALES_TAX)
+		this.subtotal = subtotal + (subtotal * SALES_TAX)
 		
 	calculateSubtotal(ArrayList<Product> cart)
+		double sum;
 		for (int i = 0; i < cart.size(); i++)
-			subTotal += cart.get(i).getPrice()
+			sum += cart.get(i).getPrice()
 		end
+		subtotal = sum
 		return subtotal
 		
 	calculateTotal(ArrayList<Product> cart)

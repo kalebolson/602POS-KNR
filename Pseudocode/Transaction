@@ -13,7 +13,7 @@ class Transaction {
 	public Transaction()
 		transactionID = ++count
 		localDateTime = LocalDateTime.now()
-		format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")
+		dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")
 		transactionDate = localDateTime.format(dtf)
 		
 		
@@ -43,11 +43,11 @@ class Transaction {
 	removeProduct(transactionID, Product)
 		look up a receipt of items from a given transactionID
 	
-	displaySubTotal()
+	displaySubTotal() - may not need this method, link to UI directly from Money class
 		call Money Class calculateSubTotal()
 		print subTotal
 		
-	displayTotal()
+	displayTotal() - may not need this method, link to UI directly from Money class
 		call Money class calculateTotal()
 		print total
 		
