@@ -1,0 +1,132 @@
+class Register()
+{
+    Store store
+    int registerID
+    Money cashValue
+    Cashier currentCashier
+
+    Register(int ID, Money initCash, Store store)
+        set registerID = ID
+        set cashValue = initCash
+        set self.store = store
+
+    menuSelect(String entry)
+        Switch entry:
+          case "sale": makeSale()
+          case "return": makeReturn()
+          case "add cashier": addCashier(get input from user)
+          case "remove cashier": removeCashier(get input from user)
+          case "run report": report()
+          case "logout": currentCashier.setTimeout()
+                         lock()
+
+    lock()
+        boolean locked = true
+        int ID
+        String PW
+
+        while locked:
+            get ID & PW from user
+            for cashiers (index i)
+                if i.cashierID==ID and i.password==PW
+                    locked = false
+                    currentCashier = i
+                    currentCashier.setShift()
+            if locked = true
+                print ("invalid credentials")
+
+
+    addCash (Money input)
+        add input to cashValue
+
+
+    removeCash (Money input)
+        if input <= cashValue:
+            remove input from cashValue
+        else:
+            return error
+
+
+
+    getValue ()
+        get cashValue
+
+
+    getID ()
+        get registerID
+
+
+    makeSale()
+        saleOpen = true
+        Transaction t
+        List(int) UPCs
+        while saleOpen
+          get user input entry
+          Switch entry:)
+            Case "add": t.addProduct(get UPC from user)
+                        UPCs.add(UPC)
+            Case "remove": t.removeProduct(get UPC from user)
+                            UPCs.remove(UPC)
+            Case "complete":
+                             print t.getSubTotal()
+                             print t.getTotal()
+                             Money payment = getTotal
+                             addCash(payment)
+                             for UPCs (index i):
+                                store.getProduct(i).sell()
+                             t.printReceipt
+                             Store.addTransaction(t)
+                             saleOpen = false
+
+    makeReturn(int ID)
+        Transaction t
+        t = store.getTransaction(ID)
+        List(int) UPCs
+        returnOpen = true
+        while returnOpen
+          get user input entry
+          Switch entry:
+            Case "all": t.returnAlltoInventory()
+                        for t.getItems() (index i):
+                          UPCs.add(i.getUPC())
+            Case "partial": get UPC from user
+                            t.returnProductToInventory(UPC)
+                            UPCs.add(UPC)
+            Case "complete": for UPCs (index i):
+                               store.getProduct(i).return()
+                             Money refund = previous total - new total
+                             removeCash(refund)
+                             returnOpen = false
+
+    addCashier()
+      get String PW, String firstname, String lastname, Boolean admin from user
+      if currentCashier.isAdmin()
+        store.addCashier(int ID,String PW, String firstname, String lastname, Boolean admin)
+      else
+        print "insuffucient privileges"
+
+    addCashier(int ID,String PW)
+      if currentCashier.isAdmin()
+        store.addCashier(int ID,String PW)
+      else
+        print "insuffucient privileges"
+
+    removeCashier(int ID)
+      if currentCashier.isAdmin()
+        store.removeCashier(int ID)
+
+    report()
+      if currentCashier.isAdmin()
+        get input select from user
+        Switch select:
+          Case "InventoryReport": print all inventory information
+          Case "CashierReportX": get cashier ID from user
+                                 Cashier c = store.getCashier(ID)
+                                 print c.getFirstName + c.getLastName
+                                 for c.getShift.getEvents() (index i)
+                                    print i
+          Case "CashierReportZ": for store.getCashiers() (index c):
+                                  print c.getFirstName + c.getLastName
+                                  for c.getShift.getEvents() (index i)
+                                      print i
+}

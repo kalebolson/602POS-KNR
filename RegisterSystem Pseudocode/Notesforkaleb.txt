@@ -1,0 +1,11 @@
+Notes:
+
+HAS-A relationships: A has a B, instantiate B in A
+
+IS-A relationships: B is an A, B extends A
+
+Store has to pass itself into each new register, make sure not to just
+make a copy of store, it has to be the address of the actual Store
+
+Create a generic class called SortedList.
+It should sort itself and allow for search by ID number (UPC, cashierID, or transaction ID)

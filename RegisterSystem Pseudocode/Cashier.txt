@@ -1,0 +1,51 @@
+class Cashier
+{
+    integer cashierID
+    String password
+    String firstName
+    String lastName
+    boolean administrator
+    Shift[] shifts
+
+    Cashier(ID,PW,firstname,lastname,admin)
+        set cashierID = ID
+        set password = PW
+        set firstName = firstName
+        set lastname = lastName
+        set administrator = admin
+
+    ##overloading cashier for quicker creation
+    Cashier(ID,PW)
+        set cashierID = ID
+        set password = PW
+	      set firstName = cashier
+        set lastName = cashier
+        set administrator = false
+
+    setShift()
+        shift = new Shift(self)
+    getShifts()
+        get shifts
+
+    getID()
+        get cashier id
+
+    setPassword(string)
+        set password = string
+
+    setName(string1,string2)
+        set firstName = string1
+        set lastName = string2
+
+    getFirstName()
+        get firstName
+
+    getLastName()
+        get lastName
+
+    ##verifies whether to do administrative tasks under this profile
+    isAdmin()
+        get administrator
+
+
+}

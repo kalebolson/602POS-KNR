@@ -1,0 +1,11 @@
+interface Reports()
+{
+    inventoryReport()
+    //prints out everything in inventory, and everything on order
+
+    cashierReportX()
+    //prints out everything a cashier did for a particular shift
+
+    cashierReportZ()
+    //prints out everything done this day for all cashiers
+}

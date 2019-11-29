@@ -1,0 +1,91 @@
+class Transaction {
+	static int count = 0
+	static int transactionID
+	LocalDateTime localDateTime
+	DateTimeFormatter dtf
+	String transactionDate
+	ArrayList<Product> cart
+	Cashier cashier
+	double cashTendered
+	double changeRecieved
+	Inventory currentInv
+	
+	public Transaction()
+		transactionID = ++count
+		localDateTime = LocalDateTime.now()
+		dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")
+		transactionDate = localDateTime.format(dtf)
+		
+		
+	returnAllToInventory(transactionID)
+		get a receipt of items from a given transactionID
+		add all items from a given transaction back to the products ArrayList in the Inventory class
+	
+	returnProductToInventory(transactionID, Product)
+		look up a receipt of items from a given transactionID
+		add specified item from a given transactionID back to the products ArrayList in the Inventory class
+		
+	refundProduct(transactionID, Product)
+		get a receipt of items from a given transactionID
+		subtract the item price from the receipt total
+		calculate new total
+		set new changeReceived based on new total
+		
+		if product is sellable
+			returnProductToInventory(transactionID, Product)
+		end
+		
+		removeProduct(transactionID, Product)
+		
+	addProduct(Product)
+		add item to end of ArrayList<Product> cart
+		
+	removeProduct(transactionID, Product)
+		look up a receipt of items from a given transactionID
+	
+	displaySubTotal() - may not need this method, link to UI directly from Money class
+		call Money Class calculateSubTotal()
+		print subTotal
+		
+	displayTotal() - may not need this method, link to UI directly from Money class
+		call Money class calculateTotal()
+		print total
+		
+	printReceipt(transactionID)
+		print items sold, their price, sub total, sales tax, and total for a given transactionID
+	
+	getTransactionID()
+		return transactionID
+	
+	setTransactionID(integer)
+		set integer = transactionID
+		
+	getTransactionDate()
+		return formatted transactionDate
+	
+	getItem(integer) 
+		return item from ArrayList<Product> cart at given index
+		
+	setItem(integer, Product)
+		add item to ArrayList<Product> cart at specified index
+		
+	getCashier()
+		return cashier
+	
+	setCashier(cashier)
+		set this cashier = cashier
+	
+	getCashTendered()
+		return cashTendered
+	
+	setCashTendered(double)
+		set cashTendered = double
+	
+	getChangeReceived()
+		return changeReceived
+		
+	setChangeReceived(double)
+		set changeReceived = double
+		
+	
+}

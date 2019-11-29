@@ -1,0 +1,14 @@
+class Event()
+{
+    Transaction t
+    String type
+
+    Event(Transaction t, String type)
+        set self.t = t
+        set self.type = type
+
+    toString()
+        print type
+        print t.getSubTotal
+        print t.getTotal
+}
