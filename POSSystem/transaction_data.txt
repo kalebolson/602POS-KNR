@@ -1,0 +1,4 @@
+Apples	0.50	2	1.00
+Bananas 0.25	3	0.75
+Oranges 0.60	5	3.00
+
