@@ -1,36 +1,42 @@
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 public class Money {
-	public static final double SALES_TAX = 0.07875;
-	private double subtotal;
-	private double total;
+	public static final BigDecimal SALES_TAX_RATE = new BigDecimal("0.07875");
+	private BigDecimal subtotal = new BigDecimal("0.00");
+	private BigDecimal total = new BigDecimal("0.00");
 	DecimalFormat df = new DecimalFormat("$###,###.00");
 	
 	public Money() {
-		subtotal = 0;
-		total = 0;
+		subtotal = new BigDecimal("0.00");
+		total = new BigDecimal("0.00");
+		
 	}
 	
-	public double addTax(double subtotal) {
-		return subtotal * SALES_TAX;
+	public BigDecimal addTax() {
+		BigDecimal salesTax = subtotal.multiply(SALES_TAX_RATE);
+		salesTax = salesTax.setScale(2, RoundingMode.HALF_UP);
+		return salesTax;
 	}
 	
 	/**
-	public double calculateSubtotal(ArrayList<Product> cart) {
-		double sum;
+	public BigDecimal calculateSubtotal(ArrayList<Product> cart) {
+		BigDecimal sum;
 		for (int i; i < cart.size(); i++) {
-			sum += cart.get(i).getPrice();
+			sum = sum.add(new BigDecimal(cart.get(i).getPrice()));
 		}
+		sum = sum.setScale(2, RoundingMode.HALF_UP);
 		subtotal = sum;
 		return subtotal;
 	}
 	*/
 	
 	/**
-	public double calculateTotal(ArrayList<Product> cart) {
+	public BigDecimal calculateTotal(ArrayList<Product> cart) {
 		calculateSubtotal(cart);
-		addTax(subtotal);
-		total = subtotal + addTax(subtotal);	
+		total = subtotal.add(addTax());	
+		total = total.setScale(2, RoundingMode.HALF_UP);
 		return total;
 	}
 	*/
