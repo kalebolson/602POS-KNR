@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Transaction {
 	private static int count = 0;
-	private int transactionID;
-	private String transactionDate;
+	int transactionID;
+	String transactionDate;
 	private double cashTendered;
 	private double changeReceived;
 	// Inventory currentInv;
@@ -13,6 +13,7 @@ public class Transaction {
 	// ArrayList<Product> cart;
 	LocalDateTime localDateTime;
 	DateTimeFormatter dtf;
+	
 	
 	public Transaction() {
 		transactionID = ++count;
