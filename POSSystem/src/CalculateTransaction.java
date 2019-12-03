@@ -2,13 +2,13 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
-public class Money {
+public class CalculateTransaction {
 	public static final BigDecimal SALES_TAX_RATE = new BigDecimal("0.07875");
 	private BigDecimal subtotal = new BigDecimal("0.00");
 	private BigDecimal total = new BigDecimal("0.00");
 	DecimalFormat df = new DecimalFormat("$###,###.00");
 	
-	public Money() {
+	public CalculateTransaction() {
 		subtotal = new BigDecimal("0.00");
 		total = new BigDecimal("0.00");
 		

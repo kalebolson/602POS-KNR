@@ -8,8 +8,8 @@ public class Transaction {
 	String transactionDate;
 	private double cashTendered;
 	private double changeReceived;
-	// Inventory currentInv;
-	// Cashier cashier;
+	private int UPC;
+	private String cashier;
 	// ArrayList<Product> cart;
 	LocalDateTime localDateTime;
 	DateTimeFormatter dtf;
@@ -23,20 +23,11 @@ public class Transaction {
 		// ArrayList<Product> cart;
 	}
 	
-	// public void addProduct(Product) {}
-	// public void removeProduct(int transactionID, Product) {}
-	
-	public void returnAllToInventory(int transactionID) {}
-	
-	// public void returnProductToInventory(int transactionID, Product) {}
-	// public void refundProduct(int transactionID, Product) {}
-	// public void addProduct(Product) {}
-	// public void removeProduct(int transactionID, Product) {}
+	// public void addProduct(int UML) {}
+	// public void removeProduct(int transactionID, int UPC, int quantity) {}
 	
 	// print items sold, their price, sub total, sales tax, and total for a given transactionID
-	public void printReceipt(int transactionID) {
-
-	}
+	public void printReceipt(int transactionID) {}
 	
 	public int getTransactionID() {
 		return transactionID;
@@ -70,10 +61,21 @@ public class Transaction {
 		this.changeReceived = changeReceived;
 	}
 	
-	// public Cashier getCashier() {
+	// public double getTotal() {
+	//	CalculateTransaction calc = new CalculateTransaction();
+	//	return Double.parseDouble(calc.calculateTotal(cart));
+	// }
+	
+	// public double getSubTotal() {
+	//	CalculateTransaction calc = new CalculateTransaction();
+	//	return Double.parseDouble(calc.calculateSubtotal(cart));
+    // }
+	
+	// public String getCashier() {
 	// 	return cashier;
 	// }
 	
-	// public void setCashier(Cashier cashier) {
-	//	this.cashier = cashier}
+	// public void setCashier(String cashier) {
+	//	this.cashier = cashier
+	//}
 }
