@@ -1,15 +1,17 @@
 public class Event {
 
-  Transaction t;
-  String type;
+  private Transaction t;
+  private String type;
 
   Event(Transaction t, String type){
     this.t = t;
     this.type = type;
   }
-
-  public toString(){
-    System.out.println(t+" | "+type)
+  
+  @Override 
+  public String toString(){
+    String s = (t+" | "+type);
+    return s;
   }
   
 }

@@ -1,12 +1,12 @@
 public class Cashier {
-  static int IDgenerator=0;
-  int cashierID;
-  String password;
-  String firstName;
-  String lastname;
-  boolean administrator;
-  Shift[] shifts = new Shift[1];
-  Shift shift;
+  private static int IDgenerator=0;
+  private int cashierID;
+  private String password;
+  private String firstname;
+  private String lastname;
+  private boolean administrator;
+  private Shift[] shifts = new Shift[1];
+  private Shift shift;
 
   Cashier(String PW, String fn, String ln, boolean admin){
     cashierID = IDgenerator;
@@ -17,8 +17,7 @@ public class Cashier {
     administrator = admin;
   }
 
-  @Overload
-  Cashier (PW){
+  Cashier (String PW){
     cashierID = IDgenerator;
     IDgenerator++;
     password = PW;
@@ -43,13 +42,8 @@ public class Cashier {
     return shifts[shifts.length-1];
   }
 
-  @Overload
   public Shift getShift(int i){
     return shifts[i];
-  }
-
-  public int getID(){
-    return ID;
   }
 
   public void setPassword(String pw){

@@ -1,0 +1,19 @@
+To Do list today:
+
+First priority -
+How does the sale process look?
+How do register and transaction work together in this process?
+Figure out how returns work from there
+
+
+Other Priorities - 
+
+Draw UI screens
+Determine which medium to build UI with
+
+Investigate storage via text files
+
+I (Kaleb) currently have the money being handled as a double in Register.java
+Do I need to change this to bigDecimal? does this matter?
+
+Do we update pseudocode at this point

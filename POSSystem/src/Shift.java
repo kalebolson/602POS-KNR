@@ -1,13 +1,14 @@
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class Shift{
-  Cashier cashier;
-  String timein;
-  String timeout;
-  ArrayList<Event> events = new ArrayList<Event>(0);
-  DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
-  LocalDateTime now = LocalDateTime.now();
+  private Cashier cashier;
+  private String timein;
+  private String timeout;
+  private ArrayList<Event> events = new ArrayList<Event>(0);
+  private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
+  private LocalDateTime now = LocalDateTime.now();
 
 
   Shift(Cashier c){
@@ -27,7 +28,6 @@ public class Shift{
     timein = dtf.format(now);
   }
 
-  @Override
   public void setTimein(String date, String time){
     timein = date + " " + time;
   }
@@ -40,7 +40,6 @@ public class Shift{
     timeout = dtf.format(now);
   }
 
-  @Override
   public void setTimeout(String date, String time){
     timeout = date + " " + time;
   }
