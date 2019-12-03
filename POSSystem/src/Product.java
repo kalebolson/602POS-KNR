@@ -1,6 +1,8 @@
 
 public class Product {
 
+	private int UPC; 
+	private static int UPCcounter=1; 
 	private String productName; 
 	private String supplier; 
 	private double unitPrice = -1.00; 
@@ -14,12 +16,15 @@ public class Product {
 	 * Functional Methods & Calculations are below 
 	 * -------------------------------------------------------- */
 	
+	//May convert price to string for use in money class? 
 	public Product(String productName, String supplier, double price, int quantityStocked, int threshold) { 
 		this.productName = productName; 
 		this.supplier = supplier; 
 		this.unitPrice = price;
 		this.quantityStocked = quantityStocked; 
 		this.threshold = threshold; 
+		this.UPC = this.UPCcounter; 
+		UPCcounter ++; 
 	}
 	
 	//add product to the inventory
@@ -32,16 +37,18 @@ public class Product {
 		quantityStocked -= remove; 
 	}
 	
+	//how much of something you are ordering for inventory
 	public void addToOrderQuantity(int add) { 
 		quantityOrdered += add; 
 	}
 	
+	//removing quantity from an inventory order
 	public void removeFromOrderQuantity(int remove) { 
 		quantityOrdered -= remove;
 	}
 	
 	public String toString() { 
-		return productName + "\t\t\t" + supplier + "\t\t\t" + unitPrice + "\t\t\t" + threshold + "\t\t\t" + quantityStocked + "\t\t\t" + quantityOrdered;  
+		return UPC+ "\t\t\t" + productName + "\t\t\t" + supplier + "\t\t\t" + unitPrice + "\t\t\t" + threshold + "\t\t\t" + quantityStocked + "\t\t\t" + quantityOrdered;  
 	}
 	/* -------------------------------------------------------- 
 	 * End Functional Methods & Calculations 
@@ -68,6 +75,7 @@ public class Product {
 		this.supplier = supplier; 
 	}
 	
+	//may make this a string for use in money class
 	public double getPrice() { 
 		return unitPrice;
 	}
@@ -102,6 +110,10 @@ public class Product {
 	
 	public void setThreshold(int threshold) { 
 		this.threshold = threshold; 
+	}
+	
+	public int getUPC(){ 
+		return UPC; 
 	}
 	
 	

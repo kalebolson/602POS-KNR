@@ -10,53 +10,59 @@ public class Inventory {
 	 * -------------------------------------------------------- */
 	public void printInventoryReport() { 
 		
-		System.out.println("Product\t\t\tSupplier\t\t\tPrice\t\t\tThreshold\t\tIn-Stock\t\tOrdered");
+		System.out.println("UPC\t\t\tProduct\t\t\tSupplier\t\t\tPrice\t\t\tThreshold\t\tIn-Stock\t\tOrdered");
 	//	System.out.println(inventory); 
 		for(Product p: inventory) { 
 			System.out.println(p);
 		}
 	}
 	
+	
+	//we now sell a new product
 	public void addnewItem(Product p) { 
 		inventory.add(p);
 	}
 	
-	
-	public void addItemstoInventory(String name, int add) { 
+
+	//for use in returns? 
+	public void addItemstoInventory(int upc, int add) { 
 		for(Product a: inventory) { 
-			if(a.getProductName().equals(name)) { 
+			if(a.getUPC()==upc) { 
 				a.setStockedQuantity(a.getStockedQuantity() + add);
 			}
 		}
 	}
 	
-	public void removeItemsFromInventory(String name, int remove) { 
+	//for use in transaction
+	public void removeItemsFromInventory(int upc, int remove) { 
 		for(Product a: inventory) { 
-			if(a.getProductName().equals(name)) { 
+			if(a.getUPC()==upc) { 
 				a.setStockedQuantity(a.getStockedQuantity() - remove);
 			}
 		}
 	}
 	
-	public void addItemstoOrder(String name, int add) { 
+	//add items into an inventory mgmt order
+	public void addItemstoOrder(int upc, int add) { 
 		for(Product a: inventory) { 
-			if(a.getProductName().equals(name)) { 
+			if(a.getUPC()==upc) { 
 				a.setOrderedQuantity(a.getOrderedQuantity() + add);
 			}
 		}
 	}
 	
-	public void removeItemsfromOrder(String name, int remove) { 
+	//remove items from an inventory mgmt order
+	public void removeItemsfromOrder(int upc, int remove) { 
 		for(Product a: inventory) { 
-			if(a.getProductName().equals(name)) { 
+			if(a.getUPC()==upc) { 
 				a.setOrderedQuantity(a.getOrderedQuantity() - remove);
 			}
 		}
 	}
 	
-	public void receivePartialOrder(String name, int received) { 
+	public void receivePartialOrder(int upc, int received) { 
 		for(Product a: inventory) { 
-			if(a.getProductName().equals(name)) { 
+			if(a.getUPC()==upc) { 
 				a.setStockedQuantity(a.getStockedQuantity()+ received);
 				a.setOrderedQuantity(a.getOrderedQuantity() - received);
 			}
@@ -69,6 +75,7 @@ public class Inventory {
 			a.setOrderedQuantity(0);
 		}
 	}
+	
 	
 	public void orderingNeeds() {
 		System.out.println();
