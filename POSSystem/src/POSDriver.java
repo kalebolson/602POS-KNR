@@ -3,7 +3,6 @@ public class POSDriver {
 
 	public static void main(String[]args) { 
 
-		System.out.println("Test1234");
 		//product(name, supplier, price, quantity, threshold)
 		Product a = new Product("Apple", "The Farm", 0.99, 50, 15); 
 		Product b = new Product("Soap", "Amazon Inc.", 4.95, 120, 30); 
