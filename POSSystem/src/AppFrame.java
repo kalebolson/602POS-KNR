@@ -45,6 +45,7 @@ public class AppFrame {
 	 */
 	private void initialize() {
 		frmPosSystem = new JFrame();
+		frmPosSystem.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmPosSystem.setResizable(false);
 		frmPosSystem.setSize(new Dimension(520, 260));
 		frmPosSystem.setTitle("POS System 1.0");
