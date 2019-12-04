@@ -5,8 +5,9 @@ public class Register {
   private Store store;
   private int registerID;
   private static int registerIDs=1;//will increment by 1 with each new register
-  private double cashValue;
+  private double cashValue; //current value in the register
   private Cashier currentCashier;
+  private Transaction currentTransaction;
 
   Register(double initCash, Store store){
     registerID = registerIDs;
@@ -61,95 +62,42 @@ public class Register {
     return this.registerID;
   }
   
-////the following lines are trash and we are redoing them entirely
-//
-//  public void makeSale(){
-//    boolean saleOpen = true;
-//    Transaction t;
-//    int[] UPCs = new int[0];
-//    int[] temp;
-//    while (saleOpen){
-//      System.out.println("add, remove, or complete: ");
-//      switch (sc.nextLine()){
-//        case "add":{
-//          System.out.println("Enter UPC");
-//          int entry = sc.nextInt();
-//          temp = new int[UPCs.length+1];
-//          for (int i=0;i<UPCs.length;i++){
-//            temp[i]=UPCs[i];
-//          }
-//          temp[temp.length-1]=entry;
-//        }
-//        case "remove":{
-//          System.out.println("Enter UPC");
-//          int entry = sc.nextInt();
-//          temp = new int[UPCs.length-1];
-//          int rmindex;
-//          for (int i=0;i<UPCs.length;i++){
-//            if (UPCs[i]==entry) {rmindex = i;}
-//          }
-//          for (int i=0;i<rmindex;i++){
-//            temp[i] = UPCs[i];
-//          }
-//          for (int i=rmindex;i<temp.length;i++){
-//            temp[i]=UPCs[i+1];
-//          }
-//        }
-//        case "complete":{
-//          System.out.println(t.getSubTotal());
-//          System.out.println(t.getTotal());
-//          double payment = t.getTotal();
-//          addCash(payment);
-//          for (int i : UPCs){
-//            store.getProduct(i).sell();
-//          }
-//          store.addTransaction(t);
-//          saleOpen=false;
-//        }
-//      }
-//    }
-//  }
-//
-//
-//  public void makeReturn(){
-//    Transaction t;
-//    t = store.getTransaction(ID);
-//    double prevTotal = t.getTotal();
-//    int[] UPCs = new int[0];
-//    int[] temp;
-//    boolean returnOpen = true;
-//    while (returnOpen){
-//      System.out.println("all, partial, or complete");
-//      String entry = sc.nextLine();
-//      switch (entry){
-//        case "all": {
-//          ////this logic will help return products to inventory if not handled in transaction class
-//          //temp = new int[t.getItems().length];
-//          //int i2=0;
-//          //for (Product i : t.getItems()){
-//          //  temp[i2]=i.getUPC();
-//          //  i2++;
-//          //}
-//          t.returnAlltoInventory();
-//        }
-//        case "partial":{
-//          System.out.println("Enter UPC:");
-//          int entry = sc.nextInt();
-//          //you might need to add the same inventory logic as in the "all" case
-//          t.returnProductToInventory(UPC);
-//        }
-//        case "complete":{
-//          ////in case you need to utilize inventory, as mentioned earlier
-//          for (int i : UPCs){
-//            store.getProduct(i).return();
-//            double refund = prevTotal = getTotal();
-//            removeCash(refund);
-//            returnOpen = false;
-//          }
-//        }
-//      }
-//    }
-//  }
+
+  public void newSale() {
+	  Transaction t = new Transaction();
+	  currentTransaction = t;
+  }
+  
+  public void newReturn(int ID) {
+	  try {
+		currentTransaction = store.getTransaction(ID);
+	} catch (InvalidIDException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+  }
+  
+  public void addToSale(int UPC) {
+	  Product p = store.getProduct(UPC);
+	  currentTransaction.addToSale(p);
+  }
+  
+  public void removeFromSale(int UPC) {
+	  Product p = store.getProduct(UPC);
+	  currentTransaction.removeFromSale(p);
+  }
+  
+  public String finalizeSale() {
+	  String receipt = currentTransaction+"";
+	  cashValue+=currentTransaction.getTotal();
+	  
+  }
+  
+  public String finalizeReturn() {
+	  String receipt = currentTransaction+"";
+	  removeCash(currentTransaction.getTotal());
+  }
+  
 
   public void addCashier(String PW, String firstname, String lastname, boolean admin) throws InsufficientRightsException{
     if (currentCashier.isAdmin())

@@ -73,6 +73,7 @@ public class Store{
 
   public void addTransaction(Transaction t){
     transactions.add(t);
+    
   }
 
   public void addRegister(double initCash){
