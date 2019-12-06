@@ -1,0 +1,18 @@
+Kaleb to do list
+
+get txt file reading and writing working with registers
+
+implement all of Nicole's inventory operations in the register class
+
+get txt file reading and writing working with inventory
+
+complete operations for all sale/return related items
+	-make sure to update cashier's shift with events at transaction finalization
+
+
+Riley will need to complete transaction class before any of the sale stuff works
+recommend a subclass of transaction called returnTransaction
+	-this will contain 2 product lists, keeping and returning
+	-this will also calculate the difference between initial total and new total
+	-difference will be subtracted from register
+

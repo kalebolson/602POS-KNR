@@ -1,0 +1,19 @@
+Here are the steps to implement file storage that this program uses
+It is used for Product, Cashiers, Registers, and Transactions
+
+1)Implement a method to write to a file 
+	-These are towards the bottom of Store.java
+
+2)Implement a method to read from a file
+	-These are below the aforementioned methods in Store.java
+
+3)Add an overloaded constructor to the class of each object being stored 
+	-these accept an ID without using a generator like the previous constructors do
+
+4)Modify the initial constructor of each class so it reads from and stores to a txt file
+	-This is only used for the ID generator, so it doesn't reset to 0 every time the program is run
+
+5)Find all instances where these classes are modified, include the write to file method after each
+
+6)Find all instances where these classes are read, include the read from file method after each
+

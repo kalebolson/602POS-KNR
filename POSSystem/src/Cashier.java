@@ -1,5 +1,13 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Scanner;
+
 public class Cashier {
-  private static int IDgenerator=0;
+  private static Scanner input;
+  private static int IDgenerator;
   private int cashierID;
   private String password;
   private String firstname;
@@ -9,13 +17,38 @@ public class Cashier {
   private Shift shift;
 
   Cashier(String PW, String fn, String ln, boolean admin){
+	//this block is to update the running ID txt file
+	try {
+		input = new Scanner(new File("runningCashierIDgenerator.txt"));
+		IDgenerator = input.nextInt();
+	} catch (FileNotFoundException e) {}
+	  
     cashierID = IDgenerator;
     IDgenerator++;
     password = PW;
     firstname = fn;
     lastname = ln;
     administrator = admin;
+    
+    //this block is to update the running ID txt file
+    try (PrintWriter output = new PrintWriter(new FileWriter("runningCashierIDgenerator.txt", false))) {//I set this to false so it overwrites instead of appending the file
+    	output.print(IDgenerator);
+    	output.close();
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+		
   }
+ 
+  
+  //this is for the reader to recreate cashiers that already exist when rewriting the text files
+  Cashier(int ID, String PW, String fn, String ln, boolean admin){
+	    cashierID = ID;
+	    password = PW;
+	    firstname = fn;
+	    lastname = ln;
+	    administrator = admin;
+	  }
 
   Cashier (String PW){
     cashierID = IDgenerator;
@@ -79,4 +112,12 @@ public class Cashier {
   public void setAdmin(Boolean b){
     this.administrator=b;
   }
+  
+  @Override
+  public String toString() {
+	  String s = "";
+	  s+=cashierID+" "+password+" "+firstname+" "+lastname+" "+administrator;
+	  return s;
+  }
+  
 }

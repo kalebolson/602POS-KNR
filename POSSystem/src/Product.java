@@ -1,3 +1,9 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Scanner;
 
 public class Product {
 
@@ -18,6 +24,15 @@ public class Product {
 	
 	//May convert price to string for use in money class? 
 	public Product(String productName, String supplier, double price, int quantityStocked, int threshold) { 
+		
+		//this block is to pull from the running UPC txt file
+		Scanner input;
+		try {
+			input = new Scanner(new File("runningUPCgenerator.txt"));
+			UPCcounter = input.nextInt();
+		} catch (FileNotFoundException e) {e.printStackTrace();}
+		
+		//main constructor
 		this.productName = productName; 
 		this.supplier = supplier; 
 		this.unitPrice = price;
@@ -25,6 +40,27 @@ public class Product {
 		this.threshold = threshold; 
 		this.UPC = this.UPCcounter; 
 		UPCcounter ++; 
+		
+		//this block is to update the running ID txt file
+		try (PrintWriter output = new PrintWriter(new FileWriter("runningUPCgenerator.txt", false))) {//I set this to false so it overwrites instead of appending the file
+	    	output.print(UPCcounter);
+	    	output.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	//overloaded constructor for writing from file
+	public Product(int UPC, String productName, String supplier, double price, int quantityStocked, int quantityOrdered, int threshold) { 
+		this.UPC = UPC;
+		this.productName = productName; 
+		this.supplier = supplier; 
+		this.unitPrice = price;
+		this.quantityStocked = quantityStocked; 
+		this.quantityOrdered = quantityOrdered;
+		this.threshold = threshold; 
+		
+		
 	}
 	
 	//add product to the inventory

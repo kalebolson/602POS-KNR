@@ -8,13 +8,14 @@ public class Inventory {
 	/* -------------------------------------------------------- 
 	 * Functional Methods & Calculations are below 
 	 * -------------------------------------------------------- */
-	public void printInventoryReport() { 
-		
-		System.out.println("UPC\t\t\tProduct\t\t\tSupplier\t\t\tPrice\t\t\tThreshold\t\tIn-Stock\t\tOrdered");
+	public String printInventoryReport() { 
+		String s = "";
+		s+=("UPC\t\t\tProduct\t\t\tSupplier\t\t\tPrice\t\t\tThreshold\t\tIn-Stock\t\tOrdered");
 	//	System.out.println(inventory); 
 		for(Product p: inventory) { 
-			System.out.println(p);
+			s+=(p);
 		}
+		return s;
 	}
 	
 	
@@ -77,16 +78,17 @@ public class Inventory {
 	}
 	
 	
-	public void orderingNeeds() {
-		System.out.println();
-		System.out.println("Please order more of the following: ");
+	public String orderingNeeds() {
+		String s = "";
+		s+=("Please order more of the following: ");
 		for(Product a: inventory) { 
 			if(a.getTotalQuantity()<a.getThreshold()) { 
 				thresholdReached = true;
-				System.out.println("\t\t"+a.getProductName() + " (On-Hand: "+ a.getStockedQuantity() + ", Threshold: " + a.getThreshold() + ")");
+				s+=("\t\t"+a.getProductName() + " (On-Hand: "+ a.getStockedQuantity() + ", Threshold: " + a.getThreshold() + ")");
 			}
 		}
-		System.out.println("End of ordering needs"); 
+		s+=("End of ordering needs"); 
+		return s;
 	}
 	
 	
@@ -98,7 +100,23 @@ public class Inventory {
 	/* -------------------------------------------------------- 
 	 * Standard Getters and Setters for each variable are below 
 	 * -------------------------------------------------------- */
+	public ArrayList<Product> getInventory(){
+		return inventory;
+	}
+	//THIS OVERWRITES THE ENTIRE INVENTORY
+	//USED ONLY FOR READING INVENTORY FROM FILE
+	public void setInventory(ArrayList<Product> list) {
+		inventory = list;
+	}
 	
+	public Product getProduct(int UPC) throws InvalidIDException {
+		for (Product p : inventory) {
+			if (p.getUPC()==UPC){
+				return p;
+			}
+		}
+		throw new InvalidIDException("No Product found with that UPC number");
+	}
 	
 	
 	/* -------------------------------------------------------- 
