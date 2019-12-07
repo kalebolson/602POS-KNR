@@ -224,7 +224,7 @@ public class Store {
 		String transactionDate;
 		Cashier cashier;
 		int numProducts;
-		ArrayList<Product> cart = new ArrayList<Product>;
+		ArrayList<Product> cart = new ArrayList<Product>();
 		
 		try {
 			input = new Scanner(new File("transactions.txt"));
