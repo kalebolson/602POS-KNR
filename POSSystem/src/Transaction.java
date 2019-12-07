@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -55,6 +56,9 @@ public class Transaction {
 		this.cart = cart;
 		cashier = c;
 	}
+	
+	// used for the text file writer. it outputs the exact format that the readers knows what to do with
+	// found in store class line 153
 	public String stringForFile() {
 		String s = "";
 		s+=transactionID+" ";
@@ -123,15 +127,15 @@ public class Transaction {
 		this.changeReceived = changeReceived;
 	}
 	
-	public double getTotal() {
+	public BigDecimal getTotal() {
 		CalculateTransaction calc = new CalculateTransaction();
-		return Double.parseDouble(calc.calculateTotal(cart));
+		return calc.calculateTotal(cart);
 	}
 	
-//	 public double getSubTotal() {
-//		CalculateTransaction calc = new CalculateTransaction();
-//		return Double.parseDouble(calc.calculateSubtotal(cart));
-//     }
+	public BigDecimal getSubTotal() {
+		CalculateTransaction calc = new CalculateTransaction();
+		return calc.calculateSubtotal(cart);
+    }
 	
 	public Cashier getCashier() {
 		return cashier;

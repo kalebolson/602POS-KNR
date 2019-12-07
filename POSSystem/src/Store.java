@@ -17,6 +17,9 @@ public class Store {
 	Cashier c = new Cashier("masterpassword","Default","Admin",true);
 	cashiers.add(c);
 	
+	// Creating inventory object and refreshing its contents
+	inv = new Inventory();
+	updateInventoryList();
 	
 	//This constructor is where we should add the logic for pulling from text files
 	updateCashierList();

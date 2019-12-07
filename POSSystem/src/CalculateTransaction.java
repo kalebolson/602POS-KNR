@@ -24,7 +24,7 @@ public class CalculateTransaction {
 	public BigDecimal calculateSubtotal(ArrayList<Product> cart) {
 		BigDecimal sum = null;
 		for (int i= 0; i < cart.size(); i++) {
-			sum = sum.add(new BigDecimal(cart.get(i).getPrice()));
+			sum = sum.add(new BigDecimal(String.valueOf(cart.get(i).getPrice())));
 		}
 		sum = sum.setScale(2, RoundingMode.HALF_UP);
 		subtotal = sum;
