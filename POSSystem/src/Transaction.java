@@ -25,7 +25,6 @@ public class Transaction {
 	public static final BigDecimal SALES_TAX_RATE = new BigDecimal("0.07875");
 	private BigDecimal subtotal = new BigDecimal("0.00");
 	private BigDecimal total = new BigDecimal("0.00");
-	DecimalFormat df = new DecimalFormat("$###,###.00");
 	
 	
 	public Transaction(Cashier c) {
@@ -134,27 +133,27 @@ public class Transaction {
 		this.changeReceived = changeReceived;
 	}
 	
-	public BigDecimal getTotal() {
+	public double getTotal() {
 		getSubTotal();
-		total = subtotal.add(getSalesTax());	
+		total = subtotal.add(new BigDecimal(String.valueOf(getSalesTax())));	
 		total = total.setScale(2, RoundingMode.HALF_UP);
-		return total;
+		return total.doubleValue();
 	}
 	
-	public BigDecimal getSalesTax() {
+	public double getSalesTax() {
 		BigDecimal salesTax = subtotal.multiply(SALES_TAX_RATE);
 		salesTax = salesTax.setScale(2, RoundingMode.HALF_UP);
-		return salesTax;
+		return salesTax.doubleValue();
 	}
 	
-	public BigDecimal getSubTotal() {
+	public double getSubTotal() {
 		BigDecimal sum = new BigDecimal("0.00");
 		for (int i= 0; i < cart.size(); i++) {
 			sum = sum.add(new BigDecimal(String.valueOf(cart.get(i).getPrice())));
 		}
 		sum = sum.setScale(2, RoundingMode.HALF_UP);
 		subtotal = sum;
-		return subtotal;
+		return subtotal.doubleValue();
     }
 	
 	public Cashier getCashier() {

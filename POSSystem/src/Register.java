@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,7 +16,7 @@ public class Register {
   private double cashValue; //current value in the register
   private Cashier currentCashier;
   private Transaction currentTransaction;
-  
+  DecimalFormat df = new DecimalFormat("$###,##0.00");
 
   Register(double initCash, Store store){
 	  //this block is to update the running ID txt file
@@ -98,12 +99,12 @@ public class Register {
   }
   
   public String calculateSale() {
-	  return "Subtotal: " + currentTransaction.getSubTotal() + 
-			  "\nSales Tax: " + currentTransaction.getSalesTax() +
-			  "\nTotal: " + currentTransaction.getTotal();
+	  return "Subtotal: " + df.format(currentTransaction.getSubTotal()) + 
+			  "\nSales Tax: " + df.format(currentTransaction.getSalesTax()) +
+			  "\nTotal: " + df.format(currentTransaction.getTotal());
   }
   
-  /*
+  
   public String finalizeSale() {
 	  String receipt = currentTransaction+"";
 	  cashValue+=currentTransaction.getTotal();
@@ -114,7 +115,7 @@ public class Register {
 	  String receipt = currentTransaction+"";
 	  removeCash(currentTransaction.getTotal());
   }
-  */
+  
   //****************************************************************************************** 
   //End sales and returns block
   //****************************************************************************************** 
