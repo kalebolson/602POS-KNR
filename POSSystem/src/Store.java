@@ -150,7 +150,7 @@ public class Store {
 		try (PrintWriter output = new PrintWriter(new FileWriter(file, false))) {//I set this to false so it overwrites instead of appending the file
 			
 			for (Transaction t : transactions) {
-				output.print(t+" ");
+				output.print(t.stringForFile());
 			}
 			output.close();
 		}
@@ -214,12 +214,37 @@ public class Store {
 		}  catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		
-		
 	}
 	
-	//will have to write this when the transaction class is complete
-	public void updateTransactionList() {}
+	public void updateTransactionList() {
+		Scanner input;
+		ArrayList<Transaction> templist = new ArrayList<Transaction>();
+		Transaction t;
+		int transactionID;
+		String transactionDate;
+		Cashier cashier;
+		int numProducts;
+		ArrayList<Product> cart = new ArrayList<Product>;
+		
+		try {
+			input = new Scanner(new File("transactions.txt"));
+			while (input.hasNext()) {
+				transactionID = input.nextInt();
+				transactionDate = input.next()+" "+input.next();//the datetime value has a space in it
+				cashier = getCashier(input.nextInt());
+				numProducts = input.nextInt();
+				for (int i=0;i<numProducts;i++) {
+					cart.add(inv.getProduct(input.nextInt()));
+				}
+				t = new Transaction(transactionID,transactionDate,cart,cashier);
+				templist.add(t);
+			}
+			transactions = templist;
+			
+		} catch (FileNotFoundException | InvalidIDException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public void updateRegisterList() {
 		Scanner input;

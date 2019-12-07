@@ -10,15 +10,15 @@ import java.util.Scanner;
 
 public class Transaction {
 	private static int count = 0;
-	int transactionID;
-	String transactionDate;
+	private int transactionID;
+	private String transactionDate;
 	private double cashTendered;
 	private double changeReceived;
 	private int UPC;
 	private Cashier cashier;
-	ArrayList<Product> cart;
-	LocalDateTime localDateTime;
-	DateTimeFormatter dtf;
+	private ArrayList<Product> cart;
+	private LocalDateTime localDateTime;
+	private DateTimeFormatter dtf;
 	
 	
 	public Transaction(Cashier c) {
@@ -54,6 +54,17 @@ public class Transaction {
 		transactionDate = dateTime;
 		this.cart = cart;
 		cashier = c;
+	}
+	public String stringForFile() {
+		String s = "";
+		s+=transactionID+" ";
+		s+=transactionDate+" ";
+		s+=cashier.getID()+" ";
+		s+=cart.size()+" ";
+		for (Product p : cart) {
+			s+=p.getUPC()+" ";
+		}
+		return s;
 	}
 	
 	public void addToSale(Product p) {
