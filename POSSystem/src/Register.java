@@ -104,7 +104,7 @@ public class Register {
 			  "\nTotal: " + df.format(currentTransaction.getTotal());
   }
   
-  public void finalizeSale() {
+  public String finalizeSale() {
 	  String receipt = currentTransaction+"";
 	  cashValue+=currentTransaction.getTotal();
 	  
@@ -113,6 +113,8 @@ public class Register {
 	  }
 	  
 	  currentCashier.getShift().addEvent(new Event(currentTransaction, "Sale"));
+	  
+	  return receipt;
   }
   /*
   public String finalizeReturn() {
