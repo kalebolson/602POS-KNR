@@ -89,7 +89,7 @@ public class Transaction {
 	}
 	
 	// print items sold, their price, sub total, sales tax, and total for a given transactionID
-	public String printReceipt() {}
+	// public String printReceipt() {}
 	
 	public int getTransactionID() {
 		return transactionID;

@@ -97,6 +97,7 @@ public class Register {
 	  currentTransaction.removeFromSale(UPC);
   }
   
+  /*
   public String finalizeSale() {
 	  String receipt = currentTransaction+"";
 	  cashValue+=currentTransaction.getTotal();
@@ -107,7 +108,7 @@ public class Register {
 	  String receipt = currentTransaction+"";
 	  removeCash(currentTransaction.getTotal());
   }
-  
+  */
   //****************************************************************************************** 
   //End sales and returns block
   //****************************************************************************************** 
