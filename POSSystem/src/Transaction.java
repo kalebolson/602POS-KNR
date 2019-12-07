@@ -25,7 +25,7 @@ public class Transaction {
 	public static final BigDecimal SALES_TAX_RATE = new BigDecimal("0.07875");
 	private BigDecimal subtotal = new BigDecimal("0.00");
 	private BigDecimal total = new BigDecimal("0.00");
-	
+	DecimalFormat df = new DecimalFormat("$###,##0.00");
 	
 	public Transaction(Cashier c) {
 		//this block is to update the running ID txt file
@@ -166,5 +166,19 @@ public class Transaction {
 	
 	public void setCashier(Cashier cashier) {
 		this.cashier = cashier;
+	}
+	
+	public String toString() {
+		String cartItems = "";
+		for (int i = 0; i < cart.size(); i++) {
+			cartItems = cartItems + "\n" + cart.get(i).getProductName() + 
+					" " + df.format(cart.get(i).getPrice());
+		}
+		
+		return "Transaction ID: " + transactionID +
+				"\n" + cartItems +
+				"\n\nSubtotal: " + df.format(getSubTotal()) +
+				"\nSales Tax: " + df.format(getSalesTax()) +
+				"\nTotal: " + df.format(getTotal());
 	}
 }

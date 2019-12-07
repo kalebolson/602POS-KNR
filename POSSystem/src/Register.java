@@ -114,12 +114,12 @@ public class Register {
 	  
 	  currentCashier.getShift().addEvent(new Event(currentTransaction, "Sale"));
   }
-  
+  /*
   public String finalizeReturn() {
 	  String receipt = currentTransaction+"";
 	  removeCash(currentTransaction.getTotal());
   }
-  
+  */
   //****************************************************************************************** 
   //End sales and returns block
   //****************************************************************************************** 
@@ -276,7 +276,16 @@ public class Register {
 		e.printStackTrace();
 	}
   }
-  public void receiveAllOrders() {
+  
+  public Transaction getCurrentTransaction() {
+	return currentTransaction;
+  }
+
+  public void setCurrentTransaction(Transaction currentTransaction) {
+	this.currentTransaction = currentTransaction;
+  }
+
+	public void receiveAllOrders() {
 	  store.getInventory().receiveAllOrders();
 	  try {
 		store.updateInventoryFile();
