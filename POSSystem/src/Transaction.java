@@ -98,12 +98,16 @@ public class Transaction {
 		}
 	}
 	
+	public ArrayList<Product> getCart() {
+		return cart;
+	}
 	// print items sold, their price, sub total, sales tax, and total for a given transactionID
 	// public String printReceipt() {}
 	
 	public int getTransactionID() {
 		return transactionID;
 	}
+	
 	
 	public void setTransactionID(int transactionID) {
 		this.transactionID = transactionID;

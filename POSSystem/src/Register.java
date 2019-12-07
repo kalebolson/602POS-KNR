@@ -104,11 +104,15 @@ public class Register {
 			  "\nTotal: " + df.format(currentTransaction.getTotal());
   }
   
-  
-  public String finalizeSale() {
+  public void finalizeSale() {
 	  String receipt = currentTransaction+"";
 	  cashValue+=currentTransaction.getTotal();
 	  
+	  for (Product p : currentTransaction.getCart()) {
+		  store.getInventory().removeItemsFromInventory(p.getUPC(), 1);
+	  }
+	  
+	  currentCashier.getShift().addEvent(new Event(currentTransaction, "Sale"));
   }
   
   public String finalizeReturn() {
