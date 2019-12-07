@@ -11,11 +11,14 @@ import java.awt.Dimension;
 
 public class AppFrame {
 
-	private JFrame frmPosSystem;
+	//(nb)- we are going to need multiple jframes.. updating the name to be more descriptive :) 
+	private JFrame frmPosSystemLogin;
 	private JTextField usernameField;
 	private JLabel lblUsername;
 	private JLabel lblPassword;
 	private JPasswordField passwordField;
+	
+	private JFrame frmPosSystemMainMenu; 
 
 	/**
 	 * Launch the application.
@@ -25,7 +28,7 @@ public class AppFrame {
 			public void run() {
 				try {
 					AppFrame window = new AppFrame();
-					window.frmPosSystem.setVisible(true);
+					window.frmPosSystemLogin.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -44,20 +47,21 @@ public class AppFrame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frmPosSystem = new JFrame();
-		frmPosSystem.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmPosSystem.setResizable(false);
-		frmPosSystem.setSize(new Dimension(520, 260));
-		frmPosSystem.setTitle("POS System 1.0");
-		frmPosSystem.getContentPane().setLayout(null);
+		
+		frmPosSystemLogin = new JFrame();
+		frmPosSystemLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmPosSystemLogin.setResizable(false);
+		frmPosSystemLogin.setSize(new Dimension(520, 260));
+		frmPosSystemLogin.setTitle("Awesome POS System 1.0");
+		frmPosSystemLogin.getContentPane().setLayout(null);
 		
 		lblUsername = new JLabel("Username");
 		lblUsername.setBounds(180, 30, 69, 15);
-		frmPosSystem.getContentPane().add(lblUsername);
+		frmPosSystemLogin.getContentPane().add(lblUsername);
 		
 		usernameField = new JTextField();
 		usernameField.setBounds(180, 50, 155, 19);
-		frmPosSystem.getContentPane().add(usernameField);
+		frmPosSystemLogin.getContentPane().add(usernameField);
 		usernameField.setColumns(10);
 		
 		// displays associated dialogue message if desired username and password match expected credentials
@@ -68,22 +72,26 @@ public class AppFrame {
 				String username = usernameField.getText();
 				String password = passwordField.getText();
 				
+				//LOL 
 				if (username.equals("rmartinez") && password.equals("poop")) {
-					JOptionPane.showMessageDialog(frmPosSystem, "Login Successful");
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Login Successful");
+				}
+				else if (username.equals("speakfriendandenter") && password.equals("mellon")) {
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "The Mines of Moria have opened!!!");
 				}
 				else {
-					JOptionPane.showMessageDialog(frmPosSystem, "Invalid Username or Password");
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid Username or Password");
 				}
 			}
 		});
 		
 		lblPassword = new JLabel("Password");
 		lblPassword.setBounds(180, 74, 65, 15);
-		frmPosSystem.getContentPane().add(lblPassword);
+		frmPosSystemLogin.getContentPane().add(lblPassword);
 		
 		passwordField = new JPasswordField();
 		passwordField.setBounds(180, 94, 155, 19);
-		frmPosSystem.getContentPane().add(passwordField);
-		frmPosSystem.getContentPane().add(btnLogin);
+		frmPosSystemLogin.getContentPane().add(passwordField);
+		frmPosSystemLogin.getContentPane().add(btnLogin);
 	}
 }
