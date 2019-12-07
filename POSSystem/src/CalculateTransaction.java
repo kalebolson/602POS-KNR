@@ -1,6 +1,7 @@
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 public class CalculateTransaction {
 	public static final BigDecimal SALES_TAX_RATE = new BigDecimal("0.07875");
@@ -20,24 +21,22 @@ public class CalculateTransaction {
 		return salesTax;
 	}
 	
-	/**
 	public BigDecimal calculateSubtotal(ArrayList<Product> cart) {
-		BigDecimal sum;
-		for (int i; i < cart.size(); i++) {
+		BigDecimal sum = null;
+		for (int i= 0; i < cart.size(); i++) {
 			sum = sum.add(new BigDecimal(cart.get(i).getPrice()));
 		}
 		sum = sum.setScale(2, RoundingMode.HALF_UP);
 		subtotal = sum;
 		return subtotal;
 	}
-	*/
 	
-	/**
+	
 	public BigDecimal calculateTotal(ArrayList<Product> cart) {
 		calculateSubtotal(cart);
 		total = subtotal.add(addTax());	
 		total = total.setScale(2, RoundingMode.HALF_UP);
 		return total;
 	}
-	*/
+	
 }

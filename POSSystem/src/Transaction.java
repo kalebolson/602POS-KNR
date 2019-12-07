@@ -123,21 +123,21 @@ public class Transaction {
 		this.changeReceived = changeReceived;
 	}
 	
-//	 public double getTotal() {
-//		CalculateTransaction calc = new CalculateTransaction();
-//		return Double.parseDouble(calc.calculateTotal(cart));
-//	 }
+	public double getTotal() {
+		CalculateTransaction calc = new CalculateTransaction();
+		return Double.parseDouble(calc.calculateTotal(cart));
+	}
 	
 //	 public double getSubTotal() {
 //		CalculateTransaction calc = new CalculateTransaction();
 //		return Double.parseDouble(calc.calculateSubtotal(cart));
 //     }
 	
-	// public String getCashier() {
-	// 	return cashier;
-	// }
+	public Cashier getCashier() {
+		return cashier;
+	}
 	
-	// public void setCashier(String cashier) {
-	//	this.cashier = cashier
-	//}
+	public void setCashier(Cashier cashier) {
+		this.cashier = cashier;
+	}
 }

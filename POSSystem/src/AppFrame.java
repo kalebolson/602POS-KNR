@@ -53,6 +53,7 @@ public class AppFrame {
 	 */
 	public AppFrame() {
 		initialize();
+		
 	}
 
 	/**
@@ -60,7 +61,7 @@ public class AppFrame {
 	 */
 	private void initialize() {
 		Store store = new Store();
-		Register register;
+		
 		cardLayout = new CardLayout();
 
 		frmPosSystemLogin = new JFrame();
@@ -128,18 +129,22 @@ public class AppFrame {
 					if (Integer.parseInt(username) == store.getCashier(0).getID() && password.equals("masterpassword")) {
 						JOptionPane.showMessageDialog(frmPosSystemLogin, "Login Successful");
 						cardLayout.show(containerPanel, "managerScreen");
+						store.getRegister(1).unlock(0, "masterpassword");
 					}
 					else if (Integer.parseInt(username) == store.getCashier(1).getID() && password.equals("asdf")) {
 						JOptionPane.showMessageDialog(frmPosSystemLogin, "Login Successful");
 						cardLayout.show(containerPanel, "transactionScreen");
+						store.getRegister(1).unlock(1, "asdf");
 					}
 					else if (Integer.parseInt(username) == store.getCashier(2).getID() && password.equals("1234")){
 						JOptionPane.showMessageDialog(frmPosSystemLogin, "Login Successful");
 						cardLayout.show(containerPanel, "transactionScreen");
+						store.getRegister(1).unlock(2, "1234");
 					}
 					else if (Integer.parseInt(username) == store.getCashier(3).getID() && password.equals("01Q3EE@")){
 						JOptionPane.showMessageDialog(frmPosSystemLogin, "Login Successful");
 						cardLayout.show(containerPanel, "transactionScreen");
+						store.getRegister(1).unlock(3, "01Q3EE@");
 					}
 					else {
 						JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid Username or Password");
