@@ -289,7 +289,7 @@ public class Store {
 			while (input.hasNext()){
 				UPC = input.nextInt();
 				productName = input.next();
-				supplier = input.next();
+				supplier = input.next(); // must make sure supplier name is one word (no spaces)
 				price = input.nextDouble();
 				quantityStocked = input.nextInt();
 				quantityOrdered = input.nextInt();

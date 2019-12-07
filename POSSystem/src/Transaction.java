@@ -4,13 +4,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Transaction {
-	private static int count = 0;
+	private static int IDgenerator;
 	private int transactionID;
 	private String transactionDate;
 	private double cashTendered;
@@ -20,6 +22,10 @@ public class Transaction {
 	private ArrayList<Product> cart;
 	private LocalDateTime localDateTime;
 	private DateTimeFormatter dtf;
+	public static final BigDecimal SALES_TAX_RATE = new BigDecimal("0.07875");
+	private BigDecimal subtotal = new BigDecimal("0.00");
+	private BigDecimal total = new BigDecimal("0.00");
+	DecimalFormat df = new DecimalFormat("$###,###.00");
 	
 	
 	public Transaction(Cashier c) {
@@ -27,22 +33,23 @@ public class Transaction {
 		Scanner input;
 		  try {
 				input = new Scanner(new File("runningTransactionIDgenerator.txt"));
-				count = input.nextInt();
+				IDgenerator = input.nextInt();
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
 		
 		//main constructor
-		transactionID = ++count;
+		transactionID = IDgenerator;
+		IDgenerator++;
 		localDateTime = LocalDateTime.now();
 		dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 		transactionDate = localDateTime.format(dtf);
 		cashier = c;
-		ArrayList<Product> cart = new ArrayList<Product>();
+		cart = new ArrayList<Product>();
 		
 		//this block is to update the running ID txt file
 	      try (PrintWriter output = new PrintWriter(new FileWriter("runningTransactionIDgenerator.txt", false))) {//I set this to false so it overwrites instead of appending the file
-	      	output.print(count);
+	      	output.print(IDgenerator);
 	      	output.close();
 	  	} catch (IOException e) {
 	  		e.printStackTrace();
@@ -128,13 +135,26 @@ public class Transaction {
 	}
 	
 	public BigDecimal getTotal() {
-		CalculateTransaction calc = new CalculateTransaction();
-		return calc.calculateTotal(cart);
+		getSubTotal();
+		total = subtotal.add(getSalesTax());	
+		total = total.setScale(2, RoundingMode.HALF_UP);
+		return total;
+	}
+	
+	public BigDecimal getSalesTax() {
+		BigDecimal salesTax = subtotal.multiply(SALES_TAX_RATE);
+		salesTax = salesTax.setScale(2, RoundingMode.HALF_UP);
+		return salesTax;
 	}
 	
 	public BigDecimal getSubTotal() {
-		CalculateTransaction calc = new CalculateTransaction();
-		return calc.calculateSubtotal(cart);
+		BigDecimal sum = new BigDecimal("0.00");
+		for (int i= 0; i < cart.size(); i++) {
+			sum = sum.add(new BigDecimal(String.valueOf(cart.get(i).getPrice())));
+		}
+		sum = sum.setScale(2, RoundingMode.HALF_UP);
+		subtotal = sum;
+		return subtotal;
     }
 	
 	public Cashier getCashier() {

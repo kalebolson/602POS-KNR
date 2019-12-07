@@ -1,1 +1,1 @@
-1 Apples Trader Joes 0.25 50 0 15 
+1 Apples TraderJoes 0.25 50 0 15 2 Bananas Aldi's 0.15 50 0 15 3 Chocolate Nestle 2.5 25 0 10 

@@ -6,8 +6,13 @@ public class TransactionDriver {
 		Store store = new Store();
 		try {
 			Register register = store.getRegister(1);
-			register.addnewItem("Apples", "Trader Joes", 0.25, 50, 15);
-			register.addnewItem("Bananas", "Aldi's", 0.15, 50, 15);
+			register.unlock(1, "asdf");
+			register.newSale();
+			register.addToSale(1);
+			register.addToSale(1);
+			register.addToSale(2);
+			register.addToSale(3);
+			System.out.println(register.calculateSale());
 		
 		} catch (InvalidIDException e) {
 			// TODO Auto-generated catch block

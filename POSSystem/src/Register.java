@@ -97,6 +97,12 @@ public class Register {
 	  currentTransaction.removeFromSale(UPC);
   }
   
+  public String calculateSale() {
+	  return "Subtotal: " + currentTransaction.getSubTotal() + 
+			  "\nSales Tax: " + currentTransaction.getSalesTax() +
+			  "\nTotal: " + currentTransaction.getTotal();
+  }
+  
   /*
   public String finalizeSale() {
 	  String receipt = currentTransaction+"";
