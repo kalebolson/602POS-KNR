@@ -18,7 +18,8 @@ public class AppFrame {
 	private JLabel lblPassword;
 	private JPasswordField passwordField;
 	
-	private JFrame frmPosSystemMainMenu; 
+	private JFrame frmPosSystemMainMenuCashier; 
+	private JFrame frmPosSystemManagerFunction;
 
 	/**
 	 * Launch the application.
