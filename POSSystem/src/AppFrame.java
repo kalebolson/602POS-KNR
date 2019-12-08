@@ -15,6 +15,8 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
 import javax.swing.JTextPane;
+import javax.swing.JTable;
+import java.awt.Font;
 
 public class AppFrame {
 
@@ -207,7 +209,7 @@ public class AppFrame {
 		newSalePanel.add(btnFinalizeSale);
 		
 		JLabel lblItemUpcList = new JLabel("Item UPC List");
-		lblItemUpcList.setBounds(98, 27, 122, 15);
+		lblItemUpcList.setBounds(71, 27, 122, 15);
 		newSalePanel.add(lblItemUpcList);
 		
 		JLabel lblEnterUpc = new JLabel("Enter UPC");
@@ -239,6 +241,106 @@ public class AppFrame {
 		});
 		btnCancelSale_1.setBounds(288, 340, 133, 25);
 		newSalePanel.add(btnCancelSale_1);
+		
+		JLabel lblNewLabel_1 = new JLabel("1 - Apples");
+		lblNewLabel_1.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblNewLabel_1.setBounds(24, 80, 129, 15);
+		newSalePanel.add(lblNewLabel_1);
+		
+		JLabel lblBananas = new JLabel("2 - Bananas");
+		lblBananas.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblBananas.setBounds(24, 104, 129, 15);
+		newSalePanel.add(lblBananas);
+		
+		JLabel lblChocolate = new JLabel("3 - Chocolate");
+		lblChocolate.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblChocolate.setBounds(24, 133, 129, 15);
+		newSalePanel.add(lblChocolate);
+		
+		JLabel lblChicken = new JLabel("4 - Chicken");
+		lblChicken.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblChicken.setBounds(24, 157, 129, 15);
+		newSalePanel.add(lblChicken);
+		
+		JLabel lblAlmond = new JLabel("8 - Almond Butter");
+		lblAlmond.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblAlmond.setBounds(24, 261, 129, 15);
+		newSalePanel.add(lblAlmond);
+		
+		JLabel lblPeanut = new JLabel("7 - Peanut Butter");
+		lblPeanut.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblPeanut.setBounds(24, 234, 129, 15);
+		newSalePanel.add(lblPeanut);
+		
+		JLabel lblEggs = new JLabel("6 - Eggs");
+		lblEggs.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblEggs.setBounds(24, 209, 129, 15);
+		newSalePanel.add(lblEggs);
+		
+		JLabel lblSalmon = new JLabel("5 - Salmon");
+		lblSalmon.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblSalmon.setBounds(24, 184, 129, 15);
+		newSalePanel.add(lblSalmon);
+		
+		JLabel lblBread = new JLabel("9 - Bread");
+		lblBread.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblBread.setBounds(24, 288, 129, 15);
+		newSalePanel.add(lblBread);
+		
+		JLabel lblPizza = new JLabel("10 - Pizza");
+		lblPizza.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblPizza.setBounds(24, 315, 129, 15);
+		newSalePanel.add(lblPizza);
+		
+		JLabel lblPizza_1 = new JLabel("20 - Milk");
+		lblPizza_1.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblPizza_1.setBounds(141, 315, 129, 15);
+		newSalePanel.add(lblPizza_1);
+		
+		JLabel lblBread_1 = new JLabel("19 - Pork");
+		lblBread_1.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblBread_1.setBounds(141, 288, 129, 15);
+		newSalePanel.add(lblBread_1);
+		
+		JLabel lblAlmond_1 = new JLabel("18 - Bacon");
+		lblAlmond_1.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblAlmond_1.setBounds(141, 261, 129, 15);
+		newSalePanel.add(lblAlmond_1);
+		
+		JLabel lblBacon = new JLabel("17 - Broccoli");
+		lblBacon.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblBacon.setBounds(141, 234, 129, 15);
+		newSalePanel.add(lblBacon);
+		
+		JLabel lblRum = new JLabel("16 - Rum");
+		lblRum.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblRum.setBounds(141, 209, 129, 15);
+		newSalePanel.add(lblRum);
+		
+		JLabel lblWine = new JLabel("15 - Wine");
+		lblWine.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblWine.setBounds(141, 184, 129, 15);
+		newSalePanel.add(lblWine);
+		
+		JLabel lblChicken_1 = new JLabel("14 - Beer");
+		lblChicken_1.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblChicken_1.setBounds(141, 157, 129, 15);
+		newSalePanel.add(lblChicken_1);
+		
+		JLabel lblJuice = new JLabel("13 - Juice");
+		lblJuice.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblJuice.setBounds(141, 133, 129, 15);
+		newSalePanel.add(lblJuice);
+		
+		JLabel lblOnions = new JLabel("12 - Onions");
+		lblOnions.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblOnions.setBounds(141, 104, 129, 15);
+		newSalePanel.add(lblOnions);
+		
+		JLabel lblOranges = new JLabel("11 - Oranges");
+		lblOranges.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblOranges.setBounds(141, 80, 129, 15);
+		newSalePanel.add(lblOranges);
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String username = usernameField.getText();
