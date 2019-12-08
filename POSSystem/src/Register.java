@@ -99,9 +99,7 @@ public class Register {
   }
   
   public String calculateSale() {
-	  return "Subtotal: " + df.format(currentTransaction.getSubTotal()) + 
-			  "\nSales Tax: " + df.format(currentTransaction.getSalesTax()) +
-			  "\nTotal: " + df.format(currentTransaction.getTotal());
+	  return currentTransaction.toString();
   }
   
   public String finalizeSale() {

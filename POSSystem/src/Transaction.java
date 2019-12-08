@@ -82,17 +82,15 @@ public class Transaction {
 	}
 	
 	public void removeFromSale(int UPC) throws InvalidIDException {
-		boolean searching = true;
-		int i = 0;
-		//I'm not using a for loop because I need to break 
-		//out of the loop once I remove the product
-		while (searching){
+		if (cart.size() == 0) {
+			throw new InvalidIDException("Cart is empty");
+		}
+		for (int i = 0; i < cart.size(); i++) {
 			if (cart.get(i).getUPC()==UPC) {
 				cart.remove(i);
-				searching = false;
+				break;
 			}
-			i++;
-			if (i==cart.size()-1) {
+			else if (i==cart.size()-1) {
 				throw new InvalidIDException("Can't find that UPC in this order");
 			}
 		}

@@ -17,6 +17,8 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextPane;
 import javax.swing.JTable;
 import java.awt.Font;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 
 public class AppFrame {
 	
@@ -35,6 +37,7 @@ public class AppFrame {
 	private JLabel lblLoggedInAdmin;
 	private JLabel lblNewSale;
 	private JTextField UPCtextField;
+	private JTextArea txtrReceipt;
 
 	/**
 	 * Launch the application.
@@ -129,6 +132,7 @@ public class AppFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				cardLayout.show(containerPanel, "newSaleScreen");
 				register.newSale();
+				txtrReceipt.setText(register.calculateSale());
 			}
 		});
 		btnNewSale.setBounds(285, 94, 128, 25);
@@ -190,10 +194,6 @@ public class AppFrame {
 		lblNewSale.setBounds(318, 12, 103, 15);
 		newSalePanel.add(lblNewSale);
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setBounds(467, 54, 176, 237);
-		newSalePanel.add(textPane);
-		
 		JLabel lblTransactionDetails = new JLabel("Transaction Details");
 		lblTransactionDetails.setBounds(487, 27, 168, 15);
 		newSalePanel.add(lblTransactionDetails);
@@ -201,12 +201,19 @@ public class AppFrame {
 		JButton btnCalculateTotal = new JButton("Calculate Total");
 		btnCalculateTotal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				txtrReceipt.setText(register.calculateSale());
 			}
 		});
 		btnCalculateTotal.setBounds(487, 303, 146, 25);
 		newSalePanel.add(btnCalculateTotal);
 		
 		JButton btnFinalizeSale = new JButton("Finalize Sale");
+		btnFinalizeSale.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				register.finalizeSale();
+				cardLayout.show(containerPanel, "cashierScreen");
+			}
+		});
 		btnFinalizeSale.setBounds(487, 340, 145, 25);
 		newSalePanel.add(btnFinalizeSale);
 		
@@ -226,13 +233,14 @@ public class AppFrame {
 		JButton btnAddItem = new JButton("Add Item");
 		btnAddItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int UPCInput = Integer.parseInt(UPCtextField.getText());
+				int UPC = Integer.parseInt(UPCtextField.getText());
 				try {
-					register.addToSale(UPCInput);
+					register.addToSale(UPC);
 				} catch (InvalidIDException e) {
 					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid UPC");
 					e.printStackTrace();
 				}
+				txtrReceipt.setText(register.calculateSale());
 				UPCtextField.setText("");
 			}
 		});
@@ -242,6 +250,15 @@ public class AppFrame {
 		JButton btnRemoveItem = new JButton("Remove Item");
 		btnRemoveItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				int UPC = Integer.parseInt(UPCtextField.getText());
+				try {
+					register.removeFromSale(UPC);
+				} catch (InvalidIDException e) {
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid UPC");
+					e.printStackTrace();
+				}
+				txtrReceipt.setText(register.calculateSale());
+				UPCtextField.setText("");
 			}
 		});
 		btnRemoveItem.setBounds(288, 199, 133, 25);
@@ -355,6 +372,15 @@ public class AppFrame {
 		lblOranges.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblOranges.setBounds(141, 80, 129, 15);
 		newSalePanel.add(lblOranges);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(487, 54, 146, 223);
+		newSalePanel.add(scrollPane);
+		
+		txtrReceipt = new JTextArea();
+		txtrReceipt.setEditable(false);
+		scrollPane.setViewportView(txtrReceipt);
+		
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String username = usernameField.getText();
