@@ -19,16 +19,12 @@ import javax.swing.JTable;
 import java.awt.Font;
 
 public class AppFrame {
-
-	//(nb)- we are going to need multiple jframes.. updating the name to be more descriptive :) 
+	
 	private JFrame frmPosSystemLogin;
 	private JTextField usernameField;
 	private JLabel lblUsername;
 	private JLabel lblPassword;
 	private JPasswordField passwordField;
-	
-	private JFrame frmPosSystemMainMenuCashier; 
-	private JFrame frmPosSystemManagerFunction;
 	private JPanel loginPanel;
 	private JLabel lblNewLabel;
 	private JPanel containerPanel;
@@ -60,17 +56,22 @@ public class AppFrame {
 	 * Create the application.
 	 */
 	public AppFrame() {
-		initialize();
+		try {
+			initialize();
+		} catch (InvalidIDException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws InvalidIDException 
 	 */
-	private void initialize() {
-		Store store = new Store();
-		String username;
-		String password;
+	private void initialize() throws InvalidIDException {
+		final Store store = new Store();
+		final Register register = store.getRegister(1);
 		
 		cardLayout = new CardLayout();
 
@@ -115,34 +116,35 @@ public class AppFrame {
 		lblSystemLogin.setBounds(305, 12, 111, 15);
 		loginPanel.add(lblSystemLogin);
 		
-		JPanel transactionPanel = new JPanel();
-		containerPanel.add(transactionPanel, "cashierScreen");
-		transactionPanel.setLayout(null);
+		JPanel cashierPanel = new JPanel();
+		containerPanel.add(cashierPanel, "cashierScreen");
+		cashierPanel.setLayout(null);
 		
 		lblNewLabel = new JLabel("Cashier Menu");
 		lblNewLabel.setBounds(302, 12, 111, 15);
-		transactionPanel.add(lblNewLabel);
+		cashierPanel.add(lblNewLabel);
 		
 		JButton btnNewSale = new JButton("New Sale");
 		btnNewSale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				cardLayout.show(containerPanel, "newSaleScreen");
+				register.newSale();
 			}
 		});
 		btnNewSale.setBounds(285, 94, 128, 25);
-		transactionPanel.add(btnNewSale);
+		cashierPanel.add(btnNewSale);
 		
 		JButton btnReturnItem = new JButton("Return Item");
 		btnReturnItem.setBounds(285, 168, 128, 25);
-		transactionPanel.add(btnReturnItem);
+		cashierPanel.add(btnReturnItem);
 		
 		JLabel lblLoggedInAs = new JLabel("Logged in as:");
 		lblLoggedInAs.setBounds(195, 54, 101, 15);
-		transactionPanel.add(lblLoggedInAs);
+		cashierPanel.add(lblLoggedInAs);
 		
 		JButton btnCancelSale = new JButton("Cancel Sale");
 		btnCancelSale.setBounds(285, 131, 128, 25);
-		transactionPanel.add(btnCancelSale);
+		cashierPanel.add(btnCancelSale);
 		
 		JButton btnLogout = new JButton("Logout");
 		btnLogout.addActionListener(new ActionListener() {
@@ -158,11 +160,11 @@ public class AppFrame {
 			}
 		});
 		btnLogout.setBounds(282, 234, 131, 25);
-		transactionPanel.add(btnLogout);
+		cashierPanel.add(btnLogout);
 		
 		JLabel lblLoggedInUser = new JLabel("Default");
 		lblLoggedInUser.setBounds(302, 54, 111, 15);
-		transactionPanel.add(lblLoggedInUser);
+		cashierPanel.add(lblLoggedInUser);
 		
 		managerPanel = new JPanel();
 		containerPanel.add(managerPanel, "managerScreen");
@@ -222,6 +224,18 @@ public class AppFrame {
 		UPCtextField.setColumns(10);
 		
 		JButton btnAddItem = new JButton("Add Item");
+		btnAddItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int UPCInput = Integer.parseInt(UPCtextField.getText());
+				try {
+					register.addToSale(UPCInput);
+				} catch (InvalidIDException e) {
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid UPC");
+					e.printStackTrace();
+				}
+				UPCtextField.setText("");
+			}
+		});
 		btnAddItem.setBounds(288, 162, 133, 25);
 		newSalePanel.add(btnAddItem);
 		
@@ -351,25 +365,25 @@ public class AppFrame {
 						JOptionPane.showMessageDialog(frmPosSystemLogin, "Login Successful");
 						cardLayout.show(containerPanel, "managerScreen");
 						lblLoggedInAdmin.setText(store.getCashier(0).getFirstName() + " " + store.getCashier(0).getLastName());
-						store.getRegister(1).unlock(Integer.parseInt(username), password);
+						register.unlock(Integer.parseInt(username), password);
 					}
 					else if (Integer.parseInt(username) == store.getCashier(1).getID() && password.equals("asdf")) {
 						JOptionPane.showMessageDialog(frmPosSystemLogin, "Login Successful");
 						cardLayout.show(containerPanel, "cashierScreen");
 						lblLoggedInUser.setText(store.getCashier(1).getFirstName() + " " + store.getCashier(1).getLastName());
-						store.getRegister(1).unlock(Integer.parseInt(username), password);
+						register.unlock(Integer.parseInt(username), password);
 					}
 					else if (Integer.parseInt(username) == store.getCashier(2).getID() && password.equals("1234")){
 						JOptionPane.showMessageDialog(frmPosSystemLogin, "Login Successful");
 						cardLayout.show(containerPanel, "cashierScreen");
 						lblLoggedInUser.setText(store.getCashier(2).getFirstName() + " " + store.getCashier(2).getLastName());
-						store.getRegister(1).unlock(Integer.parseInt(username), password);
+						register.unlock(Integer.parseInt(username), password);
 					}
 					else if (Integer.parseInt(username) == store.getCashier(3).getID() && password.equals("01Q3EE@")){
 						JOptionPane.showMessageDialog(frmPosSystemLogin, "Login Successful");
 						cardLayout.show(containerPanel, "cashierScreen");
 						lblLoggedInUser.setText(store.getCashier(3).getFirstName() + " " + store.getCashier(3).getLastName());
-						store.getRegister(1).unlock(Integer.parseInt(username), password);
+						register.unlock(Integer.parseInt(username), password);
 					}
 					else {
 						JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid Username or Password");
