@@ -13,6 +13,7 @@ import java.awt.Dimension;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import javax.swing.SwingConstants;
 
 public class AppFrame {
 
@@ -68,7 +69,7 @@ public class AppFrame {
 		frmPosSystemLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmPosSystemLogin.setResizable(false);
 		frmPosSystemLogin.setSize(new Dimension(727, 420));
-		frmPosSystemLogin.setTitle("Awesome POS System 1.0");
+		frmPosSystemLogin.setTitle("POS System 1.0");
 		frmPosSystemLogin.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		containerPanel = new JPanel();
@@ -109,9 +110,33 @@ public class AppFrame {
 		containerPanel.add(transactionPanel, "transactionScreen");
 		transactionPanel.setLayout(null);
 		
-		lblNewLabel = new JLabel("Transaction");
-		lblNewLabel.setBounds(319, 32, 97, 15);
+		lblNewLabel = new JLabel("Cashier Menu");
+		lblNewLabel.setBounds(302, 12, 111, 15);
 		transactionPanel.add(lblNewLabel);
+		
+		JButton btnNewSale = new JButton("New Sale");
+		btnNewSale.setBounds(285, 94, 128, 25);
+		transactionPanel.add(btnNewSale);
+		
+		JButton btnReturnItem = new JButton("Return Item");
+		btnReturnItem.setBounds(285, 168, 128, 25);
+		transactionPanel.add(btnReturnItem);
+		
+		JLabel lblLoggedInAs = new JLabel("Logged in as:");
+		lblLoggedInAs.setBounds(195, 54, 101, 15);
+		transactionPanel.add(lblLoggedInAs);
+		
+		JButton btnCancelSale = new JButton("Cancel Sale");
+		btnCancelSale.setBounds(285, 131, 128, 25);
+		transactionPanel.add(btnCancelSale);
+		
+		JButton btnLogout = new JButton("Logout");
+		btnLogout.setBounds(282, 234, 131, 25);
+		transactionPanel.add(btnLogout);
+		
+		JLabel lblLoggedInUser = new JLabel("Default");
+		lblLoggedInUser.setBounds(302, 54, 111, 15);
+		transactionPanel.add(lblLoggedInUser);
 		
 		managerPanel = new JPanel();
 		containerPanel.add(managerPanel, "managerScreen");
@@ -135,16 +160,19 @@ public class AppFrame {
 						JOptionPane.showMessageDialog(frmPosSystemLogin, "Login Successful");
 						cardLayout.show(containerPanel, "transactionScreen");
 						store.getRegister(1).unlock(1, "asdf");
+						lblLoggedInUser.setText(store.getCashier(1).getFirstName() + " " + store.getCashier(1).getLastName());
 					}
 					else if (Integer.parseInt(username) == store.getCashier(2).getID() && password.equals("1234")){
 						JOptionPane.showMessageDialog(frmPosSystemLogin, "Login Successful");
 						cardLayout.show(containerPanel, "transactionScreen");
 						store.getRegister(1).unlock(2, "1234");
+						lblLoggedInUser.setText(store.getCashier(2).getFirstName() + " " + store.getCashier(2).getLastName());
 					}
 					else if (Integer.parseInt(username) == store.getCashier(3).getID() && password.equals("01Q3EE@")){
 						JOptionPane.showMessageDialog(frmPosSystemLogin, "Login Successful");
 						cardLayout.show(containerPanel, "transactionScreen");
 						store.getRegister(1).unlock(3, "01Q3EE@");
+						lblLoggedInUser.setText(store.getCashier(3).getFirstName() + " " + store.getCashier(3).getLastName());
 					}
 					else {
 						JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid Username or Password");

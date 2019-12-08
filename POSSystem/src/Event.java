@@ -10,7 +10,7 @@ public class Event {
   
   @Override 
   public String toString(){
-    String s = (t+" | "+type);
+    String s = ("Sale Type: " + type + "\t" + t);
     return s;
   }
   
