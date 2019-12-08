@@ -14,7 +14,6 @@ public class TransactionDriver {
 			register.addToSale(3);
 			System.out.println(register.finalizeSale());
 			register.lock();
-			System.out.println(register.CashierReportX(1));
 		
 		} catch (InvalidIDException e) {
 			// TODO Auto-generated catch block
