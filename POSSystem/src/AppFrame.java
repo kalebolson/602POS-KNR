@@ -1,6 +1,5 @@
 import java.awt.EventQueue;
 import java.awt.HeadlessException;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -13,9 +12,6 @@ import java.awt.Dimension;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import javax.swing.SwingConstants;
-import javax.swing.JTextPane;
-import javax.swing.JTable;
 import java.awt.Font;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
@@ -198,15 +194,6 @@ public class AppFrame {
 		lblTransactionDetails.setBounds(487, 27, 168, 15);
 		newSalePanel.add(lblTransactionDetails);
 		
-		JButton btnCalculateTotal = new JButton("Calculate Total");
-		btnCalculateTotal.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				txtrReceipt.setText(register.calculateSale());
-			}
-		});
-		btnCalculateTotal.setBounds(487, 303, 146, 25);
-		newSalePanel.add(btnCalculateTotal);
-		
 		JButton btnFinalizeSale = new JButton("Finalize Sale");
 		btnFinalizeSale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -214,7 +201,7 @@ public class AppFrame {
 				cardLayout.show(containerPanel, "cashierScreen");
 			}
 		});
-		btnFinalizeSale.setBounds(487, 340, 145, 25);
+		btnFinalizeSale.setBounds(487, 310, 145, 25);
 		newSalePanel.add(btnFinalizeSale);
 		
 		JLabel lblItemUpcList = new JLabel("Item UPC List");
@@ -270,7 +257,7 @@ public class AppFrame {
 				cardLayout.show(containerPanel, "cashierScreen");
 			}
 		});
-		btnCancelSale_1.setBounds(288, 340, 133, 25);
+		btnCancelSale_1.setBounds(288, 310, 133, 25);
 		newSalePanel.add(btnCancelSale_1);
 		
 		JLabel lblNewLabel_1 = new JLabel("1 - Apples");
