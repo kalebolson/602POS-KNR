@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Cashier {
@@ -13,7 +14,7 @@ public class Cashier {
   private String firstname;
   private String lastname;
   private boolean administrator;
-  private Shift[] shifts = new Shift[1];
+  private ArrayList<Shift> shifts = new ArrayList<Shift>();
   private Shift shift;
 
   Cashier(String PW, String fn, String ln, boolean admin){
@@ -42,14 +43,24 @@ public class Cashier {
  
   
   //this is for the reader to recreate cashiers that already exist when rewriting the text files
+  Cashier(int ID, String PW, String fn, String ln, boolean admin, ArrayList<Shift> shifts){
+	    cashierID = ID;
+	    password = PW;
+	    firstname = fn;
+	    lastname = ln;
+	    administrator = admin;
+	    this.shifts = shifts;
+	  }
+
   Cashier(int ID, String PW, String fn, String ln, boolean admin){
 	    cashierID = ID;
 	    password = PW;
 	    firstname = fn;
 	    lastname = ln;
 	    administrator = admin;
+	    this.shifts = new ArrayList<Shift>();
 	  }
-
+  
   Cashier (String PW){
     cashierID = IDgenerator;
     IDgenerator++;
@@ -61,22 +72,20 @@ public class Cashier {
   }
 
   public void setShift(){
-    shift = new Shift(this);
-    Shift[] temp = new Shift[shifts.length+1];
-    shifts = temp;
-    shifts[shifts.length-1]=shift;
+    shift = new Shift();
+    shifts.add(shift);
   }
 
-  public Shift[] getShifts(){
+  public ArrayList<Shift> getShifts(){
     return shifts;
   }
 
   public Shift getShift(){
-    return shifts[shifts.length-1];
+    return shifts.get(shifts.size()-1);
   }
 
   public Shift getShift(int i){
-    return shifts[i];
+    return shifts.get(i);
   }
 
   public void setPassword(String pw){
@@ -116,7 +125,10 @@ public class Cashier {
   @Override
   public String toString() {
 	  String s = "";
-	  s+=cashierID+" "+password+" "+firstname+" "+lastname+" "+administrator;
+	  s+=cashierID+" "+password+" "+firstname+" "+lastname+" "+administrator+" "+shifts.size()+" ";
+	  for (Shift shift : shifts) {
+		  s+=shift.toFile();
+	  }
 	  return s;
   }
   

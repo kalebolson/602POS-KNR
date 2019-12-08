@@ -110,8 +110,13 @@ public class Register {
 		  store.getInventory().removeItemsFromInventory(p.getUPC(), 1);
 	  }
 	  
-	  currentCashier.getShift().addEvent(new Event(currentTransaction, "Sale"));
-	  
+	  currentCashier.getShift().addEvent(new Event(currentTransaction.getTransactionID(), "Sale"));
+	  try {
+		store.updateCashierFile();
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 	  return receipt;
   }
   /*
@@ -298,7 +303,7 @@ public class Register {
   }
   //******************************************************************************************
   //end of inventory class implementation
-//******************************************************************************************  
+  //******************************************************************************************  
   
   //****************************************************************************************** 
   //Reports

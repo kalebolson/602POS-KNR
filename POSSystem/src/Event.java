@@ -1,17 +1,25 @@
 public class Event {
 
-  private Transaction t;
+  private int transactionID;
   private String type;
 
-  Event(Transaction t, String type){
-    this.t = t;
+  Event(int t, String type){
+    this.transactionID = t;
     this.type = type;
   }
   
   @Override 
   public String toString(){
-    String s = ("Sale Type: " + type + "\t" + t);
+    String s = ("Type: " + type + "\t Transaction: " + transactionID);
     return s;
+  }
+  
+  public int getTransID() {
+	  return transactionID;
+  }
+  
+  public String getType() {
+	  return type;
   }
   
 }

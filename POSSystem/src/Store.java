@@ -14,7 +14,7 @@ public class Store {
 	registers.add(r);
 	
 	//hard coding in initial administrative cashier as well
-	Cashier c = new Cashier("masterpassword","Default","Admin",true);
+	Cashier c = new Cashier(0,"masterpassword","Default","Admin",true);
 	cashiers.add(c);
 	
 	// Creating inventory object and refreshing its contents
@@ -45,7 +45,6 @@ public class Store {
   }
 
   public Cashier getCashier(int ID) throws InvalidIDException {
-	  updateCashierList();
 	  for (int i=0; i<cashiers.size();i++) {
 		  if (ID==cashiers.get(i).getID()) {
 			  return cashiers.get(i);
@@ -199,6 +198,13 @@ public class Store {
 		String firstname;
 		String lastname;
 		boolean admin;
+		int shiftCount;
+		int eventCount;
+		Shift shift;
+		Event event;
+		int transID;
+		ArrayList<Shift>tempShifts = new ArrayList<Shift>();
+		
 		try {
 			input = new Scanner(new File("cashiers.txt"));
 			
@@ -208,7 +214,27 @@ public class Store {
 				firstname = input.next();
 				lastname = input.next();
 				admin = input.nextBoolean();
-				c = new Cashier(ID,password,firstname,lastname,admin);
+				shiftCount = input.nextInt();
+
+				for (int i=0;i<shiftCount;i++) {
+					shift = new Shift();
+					shift.setTimein(input.next(),input.next());
+					shift.setTimeout(input.next(),input.next());
+					eventCount = input.nextInt();
+					for (int x=0;x<eventCount;x++) {
+						transID = input.nextInt();
+						event = new Event(transID,input.next());
+						shift.addEvent(event);
+					}
+					tempShifts.add(shift);
+				}
+				
+				//need to do this so the people with 0 shifts don't get sent the previous person's shift
+				if (shiftCount==0) {
+					tempShifts = new ArrayList<Shift>();
+				}
+				
+				c = new Cashier(ID,password,firstname,lastname,admin,tempShifts);
 				tempList.add(c);
 			}
 			cashiers = tempList;
