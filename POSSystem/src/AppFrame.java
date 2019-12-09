@@ -207,6 +207,34 @@ public class AppFrame {
 		lblLoggedInAdmin.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblLoggedInAdmin.setBounds(615, 0, 100, 15);
 		managerPanel.add(lblLoggedInAdmin);
+		
+		JButton btnInventoryMgmt = new JButton("Inventory Management");
+		btnInventoryMgmt.setBounds(487, 310, 200, 25);
+		btnInventoryMgmt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//register.finalizeSale();
+				cardLayout.show(containerPanel, "inventoryMgmtScreen");
+				
+			}
+		});
+		managerPanel.add(btnInventoryMgmt);
+		
+		JButton btnAdminLogout = new JButton("Logout");
+		btnAdminLogout.setBounds(487, 345, 200, 25);
+		btnAdminLogout.addActionListener(new ActionListener() {
+			/*
+			 * Switches back to login screen when selecting the logout button
+			 * and clears username and password fields
+			 */
+			public void actionPerformed(ActionEvent arg0) {
+				cardLayout.show(containerPanel, "loginScreen");
+				usernameField.setText("");
+				passwordField.setText("");
+			}
+		});
+		managerPanel.add(btnAdminLogout);
+		
+
 		//*********************END Create managerScreen****************************
 		
 		
@@ -228,18 +256,24 @@ public class AppFrame {
 		lblLoggedInAdmin.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblLoggedInAdmin.setBounds(615, 0, 100, 15);
 		inventoryMgmtPanel.add(lblLoggedInAdmin);
-		//*********************END Create inventoryMgmtScreen**********************
 		
-		JButton btnInventoryMgmt = new JButton("Inventory Management");
-		btnInventoryMgmt.setBounds(487, 310, 200, 25);
-		btnInventoryMgmt.addActionListener(new ActionListener() {
+		JButton btnAdminLogout2 = new JButton("Logout");
+		btnAdminLogout2.setBounds(487, 345, 200, 25);
+		btnAdminLogout2.addActionListener(new ActionListener() {
+			/*
+			 * Switches back to login screen when selecting the logout button
+			 * and clears username and password fields
+			 */
 			public void actionPerformed(ActionEvent arg0) {
-				//register.finalizeSale();
-				cardLayout.show(containerPanel, "inventoryMgmtScreen");
-				
+				cardLayout.show(containerPanel, "loginScreen");
+				usernameField.setText("");
+				passwordField.setText("");
 			}
 		});
-		managerPanel.add(btnInventoryMgmt);
+		inventoryMgmtPanel.add(btnAdminLogout2);
+		
+		//*********************END Create inventoryMgmtScreen**********************
+		
 		  //****************************************************************************************** 
 		  //END Manager UI 
 		  //****************************************************************************************** 
