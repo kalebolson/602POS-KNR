@@ -84,7 +84,14 @@ public class Product {
 	}
 	
 	public String toString() { 
-		return UPC+ "\t\t\t" + productName + "\t\t\t" + supplier + "\t\t\t" + unitPrice + "\t\t\t" + threshold + "\t\t\t" + quantityStocked + "\t\t\t" + quantityOrdered;  
+		return "UPC:\t\t"+ UPC+ "\n" + 
+				"Product:\t"+ productName + "\n" + 
+				"Supplier:\t" + supplier + "\n" + 
+				"Price:\t\t"+ unitPrice + "\n" + 
+				"Threshold:\t" + threshold + "\n" + 
+				"Quantity:\t" + quantityStocked + "\n" + 
+				"# Ordered:\t" + quantityOrdered + "\n\n";  
+		
 	}
 	/* -------------------------------------------------------- 
 	 * End Functional Methods & Calculations 

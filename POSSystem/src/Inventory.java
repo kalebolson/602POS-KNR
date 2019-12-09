@@ -10,7 +10,7 @@ public class Inventory {
 	 * -------------------------------------------------------- */
 	public String printInventoryReport() { 
 		String s = "";
-		s+=("UPC\t\t\tProduct\t\t\tSupplier\t\t\tPrice\t\t\tThreshold\t\tIn-Stock\t\tOrdered");
+		//s+=("UPC\t\t\tProduct\t\t\tSupplier\t\t\tPrice\t\t\tThreshold\t\tIn-Stock\t\tOrdered");
 	//	System.out.println(inventory); 
 		for(Product p: inventory) { 
 			s+=(p);
