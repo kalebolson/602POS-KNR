@@ -30,7 +30,9 @@ public class AppFrame {
 	private JPanel containerPanel;
 	private CardLayout cardLayout;
 	private JPanel managerPanel;
+	private JPanel inventoryMgmtPanel;
 	private JLabel lblAdministratorMenu;
+	private JLabel lblInvMgmtMenu;
 	private JLabel lblLoggedInAs_1;
 	private JLabel lblLoggedInAdmin;
 	private JLabel lblNewSale;
@@ -182,6 +184,12 @@ public class AppFrame {
 		lblLoggedInUser.setBounds(616, 0, 111, 15);
 		cashierPanel.add(lblLoggedInUser);
 		
+		  //****************************************************************************************** 
+		  //Manager UI 
+		  //****************************************************************************************** 
+		
+		
+		//*********************Create managerScreen*******************************
 		managerPanel = new JPanel();
 		containerPanel.add(managerPanel, "managerScreen");
 		managerPanel.setLayout(null);
@@ -199,6 +207,42 @@ public class AppFrame {
 		lblLoggedInAdmin.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblLoggedInAdmin.setBounds(615, 0, 100, 15);
 		managerPanel.add(lblLoggedInAdmin);
+		//*********************END Create managerScreen****************************
+		
+		
+		//*********************Create inventoryMgmtScreen**************************
+		inventoryMgmtPanel = new JPanel();
+		containerPanel.add(inventoryMgmtPanel, "inventoryMgmtScreen");
+		inventoryMgmtPanel.setLayout(null);
+		
+		lblInvMgmtMenu = new JLabel("Inventory Management Menu");
+		lblInvMgmtMenu.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblInvMgmtMenu.setBounds(265, 28, 201, 15);
+		inventoryMgmtPanel.add(lblInvMgmtMenu);
+		
+		lblLoggedInAs_1 = new JLabel("Logged in as:");
+		lblLoggedInAs_1.setBounds(506, 0, 112, 15);
+		inventoryMgmtPanel.add(lblLoggedInAs_1);
+		
+		lblLoggedInAdmin = new JLabel("Default");
+		lblLoggedInAdmin.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblLoggedInAdmin.setBounds(615, 0, 100, 15);
+		inventoryMgmtPanel.add(lblLoggedInAdmin);
+		//*********************END Create inventoryMgmtScreen**********************
+		
+		JButton btnInventoryMgmt = new JButton("Inventory Management");
+		btnInventoryMgmt.setBounds(487, 310, 200, 25);
+		btnInventoryMgmt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//register.finalizeSale();
+				cardLayout.show(inventoryMgmtPanel, "inventoryMgmtScreen");
+				
+			}
+		});
+		managerPanel.add(btnInventoryMgmt);
+		  //****************************************************************************************** 
+		  //END Manager UI 
+		  //****************************************************************************************** 
 		
 		JPanel newSalePanel = new JPanel();
 		containerPanel.add(newSalePanel, "newSaleScreen");
