@@ -18,6 +18,20 @@ public class Inventory {
 		return s;
 	}
 	
+	public String printProductReport(int upc) { 
+		for(Product a: inventory) { 
+			if(a.getUPC()==upc) {  
+				return "Product:  " + a.getProductName() + " (" + a.getUPC() + ")" + 
+						"\nSupplier:  " + a.getSupplier() + 
+						"\nPrice:   " + a.getPrice() + 
+						"\n\n Quantity:   " + a.getStockedQuantity() + 
+						"\n Threshold:   " + a.getThreshold();
+			}
+			else return "nope";
+		}
+		return "double nope"; 
+	}
+	
 	//set inventory threshold
 	public void setProductThreshold(int upc, int threshold) { 
 		for(Product a: inventory) { 

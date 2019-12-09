@@ -331,6 +331,11 @@ public class Register {
     return inv.printInventoryReport();
   }
   
+  public String productReport(int upc) {
+	  Inventory inv = store.getInventory();
+	  return inv.printProductReport(upc);
+  }
+  
   public String CashierReportX(int ID){
     Cashier c;
 	try {

@@ -270,8 +270,18 @@ public class AppFrame {
 		
 		UPCinvTextField = new JTextField();
 		UPCinvTextField.setBounds(360, 80, 60, 19);
-		inventoryMgmtPanel.add(UPCinvTextField);
+		UPCinvTextField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int UPC = Integer.parseInt(UPCinvTextField.getText());
+				try {
+					txtrInvReport.setText(register.productReport(UPC) + "\n text field report");
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid UPC");
+				}
+			}
+		});
 		UPCinvTextField.setColumns(10);
+		inventoryMgmtPanel.add(UPCinvTextField);
 		
 		JLabel lblThreshold = new JLabel("Enter Threshold");
 		lblThreshold.setBounds(260, 104, 100, 15);
@@ -295,13 +305,15 @@ public class AppFrame {
 		btnSetThreshold.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int UPC = Integer.parseInt(UPCinvTextField.getText());
+				System.out.println(register.productReport(UPC));
+				System.out.println("Done");
 				int Threshold = Integer.parseInt(setThresholdField.getText());
 				try {
 					register.setThreshold(UPC, Threshold);
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid Threshold");
 				}
-				txtrInvReport.setText(register.inventoryReport());
+				txtrInvReport.setText(register.productReport(UPC) + "\n done");
 				UPCinvTextField.setText("");
 			}
 		});
@@ -780,7 +792,7 @@ public class AppFrame {
 				String password = passwordField.getText();
 				
 				try {
-					if (Integer.parseInt(username) == store.getCashier(0).getID() && password.equals("masterpassword")) {
+					if (Integer.parseInt(username) == store.getCashier(0).getID() && password.equals("asdf")) {
 						JOptionPane.showMessageDialog(frmPosSystemLogin, "Login Successful");
 						cardLayout.show(containerPanel, "managerScreen");
 						lblLoggedInAdmin.setText(store.getCashier(0).getFirstName() + " " + store.getCashier(0).getLastName());
