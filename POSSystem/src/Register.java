@@ -108,6 +108,7 @@ public class Register {
 	  try {
 		store.addTransaction(currentTransaction);
 		store.updateInventoryFile();
+		addCash(currentTransaction.getTotal());
 	  } catch (IOException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -123,6 +124,7 @@ public class Register {
 	    } else {
 	      throw new InsufficientFundsException("Not enough cash in the register");
 	    }
+	  removeCash(currentTransaction.getTotal());
 	  for (Product p : currentTransaction.getCart()) {
 		  currentTransaction.removeFromSale(p.getUPC());
 	  }
