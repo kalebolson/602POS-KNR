@@ -21,11 +21,13 @@ public class Inventory {
 	public String printProductReport(int upc) { 
 		for(Product a: inventory) { 
 			if(a.getUPC()==upc) {  
-				return "Product:  " + a.getProductName() + " (" + a.getUPC() + ")" + 
-						"\nSupplier:  " + a.getSupplier() + 
-						"\nPrice:   " + a.getPrice() + 
-						"\n\n Quantity:   " + a.getStockedQuantity() + 
-						"\n Threshold:   " + a.getThreshold();
+				return "Product:\t" + a.getProductName() + " (" + a.getUPC() + ")" + 
+						"\nSupplier:\t" + a.getSupplier() + 
+						"\nPrice:   \t" + a.getPrice() + 
+						"\n\nQuantity:\t" + a.getStockedQuantity() + 
+						"\nThreshold:\t" + a.getThreshold()+
+						"\n# Ordered:\t" + a.getOrderedQuantity();
+				
 			}
 			else return "nope";
 		}
