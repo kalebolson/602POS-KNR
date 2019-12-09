@@ -15,6 +15,7 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 
 public class AppFrame {
 	
@@ -34,6 +35,9 @@ public class AppFrame {
 	private JLabel lblNewSale;
 	private JTextField UPCtextField;
 	private JTextArea txtrReceipt;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
 
 	/**
 	 * Launch the application.
@@ -135,14 +139,24 @@ public class AppFrame {
 		cashierPanel.add(btnNewSale);
 		
 		JButton btnReturnItem = new JButton("Return Item");
+		btnReturnItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				cardLayout.show(containerPanel, "returnItemScreen");
+			}
+		});
 		btnReturnItem.setBounds(285, 168, 128, 25);
 		cashierPanel.add(btnReturnItem);
 		
 		JLabel lblLoggedInAs = new JLabel("Logged in as:");
-		lblLoggedInAs.setBounds(195, 54, 101, 15);
+		lblLoggedInAs.setBounds(509, 0, 101, 15);
 		cashierPanel.add(lblLoggedInAs);
 		
 		JButton btnCancelSale = new JButton("Cancel Sale");
+		btnCancelSale.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				cardLayout.show(containerPanel, "cancelSaleScreen");
+			}
+		});
 		btnCancelSale.setBounds(285, 131, 128, 25);
 		cashierPanel.add(btnCancelSale);
 		
@@ -163,7 +177,8 @@ public class AppFrame {
 		cashierPanel.add(btnLogout);
 		
 		JLabel lblLoggedInUser = new JLabel("Default");
-		lblLoggedInUser.setBounds(302, 54, 111, 15);
+		lblLoggedInUser.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblLoggedInUser.setBounds(616, 0, 111, 15);
 		cashierPanel.add(lblLoggedInUser);
 		
 		managerPanel = new JPanel();
@@ -171,15 +186,17 @@ public class AppFrame {
 		managerPanel.setLayout(null);
 		
 		lblAdministratorMenu = new JLabel("Administrator Menu");
-		lblAdministratorMenu.setBounds(278, 28, 137, 15);
+		lblAdministratorMenu.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblAdministratorMenu.setBounds(265, 28, 201, 15);
 		managerPanel.add(lblAdministratorMenu);
 		
 		lblLoggedInAs_1 = new JLabel("Logged in as:");
-		lblLoggedInAs_1.setBounds(179, 55, 112, 15);
+		lblLoggedInAs_1.setBounds(506, 0, 112, 15);
 		managerPanel.add(lblLoggedInAs_1);
 		
 		lblLoggedInAdmin = new JLabel("Default");
-		lblLoggedInAdmin.setBounds(288, 55, 100, 15);
+		lblLoggedInAdmin.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblLoggedInAdmin.setBounds(615, 0, 100, 15);
 		managerPanel.add(lblLoggedInAdmin);
 		
 		JPanel newSalePanel = new JPanel();
@@ -188,20 +205,21 @@ public class AppFrame {
 		
 		lblNewSale = new JLabel("New Sale");
 		lblNewSale.setBounds(318, 12, 103, 15);
+		lblNewSale.setFont(new Font("Dialog", Font.BOLD, 14));
 		newSalePanel.add(lblNewSale);
 		
 		JLabel lblTransactionDetails = new JLabel("Transaction Details");
-		lblTransactionDetails.setBounds(487, 27, 168, 15);
+		lblTransactionDetails.setBounds(496, 27, 168, 15);
 		newSalePanel.add(lblTransactionDetails);
 		
 		JButton btnFinalizeSale = new JButton("Finalize Sale");
+		btnFinalizeSale.setBounds(487, 310, 145, 25);
 		btnFinalizeSale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				register.finalizeSale();
 				cardLayout.show(containerPanel, "cashierScreen");
 			}
 		});
-		btnFinalizeSale.setBounds(487, 310, 145, 25);
 		newSalePanel.add(btnFinalizeSale);
 		
 		JLabel lblItemUpcList = new JLabel("Item UPC List");
@@ -218,6 +236,7 @@ public class AppFrame {
 		UPCtextField.setColumns(10);
 		
 		JButton btnAddItem = new JButton("Add Item");
+		btnAddItem.setBounds(288, 162, 133, 25);
 		btnAddItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int UPC = Integer.parseInt(UPCtextField.getText());
@@ -231,10 +250,10 @@ public class AppFrame {
 				UPCtextField.setText("");
 			}
 		});
-		btnAddItem.setBounds(288, 162, 133, 25);
 		newSalePanel.add(btnAddItem);
 		
 		JButton btnRemoveItem = new JButton("Remove Item");
+		btnRemoveItem.setBounds(288, 199, 133, 25);
 		btnRemoveItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int UPC = Integer.parseInt(UPCtextField.getText());
@@ -248,125 +267,255 @@ public class AppFrame {
 				UPCtextField.setText("");
 			}
 		});
-		btnRemoveItem.setBounds(288, 199, 133, 25);
 		newSalePanel.add(btnRemoveItem);
 		
 		JButton btnCancelSale_1 = new JButton("Cancel Sale");
+		btnCancelSale_1.setBounds(288, 310, 133, 25);
 		btnCancelSale_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				cardLayout.show(containerPanel, "cashierScreen");
 			}
 		});
-		btnCancelSale_1.setBounds(288, 310, 133, 25);
 		newSalePanel.add(btnCancelSale_1);
 		
 		JLabel lblNewLabel_1 = new JLabel("1 - Apples");
-		lblNewLabel_1.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblNewLabel_1.setBounds(24, 80, 129, 15);
+		lblNewLabel_1.setFont(new Font("Dialog", Font.PLAIN, 12));
 		newSalePanel.add(lblNewLabel_1);
 		
 		JLabel lblBananas = new JLabel("2 - Bananas");
-		lblBananas.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblBananas.setBounds(24, 104, 129, 15);
+		lblBananas.setFont(new Font("Dialog", Font.PLAIN, 12));
 		newSalePanel.add(lblBananas);
 		
 		JLabel lblChocolate = new JLabel("3 - Chocolate");
-		lblChocolate.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblChocolate.setBounds(24, 133, 129, 15);
+		lblChocolate.setFont(new Font("Dialog", Font.PLAIN, 12));
 		newSalePanel.add(lblChocolate);
 		
 		JLabel lblChicken = new JLabel("4 - Chicken");
-		lblChicken.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblChicken.setBounds(24, 157, 129, 15);
+		lblChicken.setFont(new Font("Dialog", Font.PLAIN, 12));
 		newSalePanel.add(lblChicken);
 		
 		JLabel lblAlmond = new JLabel("8 - Almond Butter");
-		lblAlmond.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblAlmond.setBounds(24, 261, 129, 15);
+		lblAlmond.setFont(new Font("Dialog", Font.PLAIN, 12));
 		newSalePanel.add(lblAlmond);
 		
 		JLabel lblPeanut = new JLabel("7 - Peanut Butter");
-		lblPeanut.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblPeanut.setBounds(24, 234, 129, 15);
+		lblPeanut.setFont(new Font("Dialog", Font.PLAIN, 12));
 		newSalePanel.add(lblPeanut);
 		
 		JLabel lblEggs = new JLabel("6 - Eggs");
-		lblEggs.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblEggs.setBounds(24, 209, 129, 15);
+		lblEggs.setFont(new Font("Dialog", Font.PLAIN, 12));
 		newSalePanel.add(lblEggs);
 		
 		JLabel lblSalmon = new JLabel("5 - Salmon");
-		lblSalmon.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblSalmon.setBounds(24, 184, 129, 15);
+		lblSalmon.setFont(new Font("Dialog", Font.PLAIN, 12));
 		newSalePanel.add(lblSalmon);
 		
 		JLabel lblBread = new JLabel("9 - Bread");
-		lblBread.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblBread.setBounds(24, 288, 129, 15);
+		lblBread.setFont(new Font("Dialog", Font.PLAIN, 12));
 		newSalePanel.add(lblBread);
 		
 		JLabel lblPizza = new JLabel("10 - Pizza");
-		lblPizza.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblPizza.setBounds(24, 315, 129, 15);
+		lblPizza.setFont(new Font("Dialog", Font.PLAIN, 12));
 		newSalePanel.add(lblPizza);
 		
 		JLabel lblPizza_1 = new JLabel("20 - Milk");
-		lblPizza_1.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblPizza_1.setBounds(141, 315, 129, 15);
+		lblPizza_1.setFont(new Font("Dialog", Font.PLAIN, 12));
 		newSalePanel.add(lblPizza_1);
 		
 		JLabel lblBread_1 = new JLabel("19 - Pork");
-		lblBread_1.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblBread_1.setBounds(141, 288, 129, 15);
+		lblBread_1.setFont(new Font("Dialog", Font.PLAIN, 12));
 		newSalePanel.add(lblBread_1);
 		
 		JLabel lblAlmond_1 = new JLabel("18 - Bacon");
-		lblAlmond_1.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblAlmond_1.setBounds(141, 261, 129, 15);
+		lblAlmond_1.setFont(new Font("Dialog", Font.PLAIN, 12));
 		newSalePanel.add(lblAlmond_1);
 		
 		JLabel lblBacon = new JLabel("17 - Broccoli");
-		lblBacon.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblBacon.setBounds(141, 234, 129, 15);
+		lblBacon.setFont(new Font("Dialog", Font.PLAIN, 12));
 		newSalePanel.add(lblBacon);
 		
 		JLabel lblRum = new JLabel("16 - Rum");
-		lblRum.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblRum.setBounds(141, 209, 129, 15);
+		lblRum.setFont(new Font("Dialog", Font.PLAIN, 12));
 		newSalePanel.add(lblRum);
 		
 		JLabel lblWine = new JLabel("15 - Wine");
-		lblWine.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblWine.setBounds(141, 184, 129, 15);
+		lblWine.setFont(new Font("Dialog", Font.PLAIN, 12));
 		newSalePanel.add(lblWine);
 		
 		JLabel lblChicken_1 = new JLabel("14 - Beer");
-		lblChicken_1.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblChicken_1.setBounds(141, 157, 129, 15);
+		lblChicken_1.setFont(new Font("Dialog", Font.PLAIN, 12));
 		newSalePanel.add(lblChicken_1);
 		
 		JLabel lblJuice = new JLabel("13 - Juice");
-		lblJuice.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblJuice.setBounds(141, 133, 129, 15);
+		lblJuice.setFont(new Font("Dialog", Font.PLAIN, 12));
 		newSalePanel.add(lblJuice);
 		
 		JLabel lblOnions = new JLabel("12 - Onions");
-		lblOnions.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblOnions.setBounds(141, 104, 129, 15);
+		lblOnions.setFont(new Font("Dialog", Font.PLAIN, 12));
 		newSalePanel.add(lblOnions);
 		
 		JLabel lblOranges = new JLabel("11 - Oranges");
-		lblOranges.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblOranges.setBounds(141, 80, 129, 15);
+		lblOranges.setFont(new Font("Dialog", Font.PLAIN, 12));
 		newSalePanel.add(lblOranges);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(487, 54, 146, 223);
+		scrollPane.setBounds(468, 54, 208, 223);
 		newSalePanel.add(scrollPane);
 		
 		txtrReceipt = new JTextArea();
 		txtrReceipt.setEditable(false);
 		scrollPane.setViewportView(txtrReceipt);
+		
+		JLabel label_1 = new JLabel("Logged in as:");
+		label_1.setBounds(497, 0, 101, 15);
+		newSalePanel.add(label_1);
+		
+		JLabel lblLoggedInUserNS = new JLabel("Default");
+		lblLoggedInUserNS.setBounds(604, 0, 111, 15);
+		lblLoggedInUserNS.setFont(new Font("Dialog", Font.PLAIN, 12));
+		newSalePanel.add(lblLoggedInUserNS);
+		
+		JPanel cancelSalePanel = new JPanel();
+		containerPanel.add(cancelSalePanel, "cancelSaleScreen");
+		cancelSalePanel.setLayout(null);
+		
+		textField = new JTextField();
+		textField.setBounds(286, 93, 124, 19);
+		cancelSalePanel.add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblCancelSale = new JLabel("Cancel Sale");
+		lblCancelSale.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblCancelSale.setBounds(306, 12, 115, 15);
+		cancelSalePanel.add(lblCancelSale);
+		
+		JLabel lblTransactionId = new JLabel("Transaction ID");
+		lblTransactionId.setBounds(156, 95, 98, 15);
+		cancelSalePanel.add(lblTransactionId);
+		
+		JTextArea txtrPlaceholder = new JTextArea();
+		txtrPlaceholder.setBounds(473, 59, 188, 300);
+		cancelSalePanel.add(txtrPlaceholder);
+		
+		JButton btnCancelEntireSale = new JButton("Cancel Sale");
+		btnCancelEntireSale.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnCancelEntireSale.setBounds(286, 208, 124, 25);
+		cancelSalePanel.add(btnCancelEntireSale);
+		
+		JButton btnMainMenuCS = new JButton("Main Menu");
+		btnMainMenuCS.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				cardLayout.show(containerPanel, "cashierScreen");
+			}
+		});
+		btnMainMenuCS.setBounds(286, 311, 124, 25);
+		cancelSalePanel.add(btnMainMenuCS);
+		
+		JLabel lblTransaction = new JLabel("Transaction");
+		lblTransaction.setBounds(526, 27, 115, 15);
+		cancelSalePanel.add(lblTransaction);
+		
+		JLabel label_4 = new JLabel("Logged in as:");
+		label_4.setBounds(497, 0, 101, 15);
+		cancelSalePanel.add(label_4);
+		
+		JLabel lblLoggedInUserCS = new JLabel("Default");
+		lblLoggedInUserCS.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblLoggedInUserCS.setBounds(604, 0, 111, 15);
+		cancelSalePanel.add(lblLoggedInUserCS);
+		
+		JButton btnSearchCS = new JButton("Search");
+		btnSearchCS.setBounds(286, 124, 124, 25);
+		cancelSalePanel.add(btnSearchCS);
+		
+		JPanel returnItemPanel = new JPanel();
+		containerPanel.add(returnItemPanel, "returnItemScreen");
+		returnItemPanel.setLayout(null);
+		
+		JButton buttonMainMenuRI = new JButton("Main Menu");
+		buttonMainMenuRI.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				cardLayout.show(containerPanel, "cashierScreen");
+			}
+		});
+		buttonMainMenuRI.setBounds(292, 313, 124, 25);
+		returnItemPanel.add(buttonMainMenuRI);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(292, 93, 124, 19);
+		returnItemPanel.add(textField_1);
+		
+		JLabel label = new JLabel("Transaction ID");
+		label.setBounds(162, 95, 98, 15);
+		returnItemPanel.add(label);
+		
+		JLabel lblReturnItem = new JLabel("Return Item");
+		lblReturnItem.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblReturnItem.setBounds(309, 12, 115, 15);
+		returnItemPanel.add(lblReturnItem);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(479, 65, 188, 300);
+		returnItemPanel.add(textArea);
+		
+		JLabel label_2 = new JLabel("Transaction");
+		label_2.setBounds(532, 40, 115, 15);
+		returnItemPanel.add(label_2);
+		
+		JButton btnNewButton_1 = new JButton("Return Item");
+		btnNewButton_1.setBounds(292, 218, 124, 25);
+		returnItemPanel.add(btnNewButton_1);
+		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(292, 187, 124, 19);
+		returnItemPanel.add(textField_2);
+		
+		JLabel lblEnterUpc_1 = new JLabel("UPC");
+		lblEnterUpc_1.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblEnterUpc_1.setBounds(162, 189, 98, 15);
+		returnItemPanel.add(lblEnterUpc_1);
+		
+		JLabel label_6 = new JLabel("Logged in as:");
+		label_6.setBounds(497, 0, 101, 15);
+		returnItemPanel.add(label_6);
+		
+		JLabel lblLoggedInUserRI = new JLabel("Default");
+		lblLoggedInUserRI.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblLoggedInUserRI.setBounds(604, 0, 111, 15);
+		returnItemPanel.add(lblLoggedInUserRI);
+		
+		JButton btnSearchRI = new JButton("Search");
+		btnSearchRI.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnSearchRI.setBounds(292, 121, 124, 25);
+		returnItemPanel.add(btnSearchRI);
 		
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -378,24 +527,36 @@ public class AppFrame {
 						JOptionPane.showMessageDialog(frmPosSystemLogin, "Login Successful");
 						cardLayout.show(containerPanel, "managerScreen");
 						lblLoggedInAdmin.setText(store.getCashier(0).getFirstName() + " " + store.getCashier(0).getLastName());
+						lblLoggedInUserNS.setText(store.getCashier(0).getFirstName() + " " + store.getCashier(0).getLastName());
+						lblLoggedInUserRI.setText(store.getCashier(0).getFirstName() + " " + store.getCashier(0).getLastName());
+						lblLoggedInUserCS.setText(store.getCashier(0).getFirstName() + " " + store.getCashier(0).getLastName());
 						register.unlock(Integer.parseInt(username), password);
 					}
 					else if (Integer.parseInt(username) == store.getCashier(1).getID() && password.equals("asdf")) {
 						JOptionPane.showMessageDialog(frmPosSystemLogin, "Login Successful");
 						cardLayout.show(containerPanel, "cashierScreen");
 						lblLoggedInUser.setText(store.getCashier(1).getFirstName() + " " + store.getCashier(1).getLastName());
+						lblLoggedInUserNS.setText(store.getCashier(1).getFirstName() + " " + store.getCashier(1).getLastName());
+						lblLoggedInUserRI.setText(store.getCashier(1).getFirstName() + " " + store.getCashier(1).getLastName());
+						lblLoggedInUserCS.setText(store.getCashier(1).getFirstName() + " " + store.getCashier(1).getLastName());
 						register.unlock(Integer.parseInt(username), password);
 					}
 					else if (Integer.parseInt(username) == store.getCashier(2).getID() && password.equals("1234")){
 						JOptionPane.showMessageDialog(frmPosSystemLogin, "Login Successful");
 						cardLayout.show(containerPanel, "cashierScreen");
 						lblLoggedInUser.setText(store.getCashier(2).getFirstName() + " " + store.getCashier(2).getLastName());
+						lblLoggedInUserNS.setText(store.getCashier(2).getFirstName() + " " + store.getCashier(2).getLastName());
+						lblLoggedInUserRI.setText(store.getCashier(2).getFirstName() + " " + store.getCashier(2).getLastName());
+						lblLoggedInUserCS.setText(store.getCashier(2).getFirstName() + " " + store.getCashier(2).getLastName());
 						register.unlock(Integer.parseInt(username), password);
 					}
 					else if (Integer.parseInt(username) == store.getCashier(3).getID() && password.equals("01Q3EE@")){
 						JOptionPane.showMessageDialog(frmPosSystemLogin, "Login Successful");
 						cardLayout.show(containerPanel, "cashierScreen");
 						lblLoggedInUser.setText(store.getCashier(3).getFirstName() + " " + store.getCashier(3).getLastName());
+						lblLoggedInUserNS.setText(store.getCashier(3).getFirstName() + " " + store.getCashier(3).getLastName());
+						lblLoggedInUserRI.setText(store.getCashier(3).getFirstName() + " " + store.getCashier(3).getLastName());
+						lblLoggedInUserCS.setText(store.getCashier(3).getFirstName() + " " + store.getCashier(3).getLastName());
 						register.unlock(Integer.parseInt(username), password);
 					}
 					else {

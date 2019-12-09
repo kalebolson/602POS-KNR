@@ -1,1 +1,20 @@
-1 Apples SupremeSupply 0.70 50 0 15 2 Bananas TraderJack's 0.17 50 0 15 3 ChocolateFarmerBub's 2.50 50 0 15 4 Chicken TraderJack's 2.92 30 0 10 5 Salmon SupremeSupply 10.92 20 0 10 6 Eggs FarmerBub's 3.49 25 0 10 7 Peanutbutter SupremeSupply 3.00 40 0 15 8 Almondbutter GeneralDistributers 6.99 40 0 15 9 Bread SupremeSupply 1.99 30 0 10 10 Pizza TraderJack's 10.99 40 0 15 11 Oranges FarmerBub's 0.54 50 0 15 12 Onions FarmerBub's 0.26 50 0 15 13 Juice SupremeSupply 3.44 30 0 15 14 Beer SupremeSupply 6.99 100 0 20 15 Wine SupremeSupply 11.99 100 0 20 16 Rum TraderJack's 18.50 100 0 20 17 Broccoli FarmerBub's 1.15 50 0 15 18 Bacon FarmerBub's 3.99 50 0 15 19 Pork TraderJack's 2.45 50 0 15 20 Milk FarmerBub's 3.56 30 0 15
+"Apples", "SupremeSupply", 0.70, 50, 15
+"Bananas", "TraderJack's", 0.17, 50, 15 
+"Chocolate", "FarmerBub's", 2.50, 50, 15 
+"Chicken", "TraderJack's", 2.92, 30, 10 
+"Salmon", "SupremeSupply", 10.92, 20, 10 
+"Eggs", "FarmerBub's", 3.49, 25, 10 
+"Peanutbutter", "SupremeSupply", 3.00, 40, 15 
+"Almondbutter", "GeneralDistributers", 6.99, 40, 15 
+"Bread", "SupremeSupply", 1.99, 30, 10 
+"Pizza", "TraderJack's", 10.99, 40, 15 
+"Oranges", "FarmerBub's", 0.54, 50, 15 
+"Onions", "FarmerBub's", 0.26, 50, 15 
+"Juice", "SupremeSupply", 3.44, 30, 15 
+"Beer", "SupremeSupply", 6.99, 100, 20 
+"Wine", "SupremeSupply", 11.99, 100, 20 
+"Rum", "TraderJack's", 18.50, 100, 20 
+"Broccoli", "FarmerBub's", 1.15, 50, 15 
+"Bacon", "FarmerBub's", 3.99, 50, 15 
+"Pork", "TraderJack's", 2.45, 50, 15 
+"Milk", "FarmerBub's", 3.56, 30, 15

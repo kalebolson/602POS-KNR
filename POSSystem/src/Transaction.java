@@ -170,7 +170,8 @@ public class Transaction {
 		String cartItems = "";
 		for (int i = 0; i < cart.size(); i++) {
 			cartItems = cartItems + "\n" + cart.get(i).getProductName() + 
-					" " + df.format(cart.get(i).getPrice());
+					" " + df.format(cart.get(i).getPrice()) + 
+					"    " + "UPC: " + cart.get(i).getUPC();
 		}
 		
 		return "Transaction ID: " + transactionID +
