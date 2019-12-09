@@ -10,7 +10,7 @@ public class Store {
 
   public Store() {
 	//hard coding in register number 1 upon store creation
-	Register r = new Register(1,0.0,this);
+	Register r = new Register(1,200.00,this);
 	registers.add(r);
 	
 	//hard coding in initial administrative cashier as well
@@ -23,6 +23,8 @@ public class Store {
 	
 	//This constructor is where we should add the logic for pulling from text files
 	updateCashierList();
+	
+	updateTransactionList();
 	
   }
   

@@ -96,6 +96,23 @@ public class Transaction {
 		}
 	}
 	
+	public double getPrice(int UPC) throws InvalidIDException {
+		double price = 0;
+		if (cart.size() == 0) {
+			throw new InvalidIDException("Cart is empty");
+		}
+		for (int i = 0; i < cart.size(); i++ ) {
+			if (cart.get(i).getUPC() == UPC) {
+				price = cart.get(i).getPrice();
+				break;
+			}
+			else if (i == cart.size() - 1) {
+				throw new InvalidIDException("Can't find that UPC in this order");
+			}
+		}
+		return price;
+	}
+	
 	public ArrayList<Product> getCart() {
 		return cart;
 	}
@@ -174,7 +191,7 @@ public class Transaction {
 					"    " + "UPC: " + cart.get(i).getUPC();
 		}
 		
-		return "Transaction ID: " + transactionID +
+		return "Transaction ID: " + transactionID + "\nDate: " + transactionDate + 
 				"\n" + cartItems +
 				"\n\nSubtotal: " + df.format(getSubTotal()) +
 				"\nSales Tax: " + df.format(getSalesTax()) +

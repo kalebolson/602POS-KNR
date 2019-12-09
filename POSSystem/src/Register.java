@@ -86,7 +86,6 @@ public class Register {
   
   public void newReturn(int ID) throws InvalidIDException {
 	currentTransaction = store.getTransaction(ID);
-
   }
   
   public void addToSale(int UPC) throws InvalidIDException {
@@ -103,26 +102,41 @@ public class Register {
   }
   
   public void finalizeSale() {
-	  String receipt = currentTransaction+"";
-	  cashValue+=currentTransaction.getTotal();
-	  
 	  for (Product p : currentTransaction.getCart()) {
 		  store.getInventory().removeItemsFromInventory(p.getUPC(), 1);
 	  }
 	  try {
+		store.addTransaction(currentTransaction);
 		store.updateInventoryFile();
 	  } catch (IOException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	  }
+	 
 	  currentCashier.getShift().addEvent(new Event(currentTransaction, "Sale"));
+	 }
+	  
+  
+  public void finalizeReturn() throws InvalidIDException, InsufficientFundsException, IOException {
+	  if (currentTransaction.getTotal() <= cashValue){
+	      cashValue -= currentTransaction.getTotal();
+	    } else {
+	      throw new InsufficientFundsException("Not enough cash in the register");
+	    }
+	  for (Product p : currentTransaction.getCart()) {
+		  currentTransaction.removeFromSale(p.getUPC());
+	  }
+	  store.updateTransactionFile();
   }
-  /*
-  public String finalizeReturn() {
-	  String receipt = currentTransaction+"";
-	  removeCash(currentTransaction.getTotal());
+  
+  // overloaded method to return just a single item
+  public void finalizeReturn(int UPC) throws InvalidIDException, IOException, InsufficientFundsException {
+	  ArrayList<Product> p = currentTransaction.getCart();
+	  removeCash(currentTransaction.getPrice(UPC));
+	  currentTransaction.removeFromSale(UPC);
+	  store.updateTransactionFile();
   }
-  */
+  
   //****************************************************************************************** 
   //End sales and returns block
   //****************************************************************************************** 

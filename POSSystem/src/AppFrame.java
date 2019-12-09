@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 import java.awt.Dimension;
@@ -36,8 +37,8 @@ public class AppFrame {
 	private JTextField UPCtextField;
 	private JTextArea txtrReceipt;
 	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField transactionIDRIField;
+	private JTextField upcRIField;
 
 	/**
 	 * Launch the application.
@@ -244,7 +245,6 @@ public class AppFrame {
 					register.addToSale(UPC);
 				} catch (InvalidIDException e) {
 					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid UPC");
-					e.printStackTrace();
 				}
 				txtrReceipt.setText(register.calculateSale());
 				UPCtextField.setText("");
@@ -261,7 +261,6 @@ public class AppFrame {
 					register.removeFromSale(UPC);
 				} catch (InvalidIDException e) {
 					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid UPC");
-					e.printStackTrace();
 				}
 				txtrReceipt.setText(register.calculateSale());
 				UPCtextField.setText("");
@@ -464,10 +463,10 @@ public class AppFrame {
 		buttonMainMenuRI.setBounds(292, 313, 124, 25);
 		returnItemPanel.add(buttonMainMenuRI);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(292, 93, 124, 19);
-		returnItemPanel.add(textField_1);
+		transactionIDRIField = new JTextField();
+		transactionIDRIField.setColumns(10);
+		transactionIDRIField.setBounds(292, 93, 124, 19);
+		returnItemPanel.add(transactionIDRIField);
 		
 		JLabel label = new JLabel("Transaction ID");
 		label.setBounds(162, 95, 98, 15);
@@ -478,22 +477,43 @@ public class AppFrame {
 		lblReturnItem.setBounds(309, 12, 115, 15);
 		returnItemPanel.add(lblReturnItem);
 		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(449, 65, 237, 300);
+		returnItemPanel.add(scrollPane_1);
+		
 		JTextArea textArea = new JTextArea();
-		textArea.setBounds(479, 65, 188, 300);
-		returnItemPanel.add(textArea);
+		scrollPane_1.setViewportView(textArea);
 		
 		JLabel label_2 = new JLabel("Transaction");
-		label_2.setBounds(532, 40, 115, 15);
+		label_2.setBounds(517, 38, 115, 15);
 		returnItemPanel.add(label_2);
 		
-		JButton btnNewButton_1 = new JButton("Return Item");
-		btnNewButton_1.setBounds(292, 218, 124, 25);
-		returnItemPanel.add(btnNewButton_1);
+		JButton btnReturnItemRI = new JButton("Return Item");
+		btnReturnItemRI.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					register.finalizeReturn(Integer.parseInt(upcRIField.getText()));
+				} catch (NumberFormatException e) {
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Error: Invalid UPC");
+				} catch (InvalidIDException e) {
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Error: Invalid UPC");
+				} catch (IOException e) {
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Error: Unable to Process Return");
+					e.printStackTrace();
+				} catch (InsufficientFundsException e) {
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Error: Insufficient Funds");
+				}
+				textArea.setText(register.calculateSale());
+				upcRIField.setText("");
+			}
+		});
+		btnReturnItemRI.setBounds(292, 218, 124, 25);
+		returnItemPanel.add(btnReturnItemRI);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(292, 187, 124, 19);
-		returnItemPanel.add(textField_2);
+		upcRIField = new JTextField();
+		upcRIField.setColumns(10);
+		upcRIField.setBounds(292, 187, 124, 19);
+		returnItemPanel.add(upcRIField);
 		
 		JLabel lblEnterUpc_1 = new JLabel("UPC");
 		lblEnterUpc_1.setHorizontalAlignment(SwingConstants.TRAILING);
@@ -512,6 +532,13 @@ public class AppFrame {
 		JButton btnSearchRI = new JButton("Search");
 		btnSearchRI.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				try {
+					register.newReturn(Integer.parseInt(transactionIDRIField.getText()));
+				} catch (NumberFormatException | InvalidIDException e) {
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid Transaction ID");
+				}
+				textArea.setText(register.calculateSale());
+				transactionIDRIField.setText("");
 			}
 		});
 		btnSearchRI.setBounds(292, 121, 124, 25);
