@@ -43,6 +43,7 @@ public class AppFrame {
 	private JTextField upcRIField;
 	private JTextArea txtrInvReport;
 	private JTextField UPCinvTextField;
+	private JTextField setThresholdField;
 
 	/**
 	 * Launch the application.
@@ -264,13 +265,40 @@ public class AppFrame {
 		inventoryMgmtPanel.add(lblItemUpcList2);
 		
 		JLabel lblEnterUpc2 = new JLabel("Enter UPC");
-		lblEnterUpc2.setBounds(318, 52, 103, 15);
+		lblEnterUpc2.setBounds(260, 80, 75, 15);
 		inventoryMgmtPanel.add(lblEnterUpc2);
 		
 		UPCinvTextField = new JTextField();
-		UPCinvTextField.setBounds(288, 80, 133, 19);
+		UPCinvTextField.setBounds(360, 80, 60, 19);
 		inventoryMgmtPanel.add(UPCinvTextField);
 		UPCinvTextField.setColumns(10);
+		
+		JLabel lblThreshold = new JLabel("Enter Threshold");
+		lblThreshold.setBounds(260, 104, 100, 15);
+		inventoryMgmtPanel.add(lblThreshold);
+		
+		setThresholdField = new JTextField();
+		setThresholdField.setBounds(360, 104, 60, 19);
+		inventoryMgmtPanel.add(setThresholdField);
+		setThresholdField.setColumns(10);
+		
+		JButton btnSetThreshold = new JButton("Set Threshold");
+		btnSetThreshold.setBounds(288, 199, 133, 25);
+		btnSetThreshold.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int UPC = Integer.parseInt(UPCinvTextField.getText());
+				int Threshold = Integer.parseInt(setThresholdField.getText());
+				try {
+					register.removeFromSale(UPC);
+				} catch (InvalidIDException e) {
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid UPC");
+				}
+				txtrReceipt.setText(register.calculateSale());
+				UPCtextField.setText("");
+			}
+		});
+		
+
 		
 		JLabel lblApples2 = new JLabel("1 - Apples");
 		lblApples2.setBounds(24, 80, 129, 15);
