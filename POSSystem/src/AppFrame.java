@@ -41,6 +41,8 @@ public class AppFrame {
 	private JTextField textField;
 	private JTextField transactionIDRIField;
 	private JTextField upcRIField;
+	private JTextArea txtrInvReport;
+	private JTextField UPCinvTextField;
 
 	/**
 	 * Launch the application.
@@ -256,6 +258,119 @@ public class AppFrame {
 		lblLoggedInAdmin.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblLoggedInAdmin.setBounds(615, 0, 100, 15);
 		inventoryMgmtPanel.add(lblLoggedInAdmin);
+		
+		JLabel lblItemUpcList2 = new JLabel("Item UPC List");
+		lblItemUpcList2.setBounds(71, 52, 122, 15);
+		inventoryMgmtPanel.add(lblItemUpcList2);
+		
+		JLabel lblEnterUpc2 = new JLabel("Enter UPC");
+		lblEnterUpc2.setBounds(318, 52, 103, 15);
+		inventoryMgmtPanel.add(lblEnterUpc2);
+		
+		UPCinvTextField = new JTextField();
+		UPCinvTextField.setBounds(288, 80, 133, 19);
+		inventoryMgmtPanel.add(UPCinvTextField);
+		UPCinvTextField.setColumns(10);
+		
+		JLabel lblApples2 = new JLabel("1 - Apples");
+		lblApples2.setBounds(24, 80, 129, 15);
+		lblApples2.setFont(new Font("Dialog", Font.PLAIN, 12));
+		inventoryMgmtPanel.add(lblApples2);
+		
+		JLabel lblBananas2 = new JLabel("2 - Bananas");
+		lblBananas2.setBounds(24, 104, 129, 15);
+		lblBananas2.setFont(new Font("Dialog", Font.PLAIN, 12));
+		inventoryMgmtPanel.add(lblBananas2);
+		
+		JLabel lblChocolate2 = new JLabel("3 - Chocolate");
+		lblChocolate2.setBounds(24, 133, 129, 15);
+		lblChocolate2.setFont(new Font("Dialog", Font.PLAIN, 12));
+		inventoryMgmtPanel.add(lblChocolate2);
+		
+		JLabel lblChicken2 = new JLabel("4 - Chicken");
+		lblChicken2.setBounds(24, 157, 129, 15);
+		lblChicken2.setFont(new Font("Dialog", Font.PLAIN, 12));
+		inventoryMgmtPanel.add(lblChicken2);
+		
+		JLabel lblAlmond2 = new JLabel("8 - Almond Butter");
+		lblAlmond2.setBounds(24, 261, 129, 15);
+		lblAlmond2.setFont(new Font("Dialog", Font.PLAIN, 12));
+		inventoryMgmtPanel.add(lblAlmond2);
+		
+		JLabel lblPeanut2 = new JLabel("7 - Peanut Butter");
+		lblPeanut2.setBounds(24, 234, 129, 15);
+		lblPeanut2.setFont(new Font("Dialog", Font.PLAIN, 12));
+		inventoryMgmtPanel.add(lblPeanut2);
+		
+		JLabel lblEggs2 = new JLabel("6 - Eggs");
+		lblEggs2.setBounds(24, 209, 129, 15);
+		lblEggs2.setFont(new Font("Dialog", Font.PLAIN, 12));
+		inventoryMgmtPanel.add(lblEggs2);
+		
+		JLabel lblSalmon2 = new JLabel("5 - Salmon");
+		lblSalmon2.setBounds(24, 184, 129, 15);
+		lblSalmon2.setFont(new Font("Dialog", Font.PLAIN, 12));
+		inventoryMgmtPanel.add(lblSalmon2);
+		
+		JLabel lblBread2 = new JLabel("9 - Bread");
+		lblBread2.setBounds(24, 288, 129, 15);
+		lblBread2.setFont(new Font("Dialog", Font.PLAIN, 12));
+		inventoryMgmtPanel.add(lblBread2);
+		
+		JLabel lblPizza2 = new JLabel("10 - Pizza");
+		lblPizza2.setBounds(24, 315, 129, 15);
+		lblPizza2.setFont(new Font("Dialog", Font.PLAIN, 12));
+		inventoryMgmtPanel.add(lblPizza2);
+		
+		JLabel lblMilk2 = new JLabel("20 - Milk");
+		lblMilk2.setBounds(141, 315, 129, 15);
+		lblMilk2.setFont(new Font("Dialog", Font.PLAIN, 12));
+		inventoryMgmtPanel.add(lblMilk2);
+		
+		JLabel lblPork2 = new JLabel("19 - Pork");
+		lblPork2.setBounds(141, 288, 129, 15);
+		lblPork2.setFont(new Font("Dialog", Font.PLAIN, 12));
+		inventoryMgmtPanel.add(lblPork2);
+		
+		JLabel lblBacon2 = new JLabel("18 - Bacon");
+		lblBacon2.setBounds(141, 261, 129, 15);
+		lblBacon2.setFont(new Font("Dialog", Font.PLAIN, 12));
+		inventoryMgmtPanel.add(lblBacon2);
+		
+		JLabel lblBroccoli2 = new JLabel("17 - Broccoli");
+		lblBroccoli2.setBounds(141, 234, 129, 15);
+		lblBroccoli2.setFont(new Font("Dialog", Font.PLAIN, 12));
+		inventoryMgmtPanel.add(lblBroccoli2);
+		
+		JLabel lblRum2 = new JLabel("16 - Rum");
+		lblRum2.setBounds(141, 209, 129, 15);
+		lblRum2.setFont(new Font("Dialog", Font.PLAIN, 12));
+		inventoryMgmtPanel.add(lblRum2);
+		
+		JLabel lblWine2 = new JLabel("15 - Wine");
+		lblWine2.setBounds(141, 184, 129, 15);
+		lblWine2.setFont(new Font("Dialog", Font.PLAIN, 12));
+		inventoryMgmtPanel.add(lblWine2);
+		
+		JLabel lblBeer2 = new JLabel("14 - Beer");
+		lblBeer2.setBounds(141, 157, 129, 15);
+		lblBeer2.setFont(new Font("Dialog", Font.PLAIN, 12));
+		inventoryMgmtPanel.add(lblBeer2);
+		
+		JLabel lblJuice2 = new JLabel("13 - Juice");
+		lblJuice2.setBounds(141, 133, 129, 15);
+		lblJuice2.setFont(new Font("Dialog", Font.PLAIN, 12));
+		inventoryMgmtPanel.add(lblJuice2);
+		
+		JLabel lblOnions2 = new JLabel("12 - Onions");
+		lblOnions2.setBounds(141, 104, 129, 15);
+		lblOnions2.setFont(new Font("Dialog", Font.PLAIN, 12));
+		inventoryMgmtPanel.add(lblOnions2);
+		
+		JLabel lblOranges2 = new JLabel("11 - Oranges");
+		lblOranges2.setBounds(141, 80, 129, 15);
+		lblOranges2.setFont(new Font("Dialog", Font.PLAIN, 12));
+		inventoryMgmtPanel.add(lblOranges2);
 		
 		JButton btnAdminLogout2 = new JButton("Logout");
 		btnAdminLogout2.setBounds(487, 345, 200, 25);
