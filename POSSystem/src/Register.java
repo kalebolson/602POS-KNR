@@ -102,17 +102,20 @@ public class Register {
 	  return currentTransaction.toString();
   }
   
-  public String finalizeSale() {
+  public void finalizeSale() {
 	  String receipt = currentTransaction+"";
 	  cashValue+=currentTransaction.getTotal();
 	  
 	  for (Product p : currentTransaction.getCart()) {
 		  store.getInventory().removeItemsFromInventory(p.getUPC(), 1);
 	  }
-	  
+	  try {
+		store.updateInventoryFile();
+	  } catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	  }
 	  currentCashier.getShift().addEvent(new Event(currentTransaction, "Sale"));
-	  
-	  return receipt;
   }
   /*
   public String finalizeReturn() {

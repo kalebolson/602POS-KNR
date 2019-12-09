@@ -12,7 +12,7 @@ public class TransactionDriver {
 			register.addToSale(1);
 			register.addToSale(2);
 			register.addToSale(3);
-			System.out.println(register.finalizeSale());
+			register.finalizeSale();
 			register.lock();
 		
 		} catch (InvalidIDException e) {
