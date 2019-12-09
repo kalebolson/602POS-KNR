@@ -301,6 +301,10 @@ public class Register {
   public void setCurrentTransaction(Transaction currentTransaction) {
 	this.currentTransaction = currentTransaction;
   }
+  
+  public void setThreshold(int UPC, int threshold) { 
+	  store.getInventory().setProductThreshold(UPC, threshold); 
+  }
 
 	public void receiveAllOrders() {
 	  store.getInventory().receiveAllOrders();
@@ -310,6 +314,8 @@ public class Register {
 		e.printStackTrace();
 	}
   }
+	
+	
   public String orderingNeeds() {
 	  return store.getInventory().orderingNeeds();
   }

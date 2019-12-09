@@ -258,7 +258,7 @@ public class AppFrame {
 		lblLoggedInAdmin = new JLabel("Default");
 		lblLoggedInAdmin.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblLoggedInAdmin.setBounds(615, 0, 100, 15);
-		inventoryMgmtPanel.add(lblLoggedInAdmin);
+		inventoryMgmtPanel.add(lblLoggedInAdmin); 
 		
 		JLabel lblItemUpcList2 = new JLabel("Item UPC List");
 		lblItemUpcList2.setBounds(71, 52, 122, 15);
@@ -282,21 +282,30 @@ public class AppFrame {
 		inventoryMgmtPanel.add(setThresholdField);
 		setThresholdField.setColumns(10);
 		
+		JScrollPane scrollPane2 = new JScrollPane();
+		scrollPane2.setBounds(468, 54, 208, 223);
+		inventoryMgmtPanel.add(scrollPane2);
+		
+		txtrInvReport = new JTextArea();
+		txtrInvReport.setEditable(false);
+		scrollPane2.setViewportView(txtrInvReport);
+		
 		JButton btnSetThreshold = new JButton("Set Threshold");
-		btnSetThreshold.setBounds(288, 199, 133, 25);
+		btnSetThreshold.setBounds(260, 133, 160, 25);
 		btnSetThreshold.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int UPC = Integer.parseInt(UPCinvTextField.getText());
 				int Threshold = Integer.parseInt(setThresholdField.getText());
 				try {
-					register.removeFromSale(UPC);
-				} catch (InvalidIDException e) {
-					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid UPC");
+					register.setThreshold(UPC, Threshold);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid Threshold");
 				}
-				txtrReceipt.setText(register.calculateSale());
-				UPCtextField.setText("");
+				txtrInvReport.setText(register.inventoryReport());
+				UPCinvTextField.setText("");
 			}
 		});
+		inventoryMgmtPanel.add(btnSetThreshold);
 		
 
 		

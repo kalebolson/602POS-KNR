@@ -18,6 +18,14 @@ public class Inventory {
 		return s;
 	}
 	
+	//set inventory threshold
+	public void setProductThreshold(int upc, int threshold) { 
+		for(Product a: inventory) { 
+			if(a.getUPC()==upc) { 
+				a.setThreshold(threshold);
+			}
+		}
+	}
 	
 	//we now sell a new product
 	public void addnewItem(Product p) { 
