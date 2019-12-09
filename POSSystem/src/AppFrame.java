@@ -217,7 +217,7 @@ public class AppFrame {
 		
 		lblInvMgmtMenu = new JLabel("Inventory Management Menu");
 		lblInvMgmtMenu.setFont(new Font("Dialog", Font.BOLD, 14));
-		lblInvMgmtMenu.setBounds(265, 28, 201, 15);
+		lblInvMgmtMenu.setBounds(250, 28, 250, 18);
 		inventoryMgmtPanel.add(lblInvMgmtMenu);
 		
 		lblLoggedInAs_1 = new JLabel("Logged in as:");
@@ -235,7 +235,7 @@ public class AppFrame {
 		btnInventoryMgmt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//register.finalizeSale();
-				cardLayout.show(inventoryMgmtPanel, "inventoryMgmtScreen");
+				cardLayout.show(containerPanel, "inventoryMgmtScreen");
 				
 			}
 		});
