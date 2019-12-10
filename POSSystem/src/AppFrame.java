@@ -19,6 +19,8 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class AppFrame {
 	
@@ -49,6 +51,7 @@ public class AppFrame {
 	private JTextField UPCinvTextField;
 	private JTextField setThresholdField;
 	private JTextField setPriceField;
+	
 
 	/**
 	 * Launch the application.
@@ -301,6 +304,30 @@ public class AppFrame {
 		});
 		managerPanel.add(btnAdminPrintInventory);
 		
+		JButton btnAdminPrintCashierZ = new JButton("Cashier Report (Z)");
+		btnAdminPrintCashierZ.setBounds(174, 345, 140, 25);
+		btnAdminPrintCashierZ.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent arg0) {
+				txtrReporting.setText(register.CashierReportZ());
+			}
+		});
+		managerPanel.add(btnAdminPrintCashierZ);
+		
+		
+		JLabel lblManagerCashierX = new JLabel("Cashier #:");
+		lblManagerCashierX.setBounds(324, 310, 122, 15);
+		managerPanel.add(lblManagerCashierX);
+		
+		JButton btnAdminPrintCashierX = new JButton("Cashier Report (X)");
+		btnAdminPrintCashierX.setBounds(324, 345, 140, 25);
+		btnAdminPrintCashierX.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent arg0) {
+				txtrReporting.setText(register.inventoryReport());
+			}
+		});
+		managerPanel.add(btnAdminPrintCashierX);
 
 		//*********************END Create managerScreen****************************
 		
@@ -334,17 +361,22 @@ public class AppFrame {
 		
 		UPCinvTextField = new JTextField();
 		UPCinvTextField.setBounds(360, 80, 60, 19);
-		UPCinvTextField.addFocusListener(new FocusListener() {
-			public void focusGained(FocusEvent fe) { 
+		UPCinvTextField.addKeyListener(new KeyListener() {
+			public void keyPressed(KeyEvent ke) { 
 				
 			}
-			public void focusLost(FocusEvent arg0) {
+			public void keyReleased(KeyEvent arg0) {
 				int UPC = Integer.parseInt(UPCinvTextField.getText());
 				try {
-					txtrInvReport.setText(register.productReport(UPC) + "\n text field report");
+					txtrInvReport.setText(register.productReport(UPC));
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid UPC");
 				}
+			}
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
 			}
 		});
 		UPCinvTextField.setColumns(10);
