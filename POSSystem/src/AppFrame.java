@@ -206,7 +206,7 @@ public class AppFrame {
 		lblLoggedInAs_1.setBounds(506, 0, 112, 15);
 		managerPanel.add(lblLoggedInAs_1);
 		
-		lblLoggedInAdmin = new JLabel("Default");
+		lblLoggedInAdmin = new JLabel("Default Admin");
 		lblLoggedInAdmin.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblLoggedInAdmin.setBounds(615, 0, 100, 15);
 		managerPanel.add(lblLoggedInAdmin);
@@ -284,11 +284,11 @@ public class AppFrame {
 		inventoryMgmtPanel.add(UPCinvTextField);
 		
 		JLabel lblThreshold = new JLabel("Enter Threshold");
-		lblThreshold.setBounds(260, 104, 100, 15);
+		lblThreshold.setBounds(260, 133, 100, 15);
 		inventoryMgmtPanel.add(lblThreshold);
 		
 		setThresholdField = new JTextField();
-		setThresholdField.setBounds(360, 104, 60, 19);
+		setThresholdField.setBounds(360, 133, 60, 19);
 		inventoryMgmtPanel.add(setThresholdField);
 		setThresholdField.setColumns(10);
 		
@@ -301,7 +301,7 @@ public class AppFrame {
 		scrollPane2.setViewportView(txtrInvReport);
 		
 		JButton btnSetThreshold = new JButton("Set Threshold");
-		btnSetThreshold.setBounds(260, 133, 160, 25);
+		btnSetThreshold.setBounds(260, 157, 160, 25);
 		btnSetThreshold.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int UPC = Integer.parseInt(UPCinvTextField.getText());
@@ -435,6 +435,17 @@ public class AppFrame {
 			}
 		});
 		inventoryMgmtPanel.add(btnAdminLogout2);
+		
+		JButton btnMainMenu = new JButton("Main Menu");
+		btnMainMenu.setBounds(487, 310, 200, 25);
+		btnMainMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//register.finalizeSale();
+				cardLayout.show(containerPanel, "managerScreen");
+				
+			}
+		});
+		inventoryMgmtPanel.add(btnMainMenu);
 		
 		//*********************END Create inventoryMgmtScreen**********************
 		

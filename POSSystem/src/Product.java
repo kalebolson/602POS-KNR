@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class Product {
@@ -15,6 +16,7 @@ public class Product {
 	private int quantityStocked = -1; 
 	private int quantityOrdered = 0; 
 	private int threshold; 
+	DecimalFormat df = new DecimalFormat("$###,##0.00");
 	
 	//private Product[] inventory; 
 	
@@ -87,7 +89,7 @@ public class Product {
 		return "UPC:\t\t"+ UPC+ "\n" + 
 				"Product:\t"+ productName + "\n" + 
 				"Supplier:\t" + supplier + "\n" + 
-				"Price:\t\t"+ unitPrice + "\n" + 
+				"Price:\t\t"+ df.format(unitPrice) + "\n" + 
 				"Threshold:\t" + threshold + "\n" + 
 				"Quantity:\t" + quantityStocked + "\n" + 
 				"# Ordered:\t" + quantityOrdered + "\n\n";  

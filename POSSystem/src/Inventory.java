@@ -1,9 +1,11 @@
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Inventory {
 
 	private ArrayList<Product> inventory = new ArrayList<Product>(); 
 	private boolean thresholdReached = false;
+	DecimalFormat df = new DecimalFormat("$###,##0.00");
 	
 	/* -------------------------------------------------------- 
 	 * Functional Methods & Calculations are below 
@@ -23,13 +25,13 @@ public class Inventory {
 			if(a.getUPC()==upc) {  
 				return "Product:\t" + a.getProductName() + " (" + a.getUPC() + ")" + 
 						"\nSupplier:\t" + a.getSupplier() + 
-						"\nPrice:   \t" + a.getPrice() + 
+						"\nPrice:   \t" + df.format(a.getPrice()) + 
 						"\n\nQuantity:\t" + a.getStockedQuantity() + 
 						"\nThreshold:\t" + a.getThreshold()+
 						"\n# Ordered:\t" + a.getOrderedQuantity();
 				
 			}
-			else return "nope";
+			//else return "nope";
 		}
 		return "double nope"; 
 	}
