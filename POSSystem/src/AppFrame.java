@@ -51,6 +51,7 @@ public class AppFrame {
 	private JTextField UPCinvTextField;
 	private JTextField setThresholdField;
 	private JTextField setPriceField;
+	private JTextField cashierXField;
 	
 
 	/**
@@ -316,15 +317,21 @@ public class AppFrame {
 		
 		
 		JLabel lblManagerCashierX = new JLabel("Cashier #:");
-		lblManagerCashierX.setBounds(324, 310, 122, 15);
+		lblManagerCashierX.setBounds(328, 310, 70, 15);
 		managerPanel.add(lblManagerCashierX);
+		
+		cashierXField = new JTextField();
+		cashierXField.setBounds(400, 310, 60, 19);
+		managerPanel.add(cashierXField);
+		cashierXField.setColumns(10);
 		
 		JButton btnAdminPrintCashierX = new JButton("Cashier Report (X)");
 		btnAdminPrintCashierX.setBounds(324, 345, 140, 25);
 		btnAdminPrintCashierX.addActionListener(new ActionListener() {
-
 			public void actionPerformed(ActionEvent arg0) {
-				txtrReporting.setText(register.inventoryReport());
+				int ID = Integer.parseInt(cashierXField.getText());
+				System.out.println("Action Listened to");
+				txtrReporting.setText(register.CashierReportX(ID));
 			}
 		});
 		managerPanel.add(btnAdminPrintCashierX);
