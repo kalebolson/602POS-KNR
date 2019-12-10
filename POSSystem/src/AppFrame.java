@@ -916,6 +916,7 @@ public class AppFrame {
 						lblLoggedInUserRI.setText(store.getCashier(0).getFirstName() + " " + store.getCashier(0).getLastName());
 						lblLoggedInUserCS.setText(store.getCashier(0).getFirstName() + " " + store.getCashier(0).getLastName());
 						register.unlock(Integer.parseInt(username), password);
+						txtrInvNotifications.setText(register.orderingNeedsReport());
 					}
 					else if (Integer.parseInt(username) == store.getCashier(1).getID() && password.equals("asdf")) {
 						JOptionPane.showMessageDialog(frmPosSystemLogin, "Login Successful");
