@@ -42,8 +42,10 @@ public class AppFrame {
 	private JTextField transactionIDRIField;
 	private JTextField upcRIField;
 	private JTextArea txtrInvReport;
+	private JTextArea txtrInvNotifications;
 	private JTextField UPCinvTextField;
 	private JTextField setThresholdField;
+	private JTextField setPriceField;
 
 	/**
 	 * Launch the application.
@@ -211,6 +213,28 @@ public class AppFrame {
 		lblLoggedInAdmin.setBounds(615, 0, 100, 15);
 		managerPanel.add(lblLoggedInAdmin);
 		
+		JButton btnStoreFunctions = new JButton("Store Functions");
+		btnStoreFunctions.setBounds(487, 240, 200, 25);
+		btnStoreFunctions.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//register.finalizeSale();
+				cardLayout.show(containerPanel, "inventoryMgmtScreen");
+				
+			}
+		});
+		managerPanel.add(btnStoreFunctions);
+		
+		JButton btnOrderMgmt = new JButton("Ordering and Receiving");
+		btnOrderMgmt.setBounds(487, 275, 200, 25);
+		btnOrderMgmt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//register.finalizeSale();
+				cardLayout.show(containerPanel, "inventoryMgmtScreen");
+				
+			}
+		});
+		managerPanel.add(btnOrderMgmt);
+		
 		JButton btnInventoryMgmt = new JButton("Inventory Management");
 		btnInventoryMgmt.setBounds(487, 310, 200, 25);
 		btnInventoryMgmt.addActionListener(new ActionListener() {
@@ -236,6 +260,18 @@ public class AppFrame {
 			}
 		});
 		managerPanel.add(btnAdminLogout);
+		
+		JScrollPane scrollPane3 = new JScrollPane();
+		scrollPane3.setBounds(24, 80, 440, 223);
+		managerPanel.add(scrollPane3);
+		
+		txtrInvNotifications = new JTextArea();
+		txtrInvNotifications.setEditable(false);
+		scrollPane3.setViewportView(txtrInvNotifications);
+		
+		JLabel lblManagerNotifications = new JLabel("Notifications");
+		lblManagerNotifications.setBounds(24, 52, 122, 15);
+		managerPanel.add(lblManagerNotifications);
 		
 
 		//*********************END Create managerScreen****************************
@@ -293,7 +329,7 @@ public class AppFrame {
 		setThresholdField.setColumns(10);
 		
 		JScrollPane scrollPane2 = new JScrollPane();
-		scrollPane2.setBounds(468, 54, 208, 223);
+		scrollPane2.setBounds(487, 80, 200, 150);
 		inventoryMgmtPanel.add(scrollPane2);
 		
 		txtrInvReport = new JTextArea();
@@ -305,8 +341,6 @@ public class AppFrame {
 		btnSetThreshold.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int UPC = Integer.parseInt(UPCinvTextField.getText());
-				System.out.println(register.productReport(UPC));
-				System.out.println("Done");
 				int Threshold = Integer.parseInt(setThresholdField.getText());
 				try {
 					register.setThreshold(UPC, Threshold);
@@ -319,7 +353,31 @@ public class AppFrame {
 		});
 		inventoryMgmtPanel.add(btnSetThreshold);
 		
+		JLabel lblPrice = new JLabel("Enter Price");
+		lblPrice.setBounds(260, 209, 100, 15);
+		inventoryMgmtPanel.add(lblPrice);
+		
+		setPriceField = new JTextField();
+		setPriceField.setBounds(360, 209, 60, 19);
+		inventoryMgmtPanel.add(setPriceField);
+		setPriceField.setColumns(10);
 
+		JButton btnSetPrice = new JButton("Set Price");
+		btnSetPrice.setBounds(260, 234, 160, 25);
+		btnSetPrice.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int UPC = Integer.parseInt(UPCinvTextField.getText());
+				int Threshold = Integer.parseInt(setPriceField.getText());
+				try {
+					register.setThreshold(UPC, Threshold);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid Threshold");
+				}
+				txtrInvReport.setText(register.productReport(UPC) + "\n done");
+				//UPCinvTextField.setText("");
+			}
+		});
+		inventoryMgmtPanel.add(btnSetPrice);
 		
 		JLabel lblApples2 = new JLabel("1 - Apples");
 		lblApples2.setBounds(24, 80, 129, 15);
@@ -435,6 +493,17 @@ public class AppFrame {
 			}
 		});
 		inventoryMgmtPanel.add(btnAdminLogout2);
+		
+		JButton btnOrderMgmt2 = new JButton("Ordering and Receiving");
+		btnOrderMgmt2.setBounds(487, 275, 200, 25);
+		btnOrderMgmt2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//register.finalizeSale();
+				cardLayout.show(containerPanel, "inventoryMgmtScreen");
+				
+			}
+		});
+		inventoryMgmtPanel.add(btnOrderMgmt2);
 		
 		JButton btnMainMenu = new JButton("Main Menu");
 		btnMainMenu.setBounds(487, 310, 200, 25);
