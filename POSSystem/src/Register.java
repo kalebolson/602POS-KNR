@@ -311,6 +311,12 @@ public class Register {
   
   public void setThreshold(int UPC, int threshold) { 
 	  store.getInventory().setProductThreshold(UPC, threshold); 
+	  try {
+			store.updateInventoryFile();
+			System.out.println("Success in reaching the update!");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
   }
 
 	public void receiveAllOrders() {

@@ -106,11 +106,11 @@ public class Inventory {
 	
 	public String orderingNeeds() {
 		String s = "";
-		s+=("Please order more of the following: \n");
+		s+=("Please order more of the following: \nProduct [On-Hand/Threshold]\n\n");
 		for(Product a: inventory) { 
 			if(a.getTotalQuantity()<a.getThreshold()) { 
 				thresholdReached = true;
-				s+=("\t\t"+a.getProductName() + " (On-Hand: "+ a.getStockedQuantity() + ", Threshold: " + a.getThreshold() + ")");
+				s+=("   "+a.getProductName() + " ["+ a.getStockedQuantity() + "/" + a.getThreshold() + "]");
 			}
 		}
 		s+=("\n\nEnd of ordering needs"); 
