@@ -43,6 +43,7 @@ public class AppFrame {
 	private JTextField upcRIField;
 	private JTextArea txtrInvReport;
 	private JTextArea txtrInvNotifications;
+	private JTextArea txtrReporting;
 	private JTextField UPCinvTextField;
 	private JTextField setThresholdField;
 	private JTextField setPriceField;
@@ -265,13 +266,21 @@ public class AppFrame {
 		scrollPane3.setBounds(24, 80, 440, 223);
 		managerPanel.add(scrollPane3);
 		
-		txtrInvNotifications = new JTextArea();
-		txtrInvNotifications.setEditable(false);
-		scrollPane3.setViewportView(txtrInvNotifications);
+		txtrReporting = new JTextArea();
+		txtrReporting.setEditable(false);
+		scrollPane3.setViewportView(txtrReporting);
 		
 		JLabel lblManagerNotifications = new JLabel("Notifications");
-		lblManagerNotifications.setBounds(24, 52, 122, 15);
+		lblManagerNotifications.setBounds(487, 52, 122, 15);
 		managerPanel.add(lblManagerNotifications);
+		
+		JScrollPane scrollPane4 = new JScrollPane();
+		scrollPane4.setBounds(487, 80, 200, 150);
+		managerPanel.add(scrollPane4);
+		
+		txtrInvNotifications = new JTextArea();
+		txtrInvNotifications.setEditable(false);
+		scrollPane4.setViewportView(txtrInvNotifications);
 		
 
 		//*********************END Create managerScreen****************************
