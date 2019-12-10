@@ -148,17 +148,21 @@ public class Register {
   //Other general store functions
   //****************************************************************************************** 
   
-  public void addCash(double input){
+  public void addCash(double input) throws IOException {
 	    cashValue+=input;
-	  }
+	    store.updateRegisterFile();
+  }
 
-  public void removeCash(double input) throws InsufficientFundsException {
+  public void removeCash(double input) throws InsufficientFundsException, IOException {
 	    if (input<=cashValue){
 	      cashValue-=input;
-	    } else {
+	      store.updateRegisterFile();
+	    } 
+	    else {
 	      throw new InsufficientFundsException("Not enough cash in the register");
 	    }
-	  }
+  }
+  
   public double getValue(){
 	    return cashValue;
 	  }
