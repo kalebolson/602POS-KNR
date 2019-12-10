@@ -9,23 +9,12 @@ public class Store {
   private ArrayList<Register> registers = new ArrayList<Register>();
 
   public Store() {
-	//hard coding in register number 1 upon store creation
-	Register r = new Register(1,200.00,this);
-	registers.add(r);
-	
-	//hard coding in initial administrative cashier as well
-	Cashier c = new Cashier("masterpassword","Default","Admin",true);
-	cashiers.add(c);
-	
-	// Creating inventory object and refreshing its contents
+	// update all lists
 	inv = new Inventory();
 	updateInventoryList();
-	
-	//This constructor is where we should add the logic for pulling from text files
+	updateRegisterList();
 	updateCashierList();
-	
 	updateTransactionList();
-	
   }
   
   
