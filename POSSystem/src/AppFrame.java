@@ -274,6 +274,10 @@ public class AppFrame {
 		lblManagerNotifications.setBounds(487, 52, 122, 15);
 		managerPanel.add(lblManagerNotifications);
 		
+		JLabel lblManagerReports = new JLabel("Reports");
+		lblManagerReports.setBounds(24, 52, 122, 15);
+		managerPanel.add(lblManagerReports);
+		
 		JScrollPane scrollPane4 = new JScrollPane();
 		scrollPane4.setBounds(487, 80, 200, 150);
 		managerPanel.add(scrollPane4);
@@ -281,6 +285,19 @@ public class AppFrame {
 		txtrInvNotifications = new JTextArea();
 		txtrInvNotifications.setEditable(false);
 		scrollPane4.setViewportView(txtrInvNotifications);
+		
+		JButton btnAdminPrintInventory = new JButton("Inventory Report");
+		btnAdminPrintInventory.setBounds(24, 345, 140, 25);
+		btnAdminPrintInventory.addActionListener(new ActionListener() {
+			/*
+			 * Switches back to login screen when selecting the logout button
+			 * and clears username and password fields
+			 */
+			public void actionPerformed(ActionEvent arg0) {
+				txtrReporting.setText(register.inventoryReport());
+			}
+		});
+		managerPanel.add(btnAdminPrintInventory);
 		
 
 		//*********************END Create managerScreen****************************

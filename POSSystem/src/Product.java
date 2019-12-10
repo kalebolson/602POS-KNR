@@ -86,10 +86,10 @@ public class Product {
 	}
 	
 	public String toString() { 
-		return "UPC:\t\t"+ UPC+ "\n" + 
+		return "UPC:\t"+ UPC+ "\n" + 
 				"Product:\t"+ productName + "\n" + 
 				"Supplier:\t" + supplier + "\n" + 
-				"Price:\t\t"+ df.format(unitPrice) + "\n" + 
+				"Price:\t"+ df.format(unitPrice) + "\n" + 
 				"Threshold:\t" + threshold + "\n" + 
 				"Quantity:\t" + quantityStocked + "\n" + 
 				"# Ordered:\t" + quantityOrdered + "\n\n";  
