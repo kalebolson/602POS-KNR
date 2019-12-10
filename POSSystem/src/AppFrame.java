@@ -17,6 +17,8 @@ import java.awt.Font;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 public class AppFrame {
 	
@@ -332,8 +334,11 @@ public class AppFrame {
 		
 		UPCinvTextField = new JTextField();
 		UPCinvTextField.setBounds(360, 80, 60, 19);
-		UPCinvTextField.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		UPCinvTextField.addFocusListener(new FocusListener() {
+			public void focusGained(FocusEvent fe) { 
+				
+			}
+			public void focusLost(FocusEvent arg0) {
 				int UPC = Integer.parseInt(UPCinvTextField.getText());
 				try {
 					txtrInvReport.setText(register.productReport(UPC) + "\n text field report");
@@ -373,8 +378,7 @@ public class AppFrame {
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid Threshold");
 				}
-				txtrInvReport.setText(register.productReport(UPC) + "\n done");
-				UPCinvTextField.setText("");
+				txtrInvReport.setText(register.productReport(UPC));
 			}
 		});
 		inventoryMgmtPanel.add(btnSetThreshold);
