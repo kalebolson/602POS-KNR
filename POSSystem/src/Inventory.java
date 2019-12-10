@@ -110,7 +110,7 @@ public class Inventory {
 		for(Product a: inventory) { 
 			if(a.getTotalQuantity()<a.getThreshold()) { 
 				thresholdReached = true;
-				s+=("   "+a.getProductName() + " ["+ a.getStockedQuantity() + "/" + a.getThreshold() + "]");
+				s+=("   "+a.getProductName() + " ["+ a.getStockedQuantity() + "/" + a.getThreshold() + "]\n");
 			}
 		}
 		s+=("\n\nEnd of ordering needs"); 
