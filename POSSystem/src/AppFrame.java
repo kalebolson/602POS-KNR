@@ -38,7 +38,7 @@ public class AppFrame {
 	private JLabel lblNewSale;
 	private JTextField UPCtextField;
 	private JTextArea txtrReceipt;
-	private JTextField textField;
+	private JTextField transactionIDCSField;
 	private JTextField transactionIDRIField;
 	private JTextField upcRIField;
 	private JTextArea txtrInvReport;
@@ -640,10 +640,10 @@ public class AppFrame {
 		containerPanel.add(cancelSalePanel, "cancelSaleScreen");
 		cancelSalePanel.setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBounds(286, 93, 124, 19);
-		cancelSalePanel.add(textField);
-		textField.setColumns(10);
+		transactionIDCSField = new JTextField();
+		transactionIDCSField.setBounds(286, 93, 124, 19);
+		cancelSalePanel.add(transactionIDCSField);
+		transactionIDCSField.setColumns(10);
 		
 		JLabel lblCancelSale = new JLabel("Cancel Sale");
 		lblCancelSale.setFont(new Font("Dialog", Font.BOLD, 14));
@@ -654,13 +654,27 @@ public class AppFrame {
 		lblTransactionId.setBounds(156, 95, 98, 15);
 		cancelSalePanel.add(lblTransactionId);
 		
-		JTextArea txtrPlaceholder = new JTextArea();
-		txtrPlaceholder.setBounds(473, 59, 188, 300);
-		cancelSalePanel.add(txtrPlaceholder);
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(457, 59, 222, 300);
+		cancelSalePanel.add(scrollPane_2);
+		
+		JTextArea txtAreaCS = new JTextArea();
+		scrollPane_2.setViewportView(txtAreaCS);
 		
 		JButton btnCancelEntireSale = new JButton("Cancel Sale");
 		btnCancelEntireSale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				try {
+					register.finalizeReturn();
+				} catch (InvalidIDException e) {
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Error: Invalid UPC");
+				} catch (InsufficientFundsException e) {
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Error: Insufficient Funds");
+					e.printStackTrace();
+				} catch (IOException e) {
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Error: Unable to Process Return");
+				}
+				txtAreaCS.setText(register.calculateSale());
 			}
 		});
 		btnCancelEntireSale.setBounds(286, 208, 124, 25);
@@ -670,6 +684,7 @@ public class AppFrame {
 		btnMainMenuCS.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				cardLayout.show(containerPanel, "cashierScreen");
+				txtAreaCS.setText("");
 			}
 		});
 		btnMainMenuCS.setBounds(286, 311, 124, 25);
@@ -689,21 +704,23 @@ public class AppFrame {
 		cancelSalePanel.add(lblLoggedInUserCS);
 		
 		JButton btnSearchCS = new JButton("Search");
+		btnSearchCS.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					register.newReturn(Integer.parseInt(transactionIDCSField.getText()));
+				} catch (NumberFormatException | InvalidIDException e) {
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid Transaction ID");
+				}
+				txtAreaCS.setText(register.calculateSale());
+				transactionIDCSField.setText("");
+			}
+		});
 		btnSearchCS.setBounds(286, 124, 124, 25);
 		cancelSalePanel.add(btnSearchCS);
 		
 		JPanel returnItemPanel = new JPanel();
 		containerPanel.add(returnItemPanel, "returnItemScreen");
 		returnItemPanel.setLayout(null);
-		
-		JButton buttonMainMenuRI = new JButton("Main Menu");
-		buttonMainMenuRI.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				cardLayout.show(containerPanel, "cashierScreen");
-			}
-		});
-		buttonMainMenuRI.setBounds(292, 313, 124, 25);
-		returnItemPanel.add(buttonMainMenuRI);
 		
 		transactionIDRIField = new JTextField();
 		transactionIDRIField.setColumns(10);
@@ -723,8 +740,19 @@ public class AppFrame {
 		scrollPane_1.setBounds(449, 65, 237, 300);
 		returnItemPanel.add(scrollPane_1);
 		
-		JTextArea textArea = new JTextArea();
-		scrollPane_1.setViewportView(textArea);
+		JTextArea textAreaRI = new JTextArea();
+		scrollPane_1.setViewportView(textAreaRI);
+		
+		JButton buttonMainMenuRI = new JButton("Main Menu");
+		buttonMainMenuRI.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				cardLayout.show(containerPanel, "cashierScreen");
+				textAreaRI.setText("");
+			}
+		});
+		
+		buttonMainMenuRI.setBounds(292, 313, 124, 25);
+		returnItemPanel.add(buttonMainMenuRI);
 		
 		JLabel label_2 = new JLabel("Transaction");
 		label_2.setBounds(517, 38, 115, 15);
@@ -741,11 +769,10 @@ public class AppFrame {
 					JOptionPane.showMessageDialog(frmPosSystemLogin, "Error: Invalid UPC");
 				} catch (IOException e) {
 					JOptionPane.showMessageDialog(frmPosSystemLogin, "Error: Unable to Process Return");
-					e.printStackTrace();
 				} catch (InsufficientFundsException e) {
 					JOptionPane.showMessageDialog(frmPosSystemLogin, "Error: Insufficient Funds");
 				}
-				textArea.setText(register.calculateSale());
+				textAreaRI.setText(register.calculateSale());
 				upcRIField.setText("");
 			}
 		});
@@ -779,7 +806,7 @@ public class AppFrame {
 				} catch (NumberFormatException | InvalidIDException e) {
 					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid Transaction ID");
 				}
-				textArea.setText(register.calculateSale());
+				textAreaRI.setText(register.calculateSale());
 				transactionIDRIField.setText("");
 			}
 		});

@@ -68,11 +68,11 @@ public class Store {
   }
 
   public Transaction getTransaction(int ID) throws InvalidIDException{
-	updateTransactionList();
 	for (Transaction t : transactions) {
 		if (t.getTransactionID()==ID) {
 			return t;
 		}
+		
 	}
 	//throws exception if it reaches this point
 	//it shouldn't reach this point if the ID exists
@@ -87,7 +87,6 @@ public class Store {
   public void addTransaction(Transaction t) throws IOException {
     transactions.add(t);
     updateTransactionFile();
-    
   }
 
   public void addRegister(double initCash) throws IOException{
@@ -224,7 +223,7 @@ public class Store {
 			input = new Scanner(new File("transactions.txt"));
 			while (input.hasNext()) {
 				transactionID = input.nextInt();
-				transactionDate = input.next()+" "+input.next();//the datetime value has a space in it
+				transactionDate = input.next() + " " + input.next();//the datetime value has a space in it
 				cashier = getCashier(input.nextInt());
 				numProducts = input.nextInt();
 				for (int i=0;i<numProducts;i++) {

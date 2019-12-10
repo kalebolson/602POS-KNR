@@ -85,7 +85,11 @@ public class Register {
   }
   
   public void newReturn(int ID) throws InvalidIDException {
-	currentTransaction = store.getTransaction(ID);
+	  try {
+		currentTransaction = store.getTransaction(ID);
+	} catch (InvalidIDException e) {
+		throw new InvalidIDException("Transaction ID does not exist");
+	}
   }
   
   public void addToSale(int UPC) throws InvalidIDException {
@@ -120,14 +124,11 @@ public class Register {
   
   public void finalizeReturn() throws InvalidIDException, InsufficientFundsException, IOException {
 	  if (currentTransaction.getTotal() <= cashValue){
-	      cashValue -= currentTransaction.getTotal();
+	      removeCash(currentTransaction.getTotal());
 	    } else {
 	      throw new InsufficientFundsException("Not enough cash in the register");
 	    }
-	  removeCash(currentTransaction.getTotal());
-	  for (Product p : currentTransaction.getCart()) {
-		  currentTransaction.removeFromSale(p.getUPC());
-	  }
+	  	currentTransaction.getCart().removeAll(currentTransaction.getCart());
 	  store.updateTransactionFile();
   }
   
