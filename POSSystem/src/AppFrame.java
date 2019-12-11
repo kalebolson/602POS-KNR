@@ -1153,46 +1153,26 @@ public class AppFrame {
 		
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String username = usernameField.getText();
+				int username = Integer.parseInt(usernameField.getText());
 				String password = passwordField.getText();
 				
 				try {
-					if (Integer.parseInt(username) == store.getCashier(0).getID() && password.equals("asdf")) {
+					if (register.unlock(username, password) && store.getCashier(username).isAdmin()) {
 						JOptionPane.showMessageDialog(frmPosSystemLogin, "Login Successful");
 						cardLayout.show(containerPanel, "managerScreen");
-						lblLoggedInAdmin.setText(store.getCashier(0).getFirstName() + " " + store.getCashier(0).getLastName());
-						lblLoggedInUserNS.setText(store.getCashier(0).getFirstName() + " " + store.getCashier(0).getLastName());
-						lblLoggedInUserRI.setText(store.getCashier(0).getFirstName() + " " + store.getCashier(0).getLastName());
-						lblLoggedInUserCS.setText(store.getCashier(0).getFirstName() + " " + store.getCashier(0).getLastName());
-						register.unlock(Integer.parseInt(username), password);
+						lblLoggedInAdmin.setText(store.getCashier(username).getFirstName() + " " + store.getCashier(username).getLastName());
+						lblLoggedInUserNS.setText(store.getCashier(username).getFirstName() + " " + store.getCashier(username).getLastName());
+						lblLoggedInUserRI.setText(store.getCashier(username).getFirstName() + " " + store.getCashier(username).getLastName());
+						lblLoggedInUserCS.setText(store.getCashier(username).getFirstName() + " " + store.getCashier(username).getLastName());
 						txtrInvNotifications.setText(register.orderingNeedsReport());
 					}
-					else if (Integer.parseInt(username) == store.getCashier(1).getID() && password.equals("asdf")) {
+					else if (register.unlock(username, password)) {
 						JOptionPane.showMessageDialog(frmPosSystemLogin, "Login Successful");
 						cardLayout.show(containerPanel, "cashierScreen");
-						lblLoggedInUser.setText(store.getCashier(1).getFirstName() + " " + store.getCashier(1).getLastName());
-						lblLoggedInUserNS.setText(store.getCashier(1).getFirstName() + " " + store.getCashier(1).getLastName());
-						lblLoggedInUserRI.setText(store.getCashier(1).getFirstName() + " " + store.getCashier(1).getLastName());
-						lblLoggedInUserCS.setText(store.getCashier(1).getFirstName() + " " + store.getCashier(1).getLastName());
-						register.unlock(Integer.parseInt(username), password);
-					}
-					else if (Integer.parseInt(username) == store.getCashier(2).getID() && password.equals("1234")){
-						JOptionPane.showMessageDialog(frmPosSystemLogin, "Login Successful");
-						cardLayout.show(containerPanel, "cashierScreen");
-						lblLoggedInUser.setText(store.getCashier(2).getFirstName() + " " + store.getCashier(2).getLastName());
-						lblLoggedInUserNS.setText(store.getCashier(2).getFirstName() + " " + store.getCashier(2).getLastName());
-						lblLoggedInUserRI.setText(store.getCashier(2).getFirstName() + " " + store.getCashier(2).getLastName());
-						lblLoggedInUserCS.setText(store.getCashier(2).getFirstName() + " " + store.getCashier(2).getLastName());
-						register.unlock(Integer.parseInt(username), password);
-					}
-					else if (Integer.parseInt(username) == store.getCashier(3).getID() && password.equals("01Q3EE@")){
-						JOptionPane.showMessageDialog(frmPosSystemLogin, "Login Successful");
-						cardLayout.show(containerPanel, "cashierScreen");
-						lblLoggedInUser.setText(store.getCashier(3).getFirstName() + " " + store.getCashier(3).getLastName());
-						lblLoggedInUserNS.setText(store.getCashier(3).getFirstName() + " " + store.getCashier(3).getLastName());
-						lblLoggedInUserRI.setText(store.getCashier(3).getFirstName() + " " + store.getCashier(3).getLastName());
-						lblLoggedInUserCS.setText(store.getCashier(3).getFirstName() + " " + store.getCashier(3).getLastName());
-						register.unlock(Integer.parseInt(username), password);
+						lblLoggedInUser.setText(store.getCashier(username).getFirstName() + " " + store.getCashier(username).getLastName());
+						lblLoggedInUserNS.setText(store.getCashier(username).getFirstName() + " " + store.getCashier(username).getLastName());
+						lblLoggedInUserRI.setText(store.getCashier(username).getFirstName() + " " + store.getCashier(username).getLastName());
+						lblLoggedInUserCS.setText(store.getCashier(username).getFirstName() + " " + store.getCashier(username).getLastName());
 					}
 					else {
 						JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid Username or Password");
