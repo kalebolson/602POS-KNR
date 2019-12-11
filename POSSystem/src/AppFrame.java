@@ -37,6 +37,7 @@ public class AppFrame {
 	private JPanel managerPanel;
 	private JPanel inventoryMgmtPanel;
 	private JPanel orderMgmtPanel; 
+	private JPanel newItemMgmtPanel;
 	private JLabel lblAdministratorMenu;
 	private JLabel lblInvMgmtMenu;
 	private JLabel lblLoggedInAs_1;
@@ -476,7 +477,7 @@ public class AppFrame {
 			 * and clears username and password fields
 			 */
 			public void actionPerformed(ActionEvent arg0) {
-				cardLayout.show(containerPanel, "managerScreen");
+				cardLayout.show(containerPanel, "newItemMgmtScreen");
 
 			}
 		});
@@ -584,7 +585,7 @@ public class AppFrame {
 			 * and clears username and password fields
 			 */
 			public void actionPerformed(ActionEvent arg0) {
-				cardLayout.show(containerPanel, "managerScreen");
+				cardLayout.show(containerPanel, "newItemMgmtScreen");
 
 			}
 		});
@@ -628,6 +629,27 @@ public class AppFrame {
 		});
 		orderMgmtPanel.add(btnAdminLogout3);
 		//*********************END Create orderMgmtScreen**************************
+		
+		
+		//*********************Create newItemMgmtScreen******************************
+		newItemMgmtPanel = new JPanel();
+		containerPanel.add(newItemMgmtPanel, "newItemMgmtScreen");
+		newItemMgmtPanel.setLayout(null);
+		
+		//lblInvMgmtMenu = new JLabel("Ordering and Receiving");
+		//lblInvMgmtMenu.setFont(new Font("Dialog", Font.BOLD, 14));
+		//lblInvMgmtMenu.setBounds(250, 28, 250, 18);
+		//newItemMgmtPanel.add(lblInvMgmtMenu);
+		
+		//lblLoggedInAs_1 = new JLabel("Logged in as:");
+		//lblLoggedInAs_1.setBounds(506, 0, 112, 15);
+		//newItemMgmtPanel.add(lblLoggedInAs_1);
+		
+		//lblLoggedInAdmin = new JLabel("Default");
+		//lblLoggedInAdmin.setFont(new Font("Dialog", Font.PLAIN, 12));
+		//lblLoggedInAdmin.setBounds(615, 0, 100, 15);
+		//newItemMgmtPanel.add(lblLoggedInAdmin); 
+		//*********************END Create newItemMgmtScreen**************************
 		
 		  //****************************************************************************************** 
 		  //END Manager UI 
