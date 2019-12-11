@@ -595,7 +595,7 @@ public class AppFrame {
 		containerPanel.add(orderMgmtPanel, "orderMgmtScreen");
 		orderMgmtPanel.setLayout(null);
 		
-		lblInvMgmtMenu = new JLabel("Inventory Management Menu");
+		lblInvMgmtMenu = new JLabel("Ordering and Receiving");
 		lblInvMgmtMenu.setFont(new Font("Dialog", Font.BOLD, 14));
 		lblInvMgmtMenu.setBounds(250, 28, 250, 18);
 		orderMgmtPanel.add(lblInvMgmtMenu);
@@ -671,7 +671,7 @@ public class AppFrame {
 		JLabel lblPizza3 = new JLabel("10 - Pizza");
 		lblPizza3.setBounds(24, 315, 129, 15);
 		lblPizza3.setFont(new Font("Dialog", Font.PLAIN, 12));
-		orderMgmtPanel.add(lblPizza2);
+		orderMgmtPanel.add(lblPizza3);
 		
 		JLabel lblMilk3 = new JLabel("20 - Milk");
 		lblMilk3.setBounds(141, 315, 129, 15);
@@ -721,7 +721,18 @@ public class AppFrame {
 		JLabel lblOranges3 = new JLabel("11 - Oranges");
 		lblOranges3.setBounds(141, 80, 129, 15);
 		lblOranges3.setFont(new Font("Dialog", Font.PLAIN, 12));
-		orderMgmtPanel.add(lblOranges2);
+		orderMgmtPanel.add(lblOranges3);
+		
+		JButton btnMainMenu2 = new JButton("Main Menu");
+		btnMainMenu2.setBounds(487, 310, 200, 25);
+		btnMainMenu2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//register.finalizeSale();
+				cardLayout.show(containerPanel, "managerScreen");
+				
+			}
+		});
+		orderMgmtPanel.add(btnMainMenu2);
 		
 		JButton btnAdminLogout3 = new JButton("Logout");
 		btnAdminLogout3.setBounds(487, 345, 200, 25);
