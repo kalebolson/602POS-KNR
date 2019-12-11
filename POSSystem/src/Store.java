@@ -217,11 +217,12 @@ public class Store {
 		String transactionDate;
 		Cashier cashier;
 		int numProducts;
-		ArrayList<Product> cart = new ArrayList<Product>();
+		ArrayList<Product> cart;
 		
 		try {
 			input = new Scanner(new File("transactions.txt"));
 			while (input.hasNext()) {
+				cart = new ArrayList<Product>();
 				transactionID = input.nextInt();
 				transactionDate = input.next() + " " + input.next();//the datetime value has a space in it
 				cashier = getCashier(input.nextInt());

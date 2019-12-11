@@ -134,7 +134,6 @@ public class Register {
   
   // overloaded method to return just a single item
   public void finalizeReturn(int UPC) throws InvalidIDException, IOException, InsufficientFundsException {
-	  ArrayList<Product> p = currentTransaction.getCart();
 	  removeCash(currentTransaction.getPrice(UPC));
 	  currentTransaction.removeFromSale(UPC);
 	  store.updateTransactionFile();
