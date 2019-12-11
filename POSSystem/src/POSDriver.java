@@ -5,7 +5,7 @@ public class POSDriver {
 		Store a = new Store(); 
 		Register r = new Register(1.00, a); 
 
-		System.out.println(r.orderingNeedsCondensedReport());
+		System.out.println("test");
 	}
 
 
