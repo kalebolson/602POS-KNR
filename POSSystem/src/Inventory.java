@@ -126,6 +126,17 @@ public class Inventory {
 		return s;
 	}
 	
+	public String orderingNeedsCondensed() {
+		String s = "";
+		s+=("Product [Amount Needed]\n");
+		for(Product a: inventory) { 
+			if(a.getTotalQuantity()<a.getThreshold()) { 
+				thresholdReached = true;
+				s+=("   "+a.getProductName() + " ["+ a.getAmountNeeded() + "]\n");
+			}
+		}
+		return s;
+	}
 	
 	/* -------------------------------------------------------- 
 	 * End Functional Methods & Calculations 

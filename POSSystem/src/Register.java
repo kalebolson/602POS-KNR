@@ -363,6 +363,11 @@ public class Register {
 	  return inv.orderingNeeds();
   }
   
+  public String orderingNeedsCondensedReport() {
+	  Inventory inv = store.getInventory();
+	  return inv.orderingNeedsCondensed();
+  }
+  
   public String CashierReportX(int ID){
     Cashier c;
 	try {

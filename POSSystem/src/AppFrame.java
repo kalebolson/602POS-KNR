@@ -54,6 +54,8 @@ public class AppFrame {
 	private JTextField setPriceField;
 	private JTextField cashierXField;
 	private JTextArea txtrOrderReport;
+	private JTextArea txtrOrderedItems; 
+	private JTextArea txtrOrderingNeeds;
 	
 
 	/**
@@ -238,6 +240,7 @@ public class AppFrame {
 		btnOrderMgmt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//register.finalizeSale();
+				txtrOrderReport.setText(register.orderingNeedsCondensedReport());
 				cardLayout.show(containerPanel, "orderMgmtScreen");
 				
 			}
@@ -570,6 +573,7 @@ public class AppFrame {
 		btnOrderMgmt2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//register.finalizeSale();
+				txtrOrderReport.setText(register.orderingNeedsCondensedReport());
 				cardLayout.show(containerPanel, "orderMgmtScreen");
 				
 			}
@@ -615,14 +619,25 @@ public class AppFrame {
 
 		
 		JScrollPane scrollPane6 = new JScrollPane();
-		scrollPane6.setBounds(487, 80, 200, 150);
-		inventoryMgmtPanel.add(scrollPane6);
+		scrollPane6.setBounds(250, 80, 220, 150);
+		orderMgmtPanel.add(scrollPane6);
 		
+		txtrOrderedItems = new JTextArea();
+		txtrOrderedItems.setEditable(false);
+		scrollPane6.setViewportView(txtrOrderedItems);
+		
+		JLabel lblManagerNotifications2 = new JLabel("Ordering Needs");
+		lblManagerNotifications2.setBounds(487, 52, 122, 15);
+		orderMgmtPanel.add(lblManagerNotifications2);
+		
+		JScrollPane scrollPane7 = new JScrollPane();
+		scrollPane7.setBounds(487, 80, 200, 150);
+		orderMgmtPanel.add(scrollPane7);
+
 		txtrOrderReport = new JTextArea();
 		txtrOrderReport.setEditable(false);
-		scrollPane6.setViewportView(txtrOrderReport);
-		
-	
+		scrollPane7.setViewportView(txtrOrderReport);
+			
 		JLabel lblApples3 = new JLabel("1 - Apples");
 		lblApples3.setBounds(24, 80, 129, 15);
 		lblApples3.setFont(new Font("Dialog", Font.PLAIN, 12));

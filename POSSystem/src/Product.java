@@ -16,6 +16,7 @@ public class Product {
 	private int quantityStocked = -1; 
 	private int quantityOrdered = 0; 
 	private int threshold; 
+	private int amountNeeded; 
 	DecimalFormat df = new DecimalFormat("$###,##0.00");
 	
 	//private Product[] inventory; 
@@ -61,6 +62,7 @@ public class Product {
 		this.quantityStocked = quantityStocked; 
 		this.quantityOrdered = quantityOrdered;
 		this.threshold = threshold; 
+		calculateNeeded();
 		
 		
 	}
@@ -68,21 +70,29 @@ public class Product {
 	//add product to the inventory
 	public void addQuantity(int add) { 
 		quantityStocked += add;
+		calculateNeeded();
 	}
 	
 	//remove product from the inventory
 	public void removeQuantity(int remove) { 
 		quantityStocked -= remove; 
+		calculateNeeded();
 	}
 	
 	//how much of something you are ordering for inventory
 	public void addToOrderQuantity(int add) { 
 		quantityOrdered += add; 
+		calculateNeeded();
 	}
 	
 	//removing quantity from an inventory order
 	public void removeFromOrderQuantity(int remove) { 
 		quantityOrdered -= remove;
+		calculateNeeded();
+	}
+	
+	public void calculateNeeded() { 
+		amountNeeded = threshold - (quantityStocked + quantityOrdered);
 	}
 	
 	public String toString() { 
@@ -135,6 +145,7 @@ public class Product {
 	
 	public void setStockedQuantity(int quantityStocked) { 
 		this.quantityStocked = quantityStocked;
+		calculateNeeded();
 	}
 	
 	public int getOrderedQuantity() {
@@ -143,6 +154,7 @@ public class Product {
 	
 	public void setOrderedQuantity(int quantityOrdered) { 
 		this.quantityOrdered = quantityOrdered;
+		calculateNeeded();
 	}
 	
 	public int getTotalQuantity() { 
@@ -151,14 +163,20 @@ public class Product {
 	
 	public int getThreshold() { 
 		return threshold; 
+		
 	}
 	
 	public void setThreshold(int threshold) { 
 		this.threshold = threshold; 
+		calculateNeeded();
 	}
 	
 	public int getUPC(){ 
 		return UPC; 
+	}
+	
+	public int getAmountNeeded() { 
+		return amountNeeded;
 	}
 	
 	
