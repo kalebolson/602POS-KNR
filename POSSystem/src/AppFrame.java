@@ -828,11 +828,13 @@ public class AppFrame {
 		btnAddItem.setBounds(288, 162, 133, 25);
 		btnAddItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int UPC = Integer.parseInt(UPCtextField.getText());
 				try {
+					int UPC = Integer.parseInt(UPCtextField.getText());
 					register.addToSale(UPC);
 				} catch (InvalidIDException e) {
 					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid UPC");
+				} catch (NumberFormatException e) {
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "UPC Field Empty");
 				}
 				txtrReceipt.setText(register.calculateSale());
 				UPCtextField.setText("");
@@ -844,11 +846,13 @@ public class AppFrame {
 		btnRemoveItem.setBounds(288, 199, 133, 25);
 		btnRemoveItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int UPC = Integer.parseInt(UPCtextField.getText());
 				try {
+					int UPC = Integer.parseInt(UPCtextField.getText());
 					register.removeFromSale(UPC);
 				} catch (InvalidIDException e) {
 					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid UPC");
+				} catch (NumberFormatException e) {
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "UPC Field Empty");
 				}
 				txtrReceipt.setText(register.calculateSale());
 				UPCtextField.setText("");
@@ -1057,8 +1061,10 @@ public class AppFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					register.newReturn(Integer.parseInt(transactionIDCSField.getText()));
-				} catch (NumberFormatException | InvalidIDException e) {
+				} catch (InvalidIDException e) {
 					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid Transaction ID");
+				} catch (NumberFormatException e) {
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Transaction ID Field Empty");
 				}
 				txtAreaCS.setText(register.calculateSale());
 				transactionIDCSField.setText("");
@@ -1116,13 +1122,13 @@ public class AppFrame {
 							+ " to the customer for this transaction.");
 					register.finalizeReturn(Integer.parseInt(upcRIField.getText()));
 				} catch (NumberFormatException e) {
-					JOptionPane.showMessageDialog(frmPosSystemLogin, "Error: Invalid UPC");
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "UPC Field Empty");
 				} catch (InvalidIDException e) {
-					JOptionPane.showMessageDialog(frmPosSystemLogin, "Error: Invalid UPC");
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid UPC");
 				} catch (IOException e) {
-					JOptionPane.showMessageDialog(frmPosSystemLogin, "Error: Unable to Process Return");
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Unable to Process Return");
 				} catch (InsufficientFundsException e) {
-					JOptionPane.showMessageDialog(frmPosSystemLogin, "Error: Insufficient Funds");
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Insufficient Funds");
 				}
 				textAreaRI.setText(register.calculateSale());
 				upcRIField.setText("");
@@ -1155,8 +1161,10 @@ public class AppFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					register.newReturn(Integer.parseInt(transactionIDRIField.getText()));
-				} catch (NumberFormatException | InvalidIDException e) {
+				} catch (InvalidIDException e) {
 					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid Transaction ID");
+				} catch (NumberFormatException e) {
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Transaction ID Field Empty");
 				}
 				textAreaRI.setText(register.calculateSale());
 				transactionIDRIField.setText("");
