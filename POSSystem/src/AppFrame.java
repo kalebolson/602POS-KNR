@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 import java.awt.Dimension;
@@ -94,6 +95,7 @@ public class AppFrame {
 	private void initialize() throws InvalidIDException {
 		final Store store = new Store();
 		final Register register = store.getRegister(1);
+		DecimalFormat df = new DecimalFormat("$###,##0.00");
 		
 		cardLayout = new CardLayout();
 
@@ -801,6 +803,9 @@ public class AppFrame {
 		btnFinalizeSale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				register.finalizeSale();
+				JOptionPane.showMessageDialog(frmPosSystemLogin, "Request "
+						+ df.format(register.getCurrentTransaction().getTotal()) 
+						+ " from the customer for this transaction.");
 				cardLayout.show(containerPanel, "cashierScreen");
 			}
 		});
@@ -1006,6 +1011,9 @@ public class AppFrame {
 		btnCancelEntireSale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Refund "
+							+ df.format(register.getCurrentTransaction().getTotal()) 
+							+ " to the customer for this transaction.");
 					register.finalizeReturn();
 				} catch (InvalidIDException e) {
 					JOptionPane.showMessageDialog(frmPosSystemLogin, "Error: Invalid UPC");
@@ -1103,6 +1111,9 @@ public class AppFrame {
 		btnReturnItemRI.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Refund "
+							+ df.format(register.getCurrentTransaction().getPrice(Integer.parseInt(upcRIField.getText()))) 
+							+ " to the customer for this transaction.");
 					register.finalizeReturn(Integer.parseInt(upcRIField.getText()));
 				} catch (NumberFormatException e) {
 					JOptionPane.showMessageDialog(frmPosSystemLogin, "Error: Invalid UPC");
@@ -1162,20 +1173,20 @@ public class AppFrame {
 				try {
 					if (register.unlock(username, password) && store.getCashier(username).isAdmin()) {
 						JOptionPane.showMessageDialog(frmPosSystemLogin, "Login Successful");
-						cardLayout.show(containerPanel, "managerScreen");
 						lblLoggedInAdmin.setText(store.getCashier(username).getFirstName() + " " + store.getCashier(username).getLastName());
 						lblLoggedInUserNS.setText(store.getCashier(username).getFirstName() + " " + store.getCashier(username).getLastName());
 						lblLoggedInUserRI.setText(store.getCashier(username).getFirstName() + " " + store.getCashier(username).getLastName());
 						lblLoggedInUserCS.setText(store.getCashier(username).getFirstName() + " " + store.getCashier(username).getLastName());
+						cardLayout.show(containerPanel, "managerScreen");
 						txtrInvNotifications.setText(register.orderingNeedsReport());
 					}
 					else if (register.unlock(username, password)) {
 						JOptionPane.showMessageDialog(frmPosSystemLogin, "Login Successful");
-						cardLayout.show(containerPanel, "cashierScreen");
 						lblLoggedInUser.setText(store.getCashier(username).getFirstName() + " " + store.getCashier(username).getLastName());
 						lblLoggedInUserNS.setText(store.getCashier(username).getFirstName() + " " + store.getCashier(username).getLastName());
 						lblLoggedInUserRI.setText(store.getCashier(username).getFirstName() + " " + store.getCashier(username).getLastName());
 						lblLoggedInUserCS.setText(store.getCashier(username).getFirstName() + " " + store.getCashier(username).getLastName());
+						cardLayout.show(containerPanel, "cashierScreen");
 					}
 					else {
 						JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid Username or Password");
