@@ -298,6 +298,7 @@ public class AppFrame {
 		scrollPane4.setViewportView(txtrInvNotifications);
 		
 		JButton btnAdminPrintInventory = new JButton("Inventory Report");
+		btnAdminPrintInventory.setFont(new Font("Dialog", Font.BOLD, 10));
 		btnAdminPrintInventory.setBounds(24, 345, 140, 25);
 		btnAdminPrintInventory.addActionListener(new ActionListener() {
 			/*
@@ -311,6 +312,7 @@ public class AppFrame {
 		managerPanel.add(btnAdminPrintInventory);
 		
 		JButton btnAdminPrintCashierZ = new JButton("Cashier Report (Z)");
+		btnAdminPrintCashierZ.setFont(new Font("Dialog", Font.BOLD, 10));
 		btnAdminPrintCashierZ.setBounds(174, 345, 140, 25);
 		btnAdminPrintCashierZ.addActionListener(new ActionListener() {
 
@@ -331,6 +333,7 @@ public class AppFrame {
 		cashierXField.setColumns(10);
 		
 		JButton btnAdminPrintCashierX = new JButton("Cashier Report (X)");
+		btnAdminPrintCashierX.setFont(new Font("Dialog", Font.BOLD, 10));
 		btnAdminPrintCashierX.setBounds(324, 345, 140, 25);
 		btnAdminPrintCashierX.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
