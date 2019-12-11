@@ -461,12 +461,26 @@ public class AppFrame {
 		inventoryMgmtPanel.add(btnSetPrice);
 				
 		JScrollPane scrollPaneinvListinventory = new JScrollPane();
-		scrollPaneinvListinventory.setBounds(24, 80, 200, 290);
+		scrollPaneinvListinventory.setBounds(24, 80, 200, 255);
 		inventoryMgmtPanel.add(scrollPaneinvListinventory);
 
 		txtrInvListInventory = new JTextArea();
 		txtrInvListInventory.setEditable(false);
 		scrollPaneinvListinventory.setViewportView(txtrInvListInventory);
+		
+		JButton btnAdminNewItem1 = new JButton("Add New Product");
+		btnAdminNewItem1.setBounds(24, 345, 200, 25);
+		btnAdminNewItem1.addActionListener(new ActionListener() {
+			/*
+			 * Switches back to login screen when selecting the logout button
+			 * and clears username and password fields
+			 */
+			public void actionPerformed(ActionEvent arg0) {
+				cardLayout.show(containerPanel, "managerScreen");
+
+			}
+		});
+		inventoryMgmtPanel.add(btnAdminNewItem1);
 		
 		JButton btnAdminLogout2 = new JButton("Logout");
 		btnAdminLogout2.setBounds(487, 345, 200, 25);
@@ -555,12 +569,26 @@ public class AppFrame {
 		scrollPane7.setViewportView(txtrOrderReport);
 		
 		JScrollPane scrollPaneinvListorder = new JScrollPane();
-		scrollPaneinvListorder.setBounds(24, 80, 200, 290);
+		scrollPaneinvListorder.setBounds(24, 80, 200, 255);
 		orderMgmtPanel.add(scrollPaneinvListorder);
 
 		txtrInvListOrder = new JTextArea();
 		txtrInvListOrder.setEditable(false);
 		scrollPaneinvListorder.setViewportView(txtrInvListOrder);
+		
+		JButton btnAdminNewItem2 = new JButton("Add New Product");
+		btnAdminNewItem2.setBounds(24, 345, 200, 25);
+		btnAdminNewItem2.addActionListener(new ActionListener() {
+			/*
+			 * Switches back to login screen when selecting the logout button
+			 * and clears username and password fields
+			 */
+			public void actionPerformed(ActionEvent arg0) {
+				cardLayout.show(containerPanel, "managerScreen");
+
+			}
+		});
+		orderMgmtPanel.add(btnAdminNewItem2);
 		
 		JButton btnInvMgmt2 = new JButton("Inventory Mangement");
 		btnInvMgmt2.setBounds(487, 275, 200, 25);
