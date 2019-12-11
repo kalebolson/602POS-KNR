@@ -313,12 +313,21 @@ public class Register {
 	  store.getInventory().setProductThreshold(UPC, threshold); 
 	  try {
 			store.updateInventoryFile();
-			System.out.println("Success in reaching the update!");
+			//System.out.println("Success in reaching the update!");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
   }
 
+  public void setPrice(int UPC, double price) { 
+	  store.getInventory().setProductPrice(UPC, price); 
+	  try {
+			store.updateInventoryFile();
+			//System.out.println("Success in reaching the update!");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+  }
 	public void receiveAllOrders() {
 	  store.getInventory().receiveAllOrders();
 	  try {

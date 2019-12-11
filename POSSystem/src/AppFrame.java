@@ -438,11 +438,11 @@ public class AppFrame {
 		btnSetPrice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int UPC = Integer.parseInt(UPCinvTextField.getText());
-				int Threshold = Integer.parseInt(setPriceField.getText());
+				double Price = Double.parseDouble(setPriceField.getText());
 				try {
-					register.setThreshold(UPC, Threshold);
+					register.setPrice(UPC, Price);
 				} catch (Exception e) {
-					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid Threshold");
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid Price");
 				}
 				txtrInvReport.setText(register.productReport(UPC) + "\n done");
 				//UPCinvTextField.setText("");

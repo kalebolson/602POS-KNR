@@ -45,6 +45,15 @@ public class Inventory {
 		}
 	}
 	
+	//set inventory price
+	public void setProductPrice(int upc, double price) { 
+		for(Product a: inventory) { 
+			if(a.getUPC()==upc) { 
+				a.setPrice(price);
+			}
+		}
+	}
+	
 	//we now sell a new product
 	public void addnewItem(Product p) { 
 		inventory.add(p);
