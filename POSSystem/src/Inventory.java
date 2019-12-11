@@ -20,6 +20,14 @@ public class Inventory {
 		return s;
 	}
 	
+	public String inventoryReferenceList() { 
+		String s = ""; 
+		for(Product p: inventory) { 
+			s+=("  " + p.getUPC() + ": " + p.getProductName() + "\n\n"); 
+		}
+		return s; 
+	}
+	
 	public String printProductReport(int upc) { 
 		for(Product a: inventory) { 
 			if(a.getUPC()==upc) {  

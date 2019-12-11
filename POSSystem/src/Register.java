@@ -357,6 +357,11 @@ public class Register {
 	  return inv.printProductReport(upc);
   }
   
+  public String inventoryList() {
+	  Inventory inv = store.getInventory();
+	  return inv.inventoryReferenceList();
+  }
+  
   public String orderingNeedsReport() {
 	  Inventory inv = store.getInventory();
 	  return inv.orderingNeeds();
