@@ -35,6 +35,7 @@ public class AppFrame {
 	private CardLayout cardLayout;
 	private JPanel managerPanel;
 	private JPanel inventoryMgmtPanel;
+	private JPanel orderMgmtPanel; 
 	private JLabel lblAdministratorMenu;
 	private JLabel lblInvMgmtMenu;
 	private JLabel lblLoggedInAs_1;
@@ -52,6 +53,7 @@ public class AppFrame {
 	private JTextField setThresholdField;
 	private JTextField setPriceField;
 	private JTextField cashierXField;
+	private JTextArea txtrOrderReport;
 	
 
 	/**
@@ -236,7 +238,7 @@ public class AppFrame {
 		btnOrderMgmt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//register.finalizeSale();
-				cardLayout.show(containerPanel, "inventoryMgmtScreen");
+				cardLayout.show(containerPanel, "orderMgmtScreen");
 				
 			}
 		});
@@ -568,7 +570,7 @@ public class AppFrame {
 		btnOrderMgmt2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//register.finalizeSale();
-				cardLayout.show(containerPanel, "inventoryMgmtScreen");
+				cardLayout.show(containerPanel, "orderMgmtScreen");
 				
 			}
 		});
@@ -586,6 +588,156 @@ public class AppFrame {
 		inventoryMgmtPanel.add(btnMainMenu);
 		
 		//*********************END Create inventoryMgmtScreen**********************
+		
+		
+		//*********************Create orderMgmtScreen**************************
+		orderMgmtPanel = new JPanel();
+		containerPanel.add(orderMgmtPanel, "orderMgmtScreen");
+		orderMgmtPanel.setLayout(null);
+		
+		lblInvMgmtMenu = new JLabel("Inventory Management Menu");
+		lblInvMgmtMenu.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblInvMgmtMenu.setBounds(250, 28, 250, 18);
+		orderMgmtPanel.add(lblInvMgmtMenu);
+		
+		lblLoggedInAs_1 = new JLabel("Logged in as:");
+		lblLoggedInAs_1.setBounds(506, 0, 112, 15);
+		orderMgmtPanel.add(lblLoggedInAs_1);
+		
+		lblLoggedInAdmin = new JLabel("Default");
+		lblLoggedInAdmin.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblLoggedInAdmin.setBounds(615, 0, 100, 15);
+		orderMgmtPanel.add(lblLoggedInAdmin); 
+		
+		JLabel lblItemUpcList3 = new JLabel("Item UPC List");
+		lblItemUpcList3.setBounds(71, 52, 122, 15);
+		orderMgmtPanel.add(lblItemUpcList3);
+
+		
+		JScrollPane scrollPane6 = new JScrollPane();
+		scrollPane6.setBounds(487, 80, 200, 150);
+		inventoryMgmtPanel.add(scrollPane6);
+		
+		txtrOrderReport = new JTextArea();
+		txtrOrderReport.setEditable(false);
+		scrollPane6.setViewportView(txtrOrderReport);
+		
+	
+		JLabel lblApples3 = new JLabel("1 - Apples");
+		lblApples3.setBounds(24, 80, 129, 15);
+		lblApples3.setFont(new Font("Dialog", Font.PLAIN, 12));
+		orderMgmtPanel.add(lblApples3);
+		
+		JLabel lblBananas3 = new JLabel("2 - Bananas");
+		lblBananas3.setBounds(24, 104, 129, 15);
+		lblBananas3.setFont(new Font("Dialog", Font.PLAIN, 12));
+		orderMgmtPanel.add(lblBananas3);
+		
+		JLabel lblChocolate3 = new JLabel("3 - Chocolate");
+		lblChocolate3.setBounds(24, 133, 129, 15);
+		lblChocolate3.setFont(new Font("Dialog", Font.PLAIN, 12));
+		orderMgmtPanel.add(lblChocolate3);
+		
+		JLabel lblChicken3 = new JLabel("4 - Chicken");
+		lblChicken3.setBounds(24, 157, 129, 15);
+		lblChicken3.setFont(new Font("Dialog", Font.PLAIN, 12));
+		orderMgmtPanel.add(lblChicken3);
+		
+		JLabel lblAlmond3 = new JLabel("8 - Almond Butter");
+		lblAlmond3.setBounds(24, 261, 129, 15);
+		lblAlmond3.setFont(new Font("Dialog", Font.PLAIN, 12));
+		orderMgmtPanel.add(lblAlmond3);
+		
+		JLabel lblPeanut3 = new JLabel("7 - Peanut Butter");
+		lblPeanut3.setBounds(24, 234, 129, 15);
+		lblPeanut3.setFont(new Font("Dialog", Font.PLAIN, 12));
+		orderMgmtPanel.add(lblPeanut3);
+		
+		JLabel lblEggs3 = new JLabel("6 - Eggs");
+		lblEggs3.setBounds(24, 209, 129, 15);
+		lblEggs3.setFont(new Font("Dialog", Font.PLAIN, 12));
+		orderMgmtPanel.add(lblEggs3);
+		
+		JLabel lblSalmon3 = new JLabel("5 - Salmon");
+		lblSalmon3.setBounds(24, 184, 129, 15);
+		lblSalmon3.setFont(new Font("Dialog", Font.PLAIN, 12));
+		orderMgmtPanel.add(lblSalmon3);
+		
+		JLabel lblBread3 = new JLabel("9 - Bread");
+		lblBread3.setBounds(24, 288, 129, 15);
+		lblBread3.setFont(new Font("Dialog", Font.PLAIN, 12));
+		orderMgmtPanel.add(lblBread3);
+		
+		JLabel lblPizza3 = new JLabel("10 - Pizza");
+		lblPizza3.setBounds(24, 315, 129, 15);
+		lblPizza3.setFont(new Font("Dialog", Font.PLAIN, 12));
+		orderMgmtPanel.add(lblPizza2);
+		
+		JLabel lblMilk3 = new JLabel("20 - Milk");
+		lblMilk3.setBounds(141, 315, 129, 15);
+		lblMilk3.setFont(new Font("Dialog", Font.PLAIN, 12));
+		orderMgmtPanel.add(lblMilk3);
+		
+		JLabel lblPork3 = new JLabel("19 - Pork");
+		lblPork3.setBounds(141, 288, 129, 15);
+		lblPork3.setFont(new Font("Dialog", Font.PLAIN, 12));
+		orderMgmtPanel.add(lblPork3);
+		
+		JLabel lblBacon3 = new JLabel("18 - Bacon");
+		lblBacon3.setBounds(141, 261, 129, 15);
+		lblBacon3.setFont(new Font("Dialog", Font.PLAIN, 12));
+		orderMgmtPanel.add(lblBacon3);
+		
+		JLabel lblBroccoli3 = new JLabel("17 - Broccoli");
+		lblBroccoli3.setBounds(141, 234, 129, 15);
+		lblBroccoli3.setFont(new Font("Dialog", Font.PLAIN, 12));
+		orderMgmtPanel.add(lblBroccoli3);
+		
+		JLabel lblRum3 = new JLabel("16 - Rum");
+		lblRum3.setBounds(141, 209, 129, 15);
+		lblRum3.setFont(new Font("Dialog", Font.PLAIN, 12));
+		orderMgmtPanel.add(lblRum3);
+		
+		JLabel lblWine3 = new JLabel("15 - Wine");
+		lblWine3.setBounds(141, 184, 129, 15);
+		lblWine3.setFont(new Font("Dialog", Font.PLAIN, 12));
+		orderMgmtPanel.add(lblWine3);
+		
+		JLabel lblBeer3 = new JLabel("14 - Beer");
+		lblBeer3.setBounds(141, 157, 129, 15);
+		lblBeer3.setFont(new Font("Dialog", Font.PLAIN, 12));
+		orderMgmtPanel.add(lblBeer3);
+		
+		JLabel lblJuice3 = new JLabel("13 - Juice");
+		lblJuice3.setBounds(141, 133, 129, 15);
+		lblJuice3.setFont(new Font("Dialog", Font.PLAIN, 12));
+		orderMgmtPanel.add(lblJuice3);
+		
+		JLabel lblOnions3 = new JLabel("12 - Onions");
+		lblOnions3.setBounds(141, 104, 129, 15);
+		lblOnions3.setFont(new Font("Dialog", Font.PLAIN, 12));
+		orderMgmtPanel.add(lblOnions3);
+		
+		JLabel lblOranges3 = new JLabel("11 - Oranges");
+		lblOranges3.setBounds(141, 80, 129, 15);
+		lblOranges3.setFont(new Font("Dialog", Font.PLAIN, 12));
+		orderMgmtPanel.add(lblOranges2);
+		
+		JButton btnAdminLogout3 = new JButton("Logout");
+		btnAdminLogout3.setBounds(487, 345, 200, 25);
+		btnAdminLogout3.addActionListener(new ActionListener() {
+			/*
+			 * Switches back to login screen when selecting the logout button
+			 * and clears username and password fields
+			 */
+			public void actionPerformed(ActionEvent arg0) {
+				cardLayout.show(containerPanel, "loginScreen");
+				usernameField.setText("");
+				passwordField.setText("");
+			}
+		});
+		orderMgmtPanel.add(btnAdminLogout3);
+		//*********************END Create orderMgmtScreen**************************
 		
 		  //****************************************************************************************** 
 		  //END Manager UI 
