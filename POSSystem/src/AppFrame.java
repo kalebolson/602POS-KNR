@@ -723,6 +723,17 @@ public class AppFrame {
 		lblOranges3.setFont(new Font("Dialog", Font.PLAIN, 12));
 		orderMgmtPanel.add(lblOranges3);
 		
+		JButton btnInvMgmt2 = new JButton("Inventory Mangement");
+		btnInvMgmt2.setBounds(487, 275, 200, 25);
+		btnInvMgmt2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//register.finalizeSale();
+				cardLayout.show(containerPanel, "inventoryMgmtScreen");
+				
+			}
+		});
+		orderMgmtPanel.add(btnInvMgmt2);
+		
 		JButton btnMainMenu2 = new JButton("Main Menu");
 		btnMainMenu2.setBounds(487, 310, 200, 25);
 		btnMainMenu2.addActionListener(new ActionListener() {
