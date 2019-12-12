@@ -209,6 +209,8 @@ public class Register {
   //we have to update the txt file with each method as well
   //******************************************************************************************
   
+  
+  //add a new product type to the inventory
   public void addnewItem(String productName, String supplier, double price, int quantityStocked, int threshold) {
 	  store.getInventory().addnewItem(new Product(productName,supplier,price,quantityStocked,threshold));
 	  try {
@@ -217,6 +219,18 @@ public class Register {
 		e.printStackTrace();
 	}
   }
+  
+  //remove a product type from the inventory
+  public void removeProductType(int UPC) { 
+	  store.getInventory().removeProductTypefromInventory(UPC);
+	  try {
+		store.updateInventoryFile();
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+  }
+  
+  //add quantity of a given product to the inventory
   public void addItemstoInventory(int upc, int quantity) {
 	  store.getInventory().addItemstoInventory(upc, quantity);
 	  try {
@@ -234,6 +248,8 @@ public class Register {
 		e.printStackTrace();
 	}
   }
+  
+  //remove quantity of a given product from the inventory
   public void removeItemsFromInventory(int upc, int quantity) {
 	  store.getInventory().removeItemsFromInventory(upc, quantity);
 	  try {

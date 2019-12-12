@@ -44,20 +44,11 @@ public class Inventory {
 		return "Invalid UPC"; 
 	}
 	
-	//set inventory threshold
-	public void setProductThreshold(int upc, int threshold) { 
+	//remove items from an inventory mgmt order
+	public void removeProductTypefromInventory(int UPC) { 
 		for(Product a: inventory) { 
-			if(a.getUPC()==upc) { 
-				a.setThreshold(threshold);
-			}
-		}
-	}
-	
-	//set inventory price
-	public void setProductPrice(int upc, double price) { 
-		for(Product a: inventory) { 
-			if(a.getUPC()==upc) { 
-				a.setPrice(price);
+			if(a.getUPC()==UPC) { 
+				inventory.remove(a);
 			}
 		}
 	}
@@ -165,7 +156,7 @@ public class Inventory {
 	
 	
 	/* -------------------------------------------------------- 
-	 * Standard Getters and Setters for each variable are below 
+	 * Standard Getters and Setters are below 
 	 * -------------------------------------------------------- */
 	public ArrayList<Product> getInventory(){
 		return inventory;
@@ -185,6 +176,23 @@ public class Inventory {
 		throw new InvalidIDException("No Product found with that UPC number");
 	}
 	
+	//set inventory threshold
+	public void setProductThreshold(int upc, int threshold) { 
+		for(Product a: inventory) { 
+			if(a.getUPC()==upc) { 
+				a.setThreshold(threshold);
+			}
+		}
+	}
+	
+	//set inventory price
+	public void setProductPrice(int upc, double price) { 
+		for(Product a: inventory) { 
+			if(a.getUPC()==upc) { 
+				a.setPrice(price);
+			}
+		}
+	}
 	
 	/* -------------------------------------------------------- 
 	 * End Getters and Setters Block 
