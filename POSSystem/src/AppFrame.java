@@ -474,7 +474,7 @@ public class AppFrame {
 		txtrInvListInventory.setEditable(false);
 		scrollPaneinvListinventory.setViewportView(txtrInvListInventory);
 		
-		JButton btnAdminNewItem1 = new JButton("Add New Product");
+		JButton btnAdminNewItem1 = new JButton("Add or Remove Products");
 		btnAdminNewItem1.setBounds(24, 345, 200, 25);
 		btnAdminNewItem1.addActionListener(new ActionListener() {
 			/*
@@ -665,7 +665,7 @@ public class AppFrame {
 		txtrInvListOrder.setEditable(false);
 		scrollPaneinvListorder.setViewportView(txtrInvListOrder);
 		
-		JButton btnAdminNewItem2 = new JButton("Add New Product");
+		JButton btnAdminNewItem2 = new JButton("Add or Remove Products");
 		btnAdminNewItem2.setBounds(24, 345, 200, 25);
 		btnAdminNewItem2.addActionListener(new ActionListener() {
 			private JLabel txtrInvListnewItem;
@@ -727,7 +727,7 @@ public class AppFrame {
 		containerPanel.add(newItemMgmtPanel, "newItemMgmtScreen");
 		newItemMgmtPanel.setLayout(null);
 		
-		lblNewItemMgmtMenu = new JLabel("Add New Item to Inventory");
+		lblNewItemMgmtMenu = new JLabel("Add/Remove Inventory Items");
 		lblNewItemMgmtMenu.setFont(new Font("Dialog", Font.BOLD, 14));
 		lblNewItemMgmtMenu.setBounds(250, 28, 250, 18);
 		newItemMgmtPanel.add(lblNewItemMgmtMenu);
@@ -748,6 +748,23 @@ public class AppFrame {
 		txtrInvListNewItems = new JTextArea();
 		txtrInvListNewItems.setEditable(false);
 		scrollPaneinvListnewItems.setViewportView(txtrInvListNewItems);
+		
+		JLabel lblNIAddItems= new JLabel("Add Items");
+		lblNIAddItems.setBounds(250, 52, 122, 15);
+		newItemMgmtPanel.add(lblNIAddItems);
+		
+		JLabel lblNIRemoveItems = new JLabel("Remove Items");
+		lblNIRemoveItems.setBounds(487, 52, 122, 15);
+		newItemMgmtPanel.add(lblNIRemoveItems);
+		
+		JLabel lblNIRemoveItemsUPC = new JLabel("UPC:");
+		lblNIRemoveItemsUPC.setBounds(487, 80, 100, 15);
+		newItemMgmtPanel.add(lblNIRemoveItemsUPC);
+		
+		JTextField NIRemoveUPCField = new JTextField();
+		NIRemoveUPCField.setBounds(577, 80, 100, 19);
+		newItemMgmtPanel.add(NIRemoveUPCField);
+		NIRemoveUPCField.setColumns(10);
 		
 		JLabel lblNewItemName= new JLabel("Product Name:");
 		lblNewItemName.setBounds(250, 80, 100, 15);
@@ -796,7 +813,7 @@ public class AppFrame {
 		 
 		JButton btnNIAddtoInv = new JButton("Add to Inventory");
 		btnNIAddtoInv.setFont(new Font("Dialog", Font.BOLD, 10));
-		btnNIAddtoInv.setBounds(270, 230, 180, 25);
+		btnNIAddtoInv.setBounds(255, 230, 180, 25);
 		btnNIAddtoInv.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int Threshold = Integer.parseInt(NIThresholdField.getText());
@@ -824,6 +841,28 @@ public class AppFrame {
 			}
 		});
 		newItemMgmtPanel.add(btnNIAddtoInv);
+		
+		JButton btnNIRemovefromInv = new JButton("Remove from Inventory");
+		btnNIRemovefromInv.setFont(new Font("Dialog", Font.BOLD, 10));
+		btnNIRemovefromInv.setBounds(493, 110, 180, 25);
+		btnNIRemovefromInv.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int UPC = Integer.parseInt(NIRemoveUPCField.getText());
+				
+				try {
+					register.removeItemsFromInventory(UPC);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid");
+				}
+				NIRemoveUPCField.setText("");
+				
+				txtrInvListNewItems.setText(register.inventoryList());
+				txtrOrderReport.setText(register.orderingNeedsCondensedReport());
+				txtrOrderedItems.setText(register.pendingOrdersReport());
+				
+			}
+		});
+		newItemMgmtPanel.add(btnNIRemovefromInv);
 		
 		JButton btnOrderMgmtNI = new JButton("Ordering and Receiving");
 		btnOrderMgmtNI.setBounds(487, 240, 200, 25);
