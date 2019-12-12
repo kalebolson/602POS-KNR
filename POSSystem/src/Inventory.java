@@ -41,7 +41,7 @@ public class Inventory {
 			}
 			//else return "nope";
 		}
-		return "double nope"; 
+		return "Invalid UPC"; 
 	}
 	
 	//set inventory threshold

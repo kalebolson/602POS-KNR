@@ -767,6 +767,64 @@ public class AppFrame {
 		newItemMgmtPanel.add(NISupplierField);
 		NISupplierField.setColumns(50);
 		
+		JLabel lblNewItemPrice= new JLabel("Price:");
+		lblNewItemPrice.setBounds(250, 140, 100, 15);
+		newItemMgmtPanel.add(lblNewItemPrice);
+		
+		JTextField NIPriceField = new JTextField();
+		NIPriceField.setBounds(340, 140, 100, 19);
+		newItemMgmtPanel.add(NIPriceField);
+		NIPriceField.setColumns(50);
+		
+		JLabel lblNewItemQuantity= new JLabel("# On-Hand:");
+		lblNewItemQuantity.setBounds(250, 170, 100, 15);
+		newItemMgmtPanel.add(lblNewItemQuantity);
+		
+		JTextField NIQuantityField = new JTextField();
+		NIQuantityField.setBounds(340, 170, 100, 19);
+		newItemMgmtPanel.add(NIQuantityField);
+		NIQuantityField.setColumns(50);
+		
+		JLabel lblNewItemThreshold= new JLabel("Theshold:");
+		lblNewItemThreshold.setBounds(250, 200, 100, 15);
+		newItemMgmtPanel.add(lblNewItemThreshold);
+		
+		JTextField NIThresholdField = new JTextField();
+		 NIThresholdField.setBounds(340, 200, 100, 19);
+		newItemMgmtPanel.add( NIThresholdField);
+		 NIThresholdField.setColumns(50);
+		 
+		JButton btnNIAddtoInv = new JButton("Add to Inventory");
+		btnNIAddtoInv.setFont(new Font("Dialog", Font.BOLD, 10));
+		btnNIAddtoInv.setBounds(270, 230, 180, 25);
+		btnNIAddtoInv.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int Threshold = Integer.parseInt(NIThresholdField.getText());
+				int Quantity = Integer.parseInt(NIQuantityField.getText());
+				double Price = Double.parseDouble(NIPriceField.getText());
+				String ProductName = NIProductNameField.getText();
+				String ProductSupplier = NISupplierField.getText();
+				
+				try {
+					//register.addItemstoOrder(UPC, Quantity);
+					register.addnewItem(ProductName, ProductSupplier, Price, Quantity, Threshold);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid");
+				}
+				NIThresholdField.setText("");
+				NIQuantityField.setText("");
+				NIPriceField.setText("");
+				NIProductNameField.setText("");
+				NISupplierField.setText("");
+				
+				txtrInvListNewItems.setText(register.inventoryList());
+				txtrOrderReport.setText(register.orderingNeedsCondensedReport());
+				txtrOrderedItems.setText(register.pendingOrdersReport());
+				
+			}
+		});
+		newItemMgmtPanel.add(btnNIAddtoInv);
+		
 		JButton btnOrderMgmtNI = new JButton("Ordering and Receiving");
 		btnOrderMgmtNI.setBounds(487, 240, 200, 25);
 		btnOrderMgmtNI.addActionListener(new ActionListener() {
