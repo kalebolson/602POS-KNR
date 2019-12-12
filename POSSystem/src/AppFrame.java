@@ -850,9 +850,13 @@ public class AppFrame {
 				int UPC = Integer.parseInt(NIRemoveUPCField.getText());
 				
 				try {
-					register.removeItemsFromInventory(UPC);
+					register.removeProductType(UPC);
+					System.out.println("Possibly worked");
 				} catch (Exception e) {
+					e.printStackTrace();
+					System.out.println("No");
 					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid");
+					
 				}
 				NIRemoveUPCField.setText("");
 				

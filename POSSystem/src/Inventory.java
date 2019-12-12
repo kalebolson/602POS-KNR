@@ -1,5 +1,6 @@
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Inventory {
 
@@ -45,12 +46,17 @@ public class Inventory {
 	}
 	
 	//remove items from an inventory mgmt order
-	public void removeProductTypefromInventory(int UPC) { 
-		for(Product a: inventory) { 
-			if(a.getUPC()==UPC) { 
-				inventory.remove(a);
+	public void removeProductTypefromInventory(int UPC) {
+		Iterator i = inventory.iterator();
+		while(i.hasNext()) { 
+			Product a = (Product) i.next();
+			if(a.getUPC() == UPC) { 
+				i.remove();
+				System.out.println("correct loop location"); 
+				break;
 			}
 		}
+		System.out.println("Loop Exited");
 	}
 	
 	//we now sell a new product
