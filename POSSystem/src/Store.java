@@ -189,16 +189,38 @@ public class Store {
 		String firstname;
 		String lastname;
 		boolean admin;
+		int shiftCount;
+		int eventCount;
+		Shift shift;
+		Event event;
+		int transID;
+		ArrayList<Shift> tempShifts;
 		try {
 			input = new Scanner(new File("cashiers.txt"));
 			
 			while (input.hasNext()) {
+				tempShifts = new ArrayList<Shift>();
 				ID = input.nextInt();
 				password = input.next();
 				firstname = input.next();
 				lastname = input.next();
 				admin = input.nextBoolean();
-				c = new Cashier(ID,password,firstname,lastname,admin);
+				shiftCount = input.nextInt();
+				
+				for (int i=0;i<shiftCount;i++) {
+					shift = new Shift();
+					shift.setTimein(input.next(),input.next());
+					shift.setTimeout(input.next(),input.next());
+					eventCount = input.nextInt();
+					for (int x=0;x<eventCount;x++) {
+						transID = input.nextInt();
+						event = new Event(transID,input.next());
+						shift.addEvent(event);
+					}
+					tempShifts.add(shift);
+				}
+				
+				c = new Cashier(ID,password,firstname,lastname,admin,tempShifts);
 				tempList.add(c);
 			}
 			cashiers = tempList;

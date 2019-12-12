@@ -194,6 +194,11 @@ public class AppFrame {
 			 * and clears username and password fields
 			 */
 			public void actionPerformed(ActionEvent arg0) {
+				try {
+					register.lock();
+				} catch (IOException e) {
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Error writing logout event to file");
+				}
 				cardLayout.show(containerPanel, "loginScreen");
 				usernameField.setText("");
 				passwordField.setText("");
@@ -276,6 +281,11 @@ public class AppFrame {
 			 * and clears username and password fields
 			 */
 			public void actionPerformed(ActionEvent arg0) {
+				try {
+					register.lock();
+				} catch (IOException e) {
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Error writing logout event to file");
+				}
 				cardLayout.show(containerPanel, "loginScreen");
 				usernameField.setText("");
 				passwordField.setText("");
@@ -950,7 +960,13 @@ public class AppFrame {
 		btnFinalizeSale.setBounds(487, 310, 145, 25);
 		btnFinalizeSale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				register.finalizeSale();
+				try {
+					register.finalizeSale();
+				} catch (IOException e) {
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "File System Error: Unable to Process Sale");
+				} catch (InvalidIDException e) {
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "There was a problem with the cashier ID, please contact support.");
+				}
 				JOptionPane.showMessageDialog(frmPosSystemLogin, "Request "
 						+ df.format(register.getCurrentTransaction().getTotal()) 
 						+ " from the customer for this transaction.");
@@ -1355,6 +1371,8 @@ public class AppFrame {
 					e.printStackTrace();
 				} catch (InvalidIDException e) {
 					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}

@@ -1,3 +1,4 @@
+import java.io.IOException;
 
 public class TransactionDriver {
 
@@ -16,6 +17,9 @@ public class TransactionDriver {
 			register.lock();
 		
 		} catch (InvalidIDException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

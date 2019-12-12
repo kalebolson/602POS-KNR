@@ -6,6 +6,8 @@ import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 
 public class Register {
@@ -17,6 +19,8 @@ public class Register {
   private Cashier currentCashier;
   private Transaction currentTransaction;
   DecimalFormat df = new DecimalFormat("$###,##0.00");
+  private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+  private LocalDateTime now = LocalDateTime.now();
 
   Register(double initCash, Store store){
 	  //this block is to update the running ID txt file
@@ -52,11 +56,13 @@ public class Register {
   //the method returns a boolean, based on input credentials
   //it also assigns the current cashier, and initializes a shift for that cashier
   
-  public void lock() {
+  public void lock() throws IOException {
 	  currentCashier.getShift().setTimeout();
+	  store.updateCashierFile();
+	  
   }
   
-  public boolean unlock(int ID, String PW){
+  public boolean unlock(int ID, String PW) throws IOException{
 	  Cashier c;
 	  try {
 		  c = store.getCashier(ID);  
@@ -66,7 +72,12 @@ public class Register {
 	  
 	  if (c.checkPassword(PW)) {
 		  currentCashier = c;
-		  c.setShift();
+		  try {
+			  if (!dtf.format(now).equals(c.getShift().getTimein().substring(0, 10))) {
+				  c.setShift();
+				  store.updateCashierFile();
+			  }
+		  } catch (IndexOutOfBoundsException e) {}
 		  return true;
 	  } else {
 		  return false;
@@ -105,7 +116,7 @@ public class Register {
 	  return currentTransaction.toString();
   }
   
-  public void finalizeSale() {
+  public void finalizeSale() throws IOException, InvalidIDException {
 	  for (Product p : currentTransaction.getCart()) {
 		  store.getInventory().removeItemsFromInventory(p.getUPC(), 1);
 	  }
@@ -118,7 +129,12 @@ public class Register {
 		e.printStackTrace();
 	  }
 	 
-	  currentCashier.getShift().addEvent(new Event(currentTransaction, "Sale"));
+	  //have to add this line because at some point a write-from-file method has
+	  //disconnected currentCashier from the correct memory location
+	  currentCashier = store.getCashier(currentCashier.getID());
+	  
+	  currentCashier.getShift().addEvent(new Event(currentTransaction.getTransactionID(), "Sale"));
+	  store.updateCashierFile();
 	 }
 	  
   
@@ -130,6 +146,13 @@ public class Register {
 	    }
 	  	currentTransaction.getCart().removeAll(currentTransaction.getCart());
 	  store.updateTransactionFile();
+	  
+	  //have to add this line because at some point a write-from-file method has
+	  //disconnected currentCashier from the correct memory location
+	  currentCashier = store.getCashier(currentCashier.getID());
+	  
+	  currentCashier.getShift().addEvent(new Event(currentTransaction.getTransactionID(), "Return"));
+	  store.updateCashierFile();
   }
   
   // overloaded method to return just a single item
@@ -137,6 +160,14 @@ public class Register {
 	  removeCash(currentTransaction.getPrice(UPC));
 	  currentTransaction.removeFromSale(UPC);
 	  store.updateTransactionFile();
+	  
+	  //have to add this line because at some point a write-from-file method has
+	  //disconnected currentCashier from the correct memory location
+	  currentCashier = store.getCashier(currentCashier.getID());
+	  
+	  currentCashier.getShift().addEvent(new Event(currentTransaction.getTransactionID(), "Return"));
+	  store.updateCashierFile();
+	  
   }
   
   //****************************************************************************************** 
@@ -358,7 +389,7 @@ public class Register {
   }
   //******************************************************************************************
   //end of inventory class implementation
-//******************************************************************************************  
+  //******************************************************************************************  
   
   //****************************************************************************************** 
   //Reports
@@ -399,14 +430,18 @@ public class Register {
 		c = store.getCashier(ID);
 	    String s = "";
 	    s+=c.getID()+" | "+c.getFirstName()+" | "+c.getLastName()+"\n";
+	    s+="In: "+c.getShift().getTimein()+" | ";
+	    s+="Out: "+c.getShift().getTimeout()+"\n";
 	    ArrayList<Event> events = c.getShift().getEvents();
 	    for (int i=0;i<events.size();i++){
 	      s+=events.get(i)+"\n";
 	    }
+	    s+="\n";
 	    return s;
 	} catch (InvalidIDException e) {
-		e.printStackTrace();
 		return "No cashier found with that ID number";
+	} catch (NullPointerException e) {
+		return "Cashier "+ID+" has no shift on record \n";
 	}
   }
 

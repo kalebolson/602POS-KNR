@@ -84,6 +84,9 @@ public class DataWriterDriver {
 			
 		} catch (InvalidIDException e) {
 			System.out.println(e.getMessage());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		
