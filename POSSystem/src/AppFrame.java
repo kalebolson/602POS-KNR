@@ -248,6 +248,7 @@ public class AppFrame {
 				//register.finalizeSale();
 				txtrOrderReport.setText(register.orderingNeedsCondensedReport());
 				txtrInvListOrder.setText(register.inventoryList());
+				txtrOrderedItems.setText(register.pendingOrdersReport());
 				cardLayout.show(containerPanel, "orderMgmtScreen");
 				
 			}
@@ -508,6 +509,7 @@ public class AppFrame {
 				//register.finalizeSale();
 				txtrOrderReport.setText(register.orderingNeedsCondensedReport());
 				txtrInvListOrder.setText(register.inventoryList());
+				txtrOrderedItems.setText(register.pendingOrdersReport());
 				cardLayout.show(containerPanel, "orderMgmtScreen");
 				
 			}
@@ -564,29 +566,30 @@ public class AppFrame {
 		scrollPane6.setViewportView(txtrOrderedItems);
 		
 		JLabel lblAddtoOrder = new JLabel("Add to Order");
-		lblAddtoOrder.setBounds(250, 245, 122, 15);
+		lblAddtoOrder.setBounds(250, 240, 122, 15);
 		orderMgmtPanel.add(lblAddtoOrder);
 		
 		JLabel lblAddtoOrderUPC = new JLabel("UPC:");
-		lblAddtoOrderUPC.setBounds(255, 265, 100, 15);
+		lblAddtoOrderUPC.setBounds(255, 260, 100, 15);
 		orderMgmtPanel.add(lblAddtoOrderUPC);
 		
 		UPCaddToOrderField = new JTextField();
-		UPCaddToOrderField.setBounds(285, 265, 40, 19);
+		UPCaddToOrderField.setBounds(285, 260, 40, 19);
 		orderMgmtPanel.add(UPCaddToOrderField);
 		UPCaddToOrderField.setColumns(10);
 		
 		JLabel lblAddtoOrderQuantity = new JLabel("Quantity:");
-		lblAddtoOrderQuantity.setBounds(355, 265, 122, 15);
+		lblAddtoOrderQuantity.setBounds(360, 260, 122, 15);
 		orderMgmtPanel.add(lblAddtoOrderQuantity);
 		
 		QuantityaddToOrderField = new JTextField();
-		QuantityaddToOrderField.setBounds(409, 265, 40, 19);
+		QuantityaddToOrderField.setBounds(414, 260, 40, 19);
 		orderMgmtPanel.add(QuantityaddToOrderField);
 		QuantityaddToOrderField.setColumns(10);
 		
-		JButton btnAddtoOrder = new JButton("Add to Order");
-		btnAddtoOrder.setBounds(250, 300, 160, 25);
+		JButton btnAddtoOrder = new JButton("Add Quantity to Order");
+		btnAddtoOrder.setFont(new Font("Dialog", Font.BOLD, 10));
+		btnAddtoOrder.setBounds(270, 285, 180, 25);
 		btnAddtoOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int UPC = Integer.parseInt(UPCaddToOrderField.getText());
@@ -597,10 +600,47 @@ public class AppFrame {
 					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid");
 				}
 				txtrOrderReport.setText(register.orderingNeedsCondensedReport());
-				txtrOrderedItems.setText(register.productReport(UPC));
+				txtrOrderedItems.setText(register.pendingOrdersReport());
+				
 			}
 		});
 		orderMgmtPanel.add(btnAddtoOrder);
+		
+		JButton btnRemovefromOrder = new JButton("Remove Quantity from Order");
+		btnRemovefromOrder.setFont(new Font("Dialog", Font.BOLD, 10));
+		btnRemovefromOrder.setBounds(270, 315, 180, 25);
+		btnRemovefromOrder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int UPC = Integer.parseInt(UPCaddToOrderField.getText());
+				int Quantity = Integer.parseInt(QuantityaddToOrderField.getText());
+				try {
+					register.removeItemsfromOrder(UPC, Quantity);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid");
+				}
+				txtrOrderReport.setText(register.orderingNeedsCondensedReport());
+				txtrOrderedItems.setText(register.pendingOrdersReport());
+			}
+		});
+		orderMgmtPanel.add(btnRemovefromOrder);
+		
+		JButton btnReceivefromOrder = new JButton("Receive Quantity from Order");
+		btnReceivefromOrder.setFont(new Font("Dialog", Font.BOLD, 10));
+		btnReceivefromOrder.setBounds(270, 345, 180, 25);
+		btnReceivefromOrder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int UPC = Integer.parseInt(UPCaddToOrderField.getText());
+				int Quantity = Integer.parseInt(QuantityaddToOrderField.getText());
+				try {
+					register.receivePartialOrder(UPC, Quantity);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid");
+				}
+				txtrOrderReport.setText(register.orderingNeedsCondensedReport());
+				txtrOrderedItems.setText(register.pendingOrdersReport());
+			}
+		});
+		orderMgmtPanel.add(btnReceivefromOrder);
 			
 		
 		JLabel lblManagerNotifications2 = new JLabel("Ordering Needs");

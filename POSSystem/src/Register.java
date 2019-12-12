@@ -367,6 +367,11 @@ public class Register {
 	  return inv.orderingNeeds();
   }
   
+  public String pendingOrdersReport() {
+	  Inventory inv = store.getInventory();
+	  return inv.orderedItems();
+  }
+  
   public String orderingNeedsCondensedReport() {
 	  Inventory inv = store.getInventory();
 	  return inv.orderingNeedsCondensed();

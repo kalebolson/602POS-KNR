@@ -123,11 +123,11 @@ public class Inventory {
 	
 	public String orderingNeeds() {
 		String s = "";
-		s+=("Please order more of the following: \nProduct [On-Hand/Threshold]\n\n");
+		s+=("Please order more of the following: \nUPC: Product [On-Hand/Threshold]\n\n");
 		for(Product a: inventory) { 
 			if(a.getTotalQuantity()<a.getThreshold()) { 
 				thresholdReached = true;
-				s+=("   "+a.getProductName() + " ["+ a.getStockedQuantity() + "/" + a.getThreshold() + "]\n");
+				s+=("   "+ a.getUPC() + ": "+a.getProductName() + " ["+ a.getStockedQuantity() + "/" + a.getThreshold() + "]\n");
 			}
 		}
 		s+=("\n\nEnd of ordering needs"); 
@@ -136,11 +136,24 @@ public class Inventory {
 	
 	public String orderingNeedsCondensed() {
 		String s = "";
-		s+=("Product [Amount Needed]\n");
+		s+=("UPC: Product [Amount Needed]\n");
 		for(Product a: inventory) { 
 			if(a.getTotalQuantity()<a.getThreshold()) { 
 				thresholdReached = true;
-				s+=("   "+a.getProductName() + " ["+ a.getAmountNeeded() + "]\n");
+				s+=("   "+ a.getUPC() + ": "+a.getProductName() + " ["+ a.getAmountNeeded() + "]\n");
+			}
+		}
+		return s;
+	}
+	
+	public String orderedItems() {
+		String s = "";
+		s+=("UPC: Product [Quantity Ordered]\n");
+		for(Product a: inventory) { 
+			
+			if(a.getOrderedQuantity()>0) { 
+				thresholdReached = true;
+				s+=("   "+ a.getUPC() + ": "+a.getProductName() + " ["+ a.getOrderedQuantity() + "]\n");
 			}
 		}
 		return s;
