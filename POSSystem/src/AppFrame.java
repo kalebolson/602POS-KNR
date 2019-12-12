@@ -62,6 +62,7 @@ public class AppFrame {
 	private JTextArea txtrOrderedItems; 
 	private JTextArea txtrInvListOrder;
 	private JTextArea txtrInvListInventory;
+	private JTextArea txtrInvListNewItems;
 
 	/**
 	 * Launch the application.
@@ -481,6 +482,7 @@ public class AppFrame {
 			 * and clears username and password fields
 			 */
 			public void actionPerformed(ActionEvent arg0) {
+				txtrInvListNewItems.setText(register.inventoryList());
 				cardLayout.show(containerPanel, "newItemMgmtScreen");
 
 			}
@@ -666,11 +668,14 @@ public class AppFrame {
 		JButton btnAdminNewItem2 = new JButton("Add New Product");
 		btnAdminNewItem2.setBounds(24, 345, 200, 25);
 		btnAdminNewItem2.addActionListener(new ActionListener() {
+			private JLabel txtrInvListnewItem;
+
 			/*
 			 * Switches back to login screen when selecting the logout button
 			 * and clears username and password fields
 			 */
 			public void actionPerformed(ActionEvent arg0) {
+				txtrInvListNewItems.setText(register.inventoryList());
 				cardLayout.show(containerPanel, "newItemMgmtScreen");
 
 			}
@@ -735,6 +740,84 @@ public class AppFrame {
 		lblLoggedInAdmin.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblLoggedInAdmin.setBounds(615, 0, 100, 15);
 		newItemMgmtPanel.add(lblLoggedInAdmin); 
+		
+		JScrollPane scrollPaneinvListnewItems = new JScrollPane();
+		scrollPaneinvListnewItems.setBounds(24, 80, 200, 255);
+		newItemMgmtPanel.add(scrollPaneinvListnewItems);
+
+		txtrInvListNewItems = new JTextArea();
+		txtrInvListNewItems.setEditable(false);
+		scrollPaneinvListnewItems.setViewportView(txtrInvListNewItems);
+		
+		JLabel lblNewItemName= new JLabel("Product Name:");
+		lblNewItemName.setBounds(250, 80, 100, 15);
+		newItemMgmtPanel.add(lblNewItemName);
+		
+		JTextField NIProductNameField = new JTextField();
+		NIProductNameField.setBounds(340, 80, 100, 19);
+		newItemMgmtPanel.add(NIProductNameField);
+		NIProductNameField.setColumns(50);
+		
+		JLabel lblNewItemSupplier= new JLabel("Supplier:");
+		lblNewItemSupplier.setBounds(250, 110, 100, 15);
+		newItemMgmtPanel.add(lblNewItemSupplier);
+		
+		JTextField NISupplierField = new JTextField();
+		NISupplierField.setBounds(340, 110, 100, 19);
+		newItemMgmtPanel.add(NISupplierField);
+		NISupplierField.setColumns(50);
+		
+		JButton btnOrderMgmtNI = new JButton("Ordering and Receiving");
+		btnOrderMgmtNI.setBounds(487, 240, 200, 25);
+		btnOrderMgmtNI.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//register.finalizeSale();
+				txtrOrderReport.setText(register.orderingNeedsCondensedReport());
+				txtrInvListOrder.setText(register.inventoryList());
+				txtrOrderedItems.setText(register.pendingOrdersReport());
+				cardLayout.show(containerPanel, "orderMgmtScreen");
+				
+			}
+		});
+		newItemMgmtPanel.add(btnOrderMgmtNI);
+		
+		JButton btnInvMgmt3 = new JButton("Inventory Mangement");
+		btnInvMgmt3.setBounds(487, 275, 200, 25);
+		btnInvMgmt3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//register.finalizeSale();
+				txtrInvListInventory.setText(register.inventoryList());
+				cardLayout.show(containerPanel, "inventoryMgmtScreen");
+				
+			}
+		});
+		newItemMgmtPanel.add(btnInvMgmt3);
+		
+		JButton btnMainMenu3 = new JButton("Main Menu");
+		btnMainMenu3.setBounds(487, 310, 200, 25);
+		btnMainMenu3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//register.finalizeSale();
+				cardLayout.show(containerPanel, "managerScreen");
+				
+			}
+		});
+		newItemMgmtPanel.add(btnMainMenu3);
+		
+		JButton btnAdminLogout4 = new JButton("Logout");
+		btnAdminLogout4.setBounds(487, 345, 200, 25);
+		btnAdminLogout4.addActionListener(new ActionListener() {
+			/*
+			 * Switches back to login screen when selecting the logout button
+			 * and clears username and password fields
+			 */
+			public void actionPerformed(ActionEvent arg0) {
+				cardLayout.show(containerPanel, "loginScreen");
+				usernameField.setText("");
+				passwordField.setText("");
+			}
+		});
+		newItemMgmtPanel.add(btnAdminLogout4);
 		//*********************END Create newItemMgmtScreen**************************
 		
 		  //****************************************************************************************** 
