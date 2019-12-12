@@ -391,8 +391,9 @@ public class AppFrame {
 				
 			}
 			public void keyReleased(KeyEvent arg0) {
-				int UPC = Integer.parseInt(UPCinvTextField.getText());
+				
 				try {
+					int UPC = Integer.parseInt(UPCinvTextField.getText());
 					txtrInvReport.setText(register.productReport(UPC));
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid UPC");
@@ -428,14 +429,15 @@ public class AppFrame {
 		btnSetThreshold.setBounds(260, 157, 160, 25);
 		btnSetThreshold.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int UPC = Integer.parseInt(UPCinvTextField.getText());
-				int Threshold = Integer.parseInt(setThresholdField.getText());
 				try {
+					int UPC = Integer.parseInt(UPCinvTextField.getText());
+					int Threshold = Integer.parseInt(setThresholdField.getText());
 					register.setThreshold(UPC, Threshold);
+					txtrInvReport.setText(register.productReport(UPC));
 				} catch (Exception e) {
-					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid Threshold");
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Please ensure that the UPC is valid and that the Threshold is a positive whole number");
 				}
-				txtrInvReport.setText(register.productReport(UPC));
+				
 			}
 		});
 		inventoryMgmtPanel.add(btnSetThreshold);
@@ -523,6 +525,7 @@ public class AppFrame {
 		btnMainMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//register.finalizeSale();
+				txtrInvNotifications.setText(register.orderingNeedsReport());
 				cardLayout.show(containerPanel, "managerScreen");
 				
 			}
@@ -699,6 +702,7 @@ public class AppFrame {
 		btnMainMenu2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//register.finalizeSale();
+				txtrInvNotifications.setText(register.orderingNeedsReport());
 				cardLayout.show(containerPanel, "managerScreen");
 				
 			}
@@ -749,11 +753,11 @@ public class AppFrame {
 		txtrInvListNewItems.setEditable(false);
 		scrollPaneinvListnewItems.setViewportView(txtrInvListNewItems);
 		
-		JLabel lblNIAddItems= new JLabel("Add Items");
+		JLabel lblNIAddItems= new JLabel("Add Products");
 		lblNIAddItems.setBounds(250, 52, 122, 15);
 		newItemMgmtPanel.add(lblNIAddItems);
 		
-		JLabel lblNIRemoveItems = new JLabel("Remove Items");
+		JLabel lblNIRemoveItems = new JLabel("Remove Products");
 		lblNIRemoveItems.setBounds(487, 52, 122, 15);
 		newItemMgmtPanel.add(lblNIRemoveItems);
 		
@@ -846,16 +850,13 @@ public class AppFrame {
 		btnNIRemovefromInv.setFont(new Font("Dialog", Font.BOLD, 10));
 		btnNIRemovefromInv.setBounds(493, 110, 180, 25);
 		btnNIRemovefromInv.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				int UPC = Integer.parseInt(NIRemoveUPCField.getText());
-				
+			public void actionPerformed(ActionEvent arg0) {			
 				try {
+					int UPC = Integer.parseInt(NIRemoveUPCField.getText());
 					register.removeProductType(UPC);
 					System.out.println("Possibly worked");
 				} catch (Exception e) {
-					e.printStackTrace();
-					System.out.println("No");
-					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid");
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Please enter a valid UPC");
 					
 				}
 				NIRemoveUPCField.setText("");
@@ -899,6 +900,7 @@ public class AppFrame {
 		btnMainMenu3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//register.finalizeSale();
+				txtrInvNotifications.setText(register.orderingNeedsReport());
 				cardLayout.show(containerPanel, "managerScreen");
 				
 			}
@@ -920,6 +922,12 @@ public class AppFrame {
 		});
 		newItemMgmtPanel.add(btnAdminLogout4);
 		//*********************END Create newItemMgmtScreen**************************
+		
+		
+		//*********************Create storeFunctionScreen****************************
+		
+		
+		//*********************END Create storeFunctionScreen************************
 		
 		  //****************************************************************************************** 
 		  //END Manager UI 
