@@ -43,6 +43,7 @@ public class AppFrame {
 	private JLabel lblLoggedInAs_1;
 	private JLabel lblLoggedInAdmin;
 	private JLabel lblNewSale;
+	private JLabel lblNewItemMgmtMenu;
 	private JTextField UPCtextField;
 	private JTextArea txtrReceipt;
 	private JTextField transactionIDCSField;
@@ -55,6 +56,8 @@ public class AppFrame {
 	private JTextField setThresholdField;
 	private JTextField setPriceField;
 	private JTextField cashierXField;
+	private JTextField UPCaddToOrderField;
+	private JTextField QuantityaddToOrderField;
 	private JTextArea txtrOrderReport;
 	private JTextArea txtrOrderedItems; 
 	private JTextArea txtrInvListOrder;
@@ -548,6 +551,9 @@ public class AppFrame {
 		lblItemUpcList3.setBounds(24, 52, 122, 15);
 		orderMgmtPanel.add(lblItemUpcList3);
 
+		JLabel lblPendingOrders = new JLabel("Ordered Items");
+		lblPendingOrders.setBounds(250, 52, 122, 15);
+		orderMgmtPanel.add(lblPendingOrders);
 		
 		JScrollPane scrollPane6 = new JScrollPane();
 		scrollPane6.setBounds(250, 80, 220, 150);
@@ -556,6 +562,46 @@ public class AppFrame {
 		txtrOrderedItems = new JTextArea();
 		txtrOrderedItems.setEditable(false);
 		scrollPane6.setViewportView(txtrOrderedItems);
+		
+		JLabel lblAddtoOrder = new JLabel("Add to Order");
+		lblAddtoOrder.setBounds(250, 245, 122, 15);
+		orderMgmtPanel.add(lblAddtoOrder);
+		
+		JLabel lblAddtoOrderUPC = new JLabel("UPC:");
+		lblAddtoOrderUPC.setBounds(255, 265, 100, 15);
+		orderMgmtPanel.add(lblAddtoOrderUPC);
+		
+		UPCaddToOrderField = new JTextField();
+		UPCaddToOrderField.setBounds(285, 265, 40, 19);
+		orderMgmtPanel.add(UPCaddToOrderField);
+		UPCaddToOrderField.setColumns(10);
+		
+		JLabel lblAddtoOrderQuantity = new JLabel("Quantity:");
+		lblAddtoOrderQuantity.setBounds(355, 265, 122, 15);
+		orderMgmtPanel.add(lblAddtoOrderQuantity);
+		
+		QuantityaddToOrderField = new JTextField();
+		QuantityaddToOrderField.setBounds(409, 265, 40, 19);
+		orderMgmtPanel.add(QuantityaddToOrderField);
+		QuantityaddToOrderField.setColumns(10);
+		
+		JButton btnAddtoOrder = new JButton("Add to Order");
+		btnAddtoOrder.setBounds(250, 300, 160, 25);
+		btnAddtoOrder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int UPC = Integer.parseInt(UPCaddToOrderField.getText());
+				int Quantity = Integer.parseInt(QuantityaddToOrderField.getText());
+				try {
+					register.addItemstoOrder(UPC, Quantity);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid");
+				}
+				txtrOrderReport.setText(register.orderingNeedsCondensedReport());
+				txtrOrderedItems.setText(register.productReport(UPC));
+			}
+		});
+		orderMgmtPanel.add(btnAddtoOrder);
+			
 		
 		JLabel lblManagerNotifications2 = new JLabel("Ordering Needs");
 		lblManagerNotifications2.setBounds(487, 52, 122, 15);
@@ -636,19 +682,19 @@ public class AppFrame {
 		containerPanel.add(newItemMgmtPanel, "newItemMgmtScreen");
 		newItemMgmtPanel.setLayout(null);
 		
-		//lblInvMgmtMenu = new JLabel("Ordering and Receiving");
-		//lblInvMgmtMenu.setFont(new Font("Dialog", Font.BOLD, 14));
-		//lblInvMgmtMenu.setBounds(250, 28, 250, 18);
-		//newItemMgmtPanel.add(lblInvMgmtMenu);
+		lblNewItemMgmtMenu = new JLabel("Add New Item to Inventory");
+		lblNewItemMgmtMenu.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblNewItemMgmtMenu.setBounds(250, 28, 250, 18);
+		newItemMgmtPanel.add(lblNewItemMgmtMenu);
 		
-		//lblLoggedInAs_1 = new JLabel("Logged in as:");
-		//lblLoggedInAs_1.setBounds(506, 0, 112, 15);
-		//newItemMgmtPanel.add(lblLoggedInAs_1);
+		lblLoggedInAs_1 = new JLabel("Logged in as:");
+		lblLoggedInAs_1.setBounds(506, 0, 112, 15);
+		newItemMgmtPanel.add(lblLoggedInAs_1);
 		
-		//lblLoggedInAdmin = new JLabel("Default");
-		//lblLoggedInAdmin.setFont(new Font("Dialog", Font.PLAIN, 12));
-		//lblLoggedInAdmin.setBounds(615, 0, 100, 15);
-		//newItemMgmtPanel.add(lblLoggedInAdmin); 
+		lblLoggedInAdmin = new JLabel("Default");
+		lblLoggedInAdmin.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblLoggedInAdmin.setBounds(615, 0, 100, 15);
+		newItemMgmtPanel.add(lblLoggedInAdmin); 
 		//*********************END Create newItemMgmtScreen**************************
 		
 		  //****************************************************************************************** 
