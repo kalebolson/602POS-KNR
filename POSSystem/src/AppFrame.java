@@ -419,7 +419,11 @@ public class AppFrame {
 					int UPC = Integer.parseInt(UPCinvTextField.getText());
 					txtrInvReport.setText(register.productReport(UPC));
 				} catch (Exception e) {
-					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid UPC");
+					if (UPCinvTextField.getText().equalsIgnoreCase("")) {
+						
+					}
+					else
+						JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid UPC");
 				}
 			}
 			@Override
