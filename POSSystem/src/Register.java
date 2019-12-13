@@ -434,14 +434,18 @@ public class Register {
 	try {
 		c = store.getCashier(ID);
 	    String s = "";
-	    s+=c.getID()+" | "+c.getFirstName()+" | "+c.getLastName()+"\n";
-	    s+="In: "+c.getShift().getTimein()+" | ";
-	    s+="Out: "+c.getShift().getTimeout()+"\n";
-	    ArrayList<Event> events = c.getShift().getEvents();
-	    for (int i=0;i<events.size();i++){
-	      s+=events.get(i)+"\n";
+	    if (dtf.format(now).equals(c.getShift().getTimein().substring(0, 10))) {
+	    	s+=c.getID()+" | "+c.getFirstName()+" | "+c.getLastName()+"\n";
+		    s+="In: "+c.getShift().getTimein()+" | ";
+		    s+="Out: "+c.getShift().getTimeout()+"\n";
+		    ArrayList<Event> events = c.getShift().getEvents();
+		    for (int i=0;i<events.size();i++){
+		      s+=events.get(i)+"\n";
+		    }
+		    s+="\n";
+	    } else {
+	    	s+="Cashier "+ID+" has no shift today. \n";
 	    }
-	    s+="\n";
 	    return s;
 	} catch (InvalidIDException e) {
 		return "No cashier found with that ID number";

@@ -1269,10 +1269,12 @@ public class AppFrame {
 		
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int username = Integer.parseInt(usernameField.getText());
-				String password = passwordField.getText();
+				int username;
+				String password;
 				
 				try {
+					username = Integer.parseInt(usernameField.getText());
+					password = passwordField.getText();
 					if (register.unlock(username, password) && store.getCashier(username).isAdmin()) {
 						JOptionPane.showMessageDialog(frmPosSystemLogin, "Login Successful");
 						lblLoggedInAdmin.setText(store.getCashier(username).getFirstName() + " " + store.getCashier(username).getLastName());
@@ -1294,16 +1296,14 @@ public class AppFrame {
 						JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid Username or Password");
 					}
 				} catch (NumberFormatException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid Username or Password");
 				} catch (HeadlessException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (InvalidIDException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid Username or Password");
 				} catch (IOException e) {
-					e.printStackTrace();
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "File Error, contact support");
 				}
 			}
 		});
