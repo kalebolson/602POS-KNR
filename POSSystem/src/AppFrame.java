@@ -1013,6 +1013,7 @@ public class AppFrame {
 				try {
 					int UPC = Integer.parseInt(UPCtextField.getText());
 					register.addToSale(UPC);
+					register.removeItemsFromInventory(UPC);
 				} catch (InvalidIDException e) {
 					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid UPC");
 				} catch (NumberFormatException e) {
@@ -1031,6 +1032,7 @@ public class AppFrame {
 				try {
 					int UPC = Integer.parseInt(UPCtextField.getText());
 					register.removeFromSale(UPC);
+					register.addItemstoInventory(UPC);
 				} catch (InvalidIDException e) {
 					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid UPC");
 				} catch (NumberFormatException e) {
