@@ -69,9 +69,9 @@ public class Register {
 	  Cashier c;
 	  try {
 		  c = store.getCashier(ID);  
-		  System.out.println(""+c);
-		  System.out.println(""+ID);
-		  System.out.println(""+ c.checkPassword(PW));
+		  //System.out.println(""+c);
+		 // System.out.println(""+ID);
+		  //System.out.println(""+ c.checkPassword(PW));
 	  } catch (InvalidIDException e) {
 		  return false;
 	  }

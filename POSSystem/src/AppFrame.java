@@ -51,6 +51,7 @@ public class AppFrame {
 	private JTextField UPCtextField;
 	private JTextArea txtrReceipt;
 	private JTextArea txtrSFCashier;
+	private JTextArea txtrSFRegister;
 	private JTextField transactionIDCSField;
 	private JTextField transactionIDRIField;
 	private JTextField upcRIField;
@@ -548,6 +549,19 @@ public class AppFrame {
 		});
 		inventoryMgmtPanel.add(btnAdminLogout2);
 		
+		JButton btnStoreFunctions2 = new JButton("Store Functions");
+		btnStoreFunctions2.setBounds(487, 240, 200, 25);
+		btnStoreFunctions2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//register.finalizeSale();
+				txtrReporting.setText("");
+				txtrSFCashier.setText(register.CashierReportFullCondensed());
+				cardLayout.show(containerPanel, "storeFunctionScreen");
+				
+			}
+		});
+		inventoryMgmtPanel.add(btnStoreFunctions2);		
+		
 		JButton btnOrderMgmt2 = new JButton("Ordering and Receiving");
 		btnOrderMgmt2.setBounds(487, 275, 200, 25);
 		btnOrderMgmt2.addActionListener(new ActionListener() {
@@ -727,6 +741,19 @@ public class AppFrame {
 			}
 		});
 		orderMgmtPanel.add(btnAdminNewItem2);
+		
+		JButton btnStoreFunctions3 = new JButton("Store Functions");
+		btnStoreFunctions3.setBounds(487, 240, 200, 25);
+		btnStoreFunctions3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//register.finalizeSale();
+				txtrReporting.setText("");
+				txtrSFCashier.setText(register.CashierReportFullCondensed());
+				cardLayout.show(containerPanel, "storeFunctionScreen");
+				
+			}
+		});
+		orderMgmtPanel.add(btnStoreFunctions3);		
 		
 		JButton btnInvMgmt2 = new JButton("Inventory Mangement");
 		btnInvMgmt2.setBounds(487, 275, 200, 25);
@@ -987,9 +1014,37 @@ public class AppFrame {
 		lblLoggedInAdmin.setBounds(615, 0, 100, 15);
 		storeFunctionPanel.add(lblLoggedInAdmin); 
 		
-		JLabel lblSFRegisters = new JLabel("Register Functions");
+		JLabel lblSFRegisters = new JLabel("Manage Cashiers");
 		lblSFRegisters.setBounds(24, 52, 122, 15);
 		storeFunctionPanel.add(lblSFRegisters);
+		
+		JLabel lblSFRemoveID = new JLabel("Cashier ID:");
+		lblSFRemoveID.setBounds(24, 81, 122, 15);
+		storeFunctionPanel.add(lblSFRemoveID);
+		
+		JTextField SFRemoveField = new JTextField();
+		SFRemoveField.setBounds(100, 81, 80, 19);
+		storeFunctionPanel.add(SFRemoveField);
+		SFRemoveField.setColumns(10);
+		
+		JButton btnSFRemoveCashier = new JButton("Remove Cashier");
+		btnSFRemoveCashier.setFont(new Font("Dialog", Font.BOLD, 10));
+		btnSFRemoveCashier.setBounds(24, 110, 155, 25);
+		btnSFRemoveCashier.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				try {
+					int id = Integer.parseInt(SFRemoveField.getText());
+					register.removeCashier(id);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Please type 'true' or 'false' into the 'Is Admin?' Field");
+				}
+				SFRemoveField.setText("");
+				txtrSFCashier.setText(register.CashierReportFullCondensed());
+		
+			}
+		});
+		storeFunctionPanel.add(btnSFRemoveCashier);
 		
 		JLabel lblSFFirstName = new JLabel("First Name:");
 		lblSFFirstName.setBounds(228, 81, 122, 15);
@@ -1056,37 +1111,11 @@ public class AppFrame {
 		});
 		storeFunctionPanel.add(btnSFAddNewCashier);
 		
-		JLabel lblSFRemoveID = new JLabel("Cashier ID:");
-		lblSFRemoveID.setBounds(228, 280, 122, 15);
-		storeFunctionPanel.add(lblSFRemoveID);
-		
-		JTextField SFRemoveField = new JTextField();
-		SFRemoveField.setBounds(340, 280, 100, 19);
-		storeFunctionPanel.add(SFRemoveField);
-		SFRemoveField.setColumns(10);
-		
-		JButton btnSFRemoveCashier = new JButton("Remove Cashier");
-		btnSFRemoveCashier.setFont(new Font("Dialog", Font.BOLD, 10));
-		btnSFRemoveCashier.setBounds(255, 315, 180, 25);
-		btnSFRemoveCashier.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
 
-				try {
-					int id = Integer.parseInt(SFRemoveField.getText());
-					register.removeCashier(id);
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(frmPosSystemLogin, "Please type 'true' or 'false' into the 'Is Admin?' Field");
-				}
-				SFRemoveField.setText("");
-				txtrSFCashier.setText(register.CashierReportFullCondensed());
-		
-			}
-		});
-		storeFunctionPanel.add(btnSFRemoveCashier);
 				
-		JLabel lblSFCashiers= new JLabel("Manage Cashiers");
-		lblSFCashiers.setBounds(250, 52, 122, 15);
-		storeFunctionPanel.add(lblSFCashiers);
+		//JLabel lblSFCashiers= new JLabel("Add Cashiers");
+		//lblSFCashiers.setBounds(250, 52, 122, 15);
+		//storeFunctionPanel.add(lblSFCashiers);
 		
 		JScrollPane scrollPaneSF1 = new JScrollPane();
 		scrollPaneSF1.setBounds(487, 80, 200, 150);
@@ -1096,6 +1125,7 @@ public class AppFrame {
 		txtrSFCashier.setEditable(false);
 		scrollPaneSF1.setViewportView(txtrSFCashier);
 		
+
 		JButton btnOrderMgmtSF = new JButton("Ordering and Receiving");
 		btnOrderMgmtSF.setBounds(487, 240, 200, 25);
 		btnOrderMgmtSF.addActionListener(new ActionListener() {
