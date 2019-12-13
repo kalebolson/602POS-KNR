@@ -374,7 +374,7 @@ public class AppFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					int ID = Integer.parseInt(cashierXField.getText());
-					System.out.println("Action Listened to");
+					//System.out.println("Action Listened to");
 					txtrReporting.setText(register.CashierReportX(ID));
 				} catch (NumberFormatException e) {
 					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid Cashier No.");
@@ -1203,6 +1203,7 @@ public class AppFrame {
 		btnReturnItemRI.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
+					int UPC = Integer.parseInt(upcRIField.getText());
 					BigDecimal salesTax = new BigDecimal("0.07875");
 					BigDecimal itemPrice = new BigDecimal(String.valueOf(register.getCurrentTransaction().getPrice(Integer.parseInt(upcRIField.getText()))));
 					itemPrice = itemPrice.add(itemPrice.multiply(salesTax));
@@ -1211,6 +1212,7 @@ public class AppFrame {
 							+ df.format(itemPrice) 
 							+ " to the customer for this transaction.");
 					register.finalizeReturn(Integer.parseInt(upcRIField.getText()));
+					register.addItemstoInventory(UPC);
 				} catch (NumberFormatException e) {
 					JOptionPane.showMessageDialog(frmPosSystemLogin, "UPC Field Empty");
 				} catch (InvalidIDException e) {
