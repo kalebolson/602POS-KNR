@@ -1066,7 +1066,8 @@ public class AppFrame {
 		SFLastNameField.setColumns(50);
 		
 		JLabel lblSFPassword= new JLabel("Password:");
-		lblSFPassword.setBounds(231, 142, 66, 15);
+		lblSFPassword.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblSFPassword.setBounds(231, 142, 100, 15);
 		storeFunctionPanel.add(lblSFPassword);
 		
 		JTextField SFPasswordField = new JTextField();
@@ -1075,7 +1076,7 @@ public class AppFrame {
 		SFPasswordField.setColumns(50);
 		
 		JLabel lblSFIsAdmin= new JLabel("Is Admin?:");
-		lblSFIsAdmin.setBounds(232, 174, 66, 15);
+		lblSFIsAdmin.setBounds(232, 174, 99, 15);
 		storeFunctionPanel.add(lblSFIsAdmin);
 		
 		JTextField SFIsAdminField = new JTextField();
