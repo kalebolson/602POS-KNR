@@ -122,10 +122,15 @@ public class Register {
   public void finalizeSale() throws IOException, InvalidIDException {
 	  for (Product p : currentTransaction.getCart()) {
 		  store.getInventory().removeItemsFromInventory(p.getUPC(), 1);
+		  try {
+			  store.updateInventoryFile(); 
+		  }catch(IOException e2) { 
+			  e2.printStackTrace();
+		  }
 	  }
 	  try {
 		store.addTransaction(currentTransaction);
-		store.updateInventoryFile();
+		//store.updateInventoryFile();
 		addCash(currentTransaction.getTotal());
 	  } catch (IOException e) {
 		// TODO Auto-generated catch block
