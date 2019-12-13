@@ -40,14 +40,18 @@ public class AppFrame {
 	private JPanel inventoryMgmtPanel;
 	private JPanel orderMgmtPanel; 
 	private JPanel newItemMgmtPanel;
+	private JPanel storeFunctionPanel;
 	private JLabel lblAdministratorMenu;
 	private JLabel lblInvMgmtMenu;
 	private JLabel lblLoggedInAs_1;
 	private JLabel lblLoggedInAdmin;
 	private JLabel lblNewSale;
 	private JLabel lblNewItemMgmtMenu;
+	private JLabel lblstoreFunctionsMenu;
 	private JTextField UPCtextField;
 	private JTextArea txtrReceipt;
+	private JTextArea txtrSFCashier;
+	private JTextArea txtrSFRegister;
 	private JTextField transactionIDCSField;
 	private JTextField transactionIDRIField;
 	private JTextField upcRIField;
@@ -256,7 +260,9 @@ public class AppFrame {
 		btnStoreFunctions.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//register.finalizeSale();
-				cardLayout.show(containerPanel, "inventoryMgmtScreen");
+				txtrReporting.setText("");
+				txtrSFCashier.setText(register.CashierReportFullCondensed());
+				cardLayout.show(containerPanel, "storeFunctionScreen");
 				
 			}
 		});
@@ -267,6 +273,7 @@ public class AppFrame {
 		btnOrderMgmt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//register.finalizeSale();
+				txtrReporting.setText("");
 				txtrOrderReport.setText(register.orderingNeedsCondensedReport());
 				txtrInvListOrder.setText(register.inventoryList());
 				txtrOrderedItems.setText(register.pendingOrdersReport());
@@ -281,6 +288,7 @@ public class AppFrame {
 		btnInventoryMgmt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//register.finalizeSale();
+				txtrReporting.setText("");
 				txtrInvListInventory.setText(register.inventoryList());
 				cardLayout.show(containerPanel, "inventoryMgmtScreen");
 				
@@ -301,6 +309,7 @@ public class AppFrame {
 				} catch (IOException e) {
 					JOptionPane.showMessageDialog(frmPosSystemLogin, "Error writing logout event to file");
 				}
+				txtrReporting.setText("");
 				cardLayout.show(containerPanel, "loginScreen");
 				usernameField.setText("");
 				passwordField.setText("");
@@ -540,6 +549,19 @@ public class AppFrame {
 		});
 		inventoryMgmtPanel.add(btnAdminLogout2);
 		
+		JButton btnStoreFunctions2 = new JButton("Store Functions");
+		btnStoreFunctions2.setBounds(487, 240, 200, 25);
+		btnStoreFunctions2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//register.finalizeSale();
+				txtrReporting.setText("");
+				txtrSFCashier.setText(register.CashierReportFullCondensed());
+				cardLayout.show(containerPanel, "storeFunctionScreen");
+				
+			}
+		});
+		inventoryMgmtPanel.add(btnStoreFunctions2);		
+		
 		JButton btnOrderMgmt2 = new JButton("Ordering and Receiving");
 		btnOrderMgmt2.setBounds(487, 275, 200, 25);
 		btnOrderMgmt2.addActionListener(new ActionListener() {
@@ -720,6 +742,19 @@ public class AppFrame {
 		});
 		orderMgmtPanel.add(btnAdminNewItem2);
 		
+		JButton btnStoreFunctions3 = new JButton("Store Functions");
+		btnStoreFunctions3.setBounds(487, 240, 200, 25);
+		btnStoreFunctions3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//register.finalizeSale();
+				txtrReporting.setText("");
+				txtrSFCashier.setText(register.CashierReportFullCondensed());
+				cardLayout.show(containerPanel, "storeFunctionScreen");
+				
+			}
+		});
+		orderMgmtPanel.add(btnStoreFunctions3);		
+		
 		JButton btnInvMgmt2 = new JButton("Inventory Mangement");
 		btnInvMgmt2.setBounds(487, 275, 200, 25);
 		btnInvMgmt2.addActionListener(new ActionListener() {
@@ -807,7 +842,7 @@ public class AppFrame {
 		
 		JLabel lblNewItemName= new JLabel("Product Name:");
 		lblNewItemName.setFont(new Font("Dialog", Font.BOLD, 12));
-		lblNewItemName.setBounds(228, 81, 122, 15);
+		lblNewItemName.setBounds(233, 81, 122, 15);
 		newItemMgmtPanel.add(lblNewItemName);
 		
 		JTextField NIProductNameField = new JTextField();
@@ -825,7 +860,7 @@ public class AppFrame {
 		NISupplierField.setColumns(50);
 		
 		JLabel lblNewItemPrice= new JLabel("Price:");
-		lblNewItemPrice.setBounds(284, 142, 66, 15);
+		lblNewItemPrice.setBounds(283, 142, 66, 15);
 		newItemMgmtPanel.add(lblNewItemPrice);
 		
 		JTextField NIPriceField = new JTextField();
@@ -834,7 +869,7 @@ public class AppFrame {
 		NIPriceField.setColumns(50);
 		
 		JLabel lblNewItemQuantity= new JLabel("# On-Hand:");
-		lblNewItemQuantity.setBounds(250, 170, 88, 15);
+		lblNewItemQuantity.setBounds(254, 170, 88, 15);
 		newItemMgmtPanel.add(lblNewItemQuantity);
 		
 		JTextField NIQuantityField = new JTextField();
@@ -961,7 +996,188 @@ public class AppFrame {
 		
 		
 		//*********************Create storeFunctionScreen****************************
+		storeFunctionPanel = new JPanel();
+		containerPanel.add(storeFunctionPanel, "storeFunctionScreen");
+		storeFunctionPanel.setLayout(null);
 		
+		lblstoreFunctionsMenu = new JLabel("Store Functions");
+		lblstoreFunctionsMenu.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblstoreFunctionsMenu.setBounds(250, 28, 250, 18);
+		storeFunctionPanel.add(lblstoreFunctionsMenu);
+		
+		lblLoggedInAs_1 = new JLabel("Logged in as:");
+		lblLoggedInAs_1.setBounds(506, 0, 112, 15);
+		storeFunctionPanel.add(lblLoggedInAs_1);
+		
+		lblLoggedInAdmin = new JLabel("Default");
+		lblLoggedInAdmin.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblLoggedInAdmin.setBounds(615, 0, 100, 15);
+		storeFunctionPanel.add(lblLoggedInAdmin); 
+		
+		JLabel lblSFRegisters = new JLabel("Manage Cashiers");
+		lblSFRegisters.setBounds(24, 52, 122, 15);
+		storeFunctionPanel.add(lblSFRegisters);
+		
+		JLabel lblSFRemoveID = new JLabel("Cashier ID:");
+		lblSFRemoveID.setBounds(24, 81, 122, 15);
+		storeFunctionPanel.add(lblSFRemoveID);
+		
+		JTextField SFRemoveField = new JTextField();
+		SFRemoveField.setBounds(100, 81, 80, 19);
+		storeFunctionPanel.add(SFRemoveField);
+		SFRemoveField.setColumns(10);
+		
+		JButton btnSFRemoveCashier = new JButton("Remove Cashier");
+		btnSFRemoveCashier.setFont(new Font("Dialog", Font.BOLD, 10));
+		btnSFRemoveCashier.setBounds(24, 110, 155, 25);
+		btnSFRemoveCashier.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				try {
+					int id = Integer.parseInt(SFRemoveField.getText());
+					register.removeCashier(id);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Please type 'true' or 'false' into the 'Is Admin?' Field");
+				}
+				SFRemoveField.setText("");
+				txtrSFCashier.setText(register.CashierReportFullCondensed());
+		
+			}
+		});
+		storeFunctionPanel.add(btnSFRemoveCashier);
+		
+		JLabel lblSFFirstName = new JLabel("First Name:");
+		lblSFFirstName.setBounds(228, 81, 122, 15);
+		storeFunctionPanel.add(lblSFFirstName);
+		
+		JTextField SFFirstNameField = new JTextField();
+		SFFirstNameField.setBounds(340, 80, 100, 19);
+		storeFunctionPanel.add(SFFirstNameField);
+		SFFirstNameField.setColumns(10);
+		
+		JLabel lblSFLastName= new JLabel("Last Name:");
+		lblSFLastName.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblSFLastName.setBounds(228, 108, 83, 15);
+		storeFunctionPanel.add(lblSFLastName);
+		
+		JTextField SFLastNameField = new JTextField();
+		SFLastNameField.setBounds(340, 110, 100, 19);
+		storeFunctionPanel.add(SFLastNameField);
+		SFLastNameField.setColumns(50);
+		
+		JLabel lblSFPassword= new JLabel("Password:");
+		lblSFPassword.setBounds(231, 142, 66, 15);
+		storeFunctionPanel.add(lblSFPassword);
+		
+		JTextField SFPasswordField = new JTextField();
+		SFPasswordField.setBounds(340, 140, 100, 19);
+		storeFunctionPanel.add(SFPasswordField);
+		SFPasswordField.setColumns(50);
+		
+		JLabel lblSFIsAdmin= new JLabel("Is Admin?:");
+		lblSFIsAdmin.setBounds(232, 174, 66, 15);
+		storeFunctionPanel.add(lblSFIsAdmin);
+		
+		JTextField SFIsAdminField = new JTextField();
+		SFIsAdminField.setBounds(340, 170, 100, 19);
+		storeFunctionPanel.add(SFIsAdminField);
+		SFIsAdminField.setColumns(50);
+		
+		JButton btnSFAddNewCashier = new JButton("Add New Cashier");
+		btnSFAddNewCashier.setFont(new Font("Dialog", Font.BOLD, 10));
+		btnSFAddNewCashier.setBounds(255, 205, 180, 25);
+		btnSFAddNewCashier.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				try {
+					boolean admin = Boolean.parseBoolean(SFIsAdminField.getText());
+					String FirstName = SFFirstNameField.getText();
+					String LastName = SFLastNameField.getText();
+					String Password = SFPasswordField.getText();
+					//register.addItemstoOrder(UPC, Quantity);
+					//register.addnewItem(ProductName, ProductSupplier, Price, Quantity, Threshold);
+					register.addCashier(Password, FirstName, LastName, admin);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Please type 'true' or 'false' into the 'Is Admin?' Field");
+				}
+				SFFirstNameField.setText("");
+				SFLastNameField.setText("");
+				SFPasswordField.setText("");
+				SFIsAdminField.setText("");
+				txtrSFCashier.setText(register.CashierReportFullCondensed());
+				
+							
+			}
+		});
+		storeFunctionPanel.add(btnSFAddNewCashier);
+		
+
+				
+		//JLabel lblSFCashiers= new JLabel("Add Cashiers");
+		//lblSFCashiers.setBounds(250, 52, 122, 15);
+		//storeFunctionPanel.add(lblSFCashiers);
+		
+		JScrollPane scrollPaneSF1 = new JScrollPane();
+		scrollPaneSF1.setBounds(487, 80, 200, 150);
+		storeFunctionPanel.add(scrollPaneSF1);
+		
+		txtrSFCashier = new JTextArea();
+		txtrSFCashier.setEditable(false);
+		scrollPaneSF1.setViewportView(txtrSFCashier);
+		
+
+		JButton btnOrderMgmtSF = new JButton("Ordering and Receiving");
+		btnOrderMgmtSF.setBounds(487, 240, 200, 25);
+		btnOrderMgmtSF.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//register.finalizeSale();
+				txtrOrderReport.setText(register.orderingNeedsCondensedReport());
+				txtrInvListOrder.setText(register.inventoryList());
+				txtrOrderedItems.setText(register.pendingOrdersReport());
+				cardLayout.show(containerPanel, "orderMgmtScreen");
+				
+			}
+		});
+		storeFunctionPanel.add(btnOrderMgmtSF);
+		
+		JButton btnInvMgmtSF = new JButton("Inventory Mangement");
+		btnInvMgmtSF.setBounds(487, 275, 200, 25);
+		btnInvMgmtSF.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//register.finalizeSale();
+				txtrInvListInventory.setText(register.inventoryList());
+				cardLayout.show(containerPanel, "inventoryMgmtScreen");
+				
+			}
+		});
+		storeFunctionPanel.add(btnInvMgmtSF);
+		
+		JButton btnMainMenuSF = new JButton("Main Menu");
+		btnMainMenuSF.setBounds(487, 310, 200, 25);
+		btnMainMenuSF.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//register.finalizeSale();
+				txtrInvNotifications.setText(register.orderingNeedsReport());
+				cardLayout.show(containerPanel, "managerScreen");
+				
+			}
+		});
+		storeFunctionPanel.add(btnMainMenuSF);
+		
+		JButton btnAdminLogoutSF = new JButton("Logout");
+		btnAdminLogoutSF.setBounds(487, 345, 200, 25);
+		btnAdminLogoutSF.addActionListener(new ActionListener() {
+			/*
+			 * Switches back to login screen when selecting the logout button
+			 * and clears username and password fields
+			 */
+			public void actionPerformed(ActionEvent arg0) {
+				cardLayout.show(containerPanel, "loginScreen");
+				usernameField.setText("");
+				passwordField.setText("");
+			}
+		});
+		storeFunctionPanel.add(btnAdminLogoutSF);
 		
 		//*********************END Create storeFunctionScreen************************
 		
@@ -1013,7 +1229,7 @@ public class AppFrame {
 				try {
 					int UPC = Integer.parseInt(UPCtextField.getText());
 					register.addToSale(UPC);
-					register.removeItemsFromInventory(UPC);
+					//register.removeItemsFromInventory(UPC);
 				} catch (InvalidIDException e) {
 					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid UPC");
 				} catch (NumberFormatException e) {

@@ -69,6 +69,9 @@ public class Register {
 	  Cashier c;
 	  try {
 		  c = store.getCashier(ID);  
+		  //System.out.println(""+c);
+		 // System.out.println(""+ID);
+		  //System.out.println(""+ c.checkPassword(PW));
 	  } catch (InvalidIDException e) {
 		  return false;
 	  }
@@ -76,10 +79,15 @@ public class Register {
 	  if (c.checkPassword(PW)) {
 		  currentCashier = c;
 		  try {
-			  if (!dtf.format(now).equals(c.getShift().getTimein().substring(0, 10))) {
+			  if (c.getShift() == null) { 
 				  c.setShift();
 				  store.updateCashierFile();
 			  }
+			  else if (!dtf.format(now).equals(c.getShift().getTimein().substring(0, 10))) {
+				  c.setShift();
+				  store.updateCashierFile();
+			  }
+			  else return true;
 		  } catch (IndexOutOfBoundsException e) {}
 		  return true;
 	  } else {
@@ -122,10 +130,15 @@ public class Register {
   public void finalizeSale() throws IOException, InvalidIDException {
 	  for (Product p : currentTransaction.getCart()) {
 		  store.getInventory().removeItemsFromInventory(p.getUPC(), 1);
+		  try {
+			  store.updateInventoryFile(); 
+		  }catch(IOException e2) { 
+			  e2.printStackTrace();
+		  }
 	  }
 	  try {
 		store.addTransaction(currentTransaction);
-		store.updateInventoryFile();
+		//store.updateInventoryFile();
 		addCash(currentTransaction.getTotal());
 	  } catch (IOException e) {
 		// TODO Auto-generated catch block
@@ -453,6 +466,29 @@ public class Register {
 		return "Cashier "+ID+" has no shift on record \n";
 	}
   }
+  
+  public String CashierReportCondensed(int ID){
+	    Cashier c;
+		try {
+			c = store.getCashier(ID);
+		    String s = "";
+		    s+=c.getID()+" | "+c.getFirstName()+" | "+c.getLastName() + "\n";
+		    return s;
+		} catch (InvalidIDException e) {
+			return "No cashier found with that ID number";
+		} catch (NullPointerException e) {
+			return "Cashier "+ID+" has no shift on record \n";
+		}
+	  }
+  
+  public String CashierReportFullCondensed(){
+	    String s = "";
+	    ArrayList<Cashier> cashiers = store.getCashiers();
+	    for (Cashier c : cashiers) {
+	    	s+=CashierReportCondensed(c.getID()); //Z report is just an X report for all cashiers
+	    }
+	    return s;
+	  }
 
   public String CashierReportZ(){
     String s = "";
