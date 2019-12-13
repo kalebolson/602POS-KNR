@@ -83,8 +83,13 @@ public class Cashier {
   public Shift getShift(){
 	  if (shifts.size()!=0)
 		  return shifts.get(shifts.size()-1);
-	  else
-		  return null;
+	//  else if (shifts.size() == 0) {
+	//	  shifts.add(new Shift());
+	//  	  return shifts.get(shifts.size()-1);
+	//  }
+	  else return null;
+
+		  
   }
 
   public Shift getShift(int i){

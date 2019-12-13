@@ -69,6 +69,9 @@ public class Register {
 	  Cashier c;
 	  try {
 		  c = store.getCashier(ID);  
+		  System.out.println(""+c);
+		  System.out.println(""+ID);
+		  System.out.println(""+ c.checkPassword(PW));
 	  } catch (InvalidIDException e) {
 		  return false;
 	  }
@@ -76,10 +79,15 @@ public class Register {
 	  if (c.checkPassword(PW)) {
 		  currentCashier = c;
 		  try {
-			  if (!dtf.format(now).equals(c.getShift().getTimein().substring(0, 10))) {
+			  if (c.getShift() == null) { 
 				  c.setShift();
 				  store.updateCashierFile();
 			  }
+			  else if (!dtf.format(now).equals(c.getShift().getTimein().substring(0, 10))) {
+				  c.setShift();
+				  store.updateCashierFile();
+			  }
+			  else return true;
 		  } catch (IndexOutOfBoundsException e) {}
 		  return true;
 	  } else {
