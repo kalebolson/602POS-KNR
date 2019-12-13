@@ -123,7 +123,7 @@ public class Register {
 	  currentTransaction.removeFromSale(UPC);
   }
   
-  public String calculateSale() {
+  public String calculateSale() throws NullPointerException {
 	  return currentTransaction.toString();
   }
   
@@ -160,6 +160,9 @@ public class Register {
 	    } else {
 	      throw new InsufficientFundsException("Not enough cash in the register");
 	    }
+	  for (Product p : currentTransaction.getCart()) {
+		  addItemstoInventory(p.getUPC());
+	  }
 	  	currentTransaction.getCart().removeAll(currentTransaction.getCart());
 	  store.updateTransactionFile();
 	  

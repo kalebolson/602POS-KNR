@@ -79,7 +79,8 @@ public class AppFrame {
 				try {
 					AppFrame window = new AppFrame();
 					window.frmPosSystemLogin.setVisible(true);
-				} catch (Exception e) {
+				} 
+				catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -93,8 +94,7 @@ public class AppFrame {
 		try {
 			initialize();
 		} catch (InvalidIDException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid Cashier No.");
 		}
 		
 	}
@@ -1327,11 +1327,15 @@ public class AppFrame {
 					JOptionPane.showMessageDialog(frmPosSystemLogin, "Error: Invalid UPC");
 				} catch (InsufficientFundsException e) {
 					JOptionPane.showMessageDialog(frmPosSystemLogin, "Error: Insufficient Funds");
-					e.printStackTrace();
 				} catch (IOException e) {
 					JOptionPane.showMessageDialog(frmPosSystemLogin, "Error: Unable to Process Return");
 				}
-				txtAreaCS.setText(register.calculateSale());
+				try {
+					txtAreaCS.setText(register.calculateSale());
+				} catch (NullPointerException e) {
+					//do nothing, if this is caught we will not set text
+				}
+				
 			}
 		});
 		btnCancelEntireSale.setBounds(286, 208, 124, 25);
@@ -1370,7 +1374,12 @@ public class AppFrame {
 				} catch (NumberFormatException e) {
 					JOptionPane.showMessageDialog(frmPosSystemLogin, "Transaction ID Field Empty");
 				}
-				txtAreaCS.setText(register.calculateSale());
+				try {
+					txtAreaCS.setText(register.calculateSale());
+				} catch (NullPointerException e) {
+					//do nothing, if this is null there is nothing to calculate
+				}
+				
 				transactionIDCSField.setText("");
 			}
 		});
@@ -1514,8 +1523,7 @@ public class AppFrame {
 				} catch (NumberFormatException e) {
 					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid Username or Password");
 				} catch (HeadlessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "An error occurred, contact support");
 				} catch (InvalidIDException e) {
 					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid Username or Password");
 				} catch (IOException e) {
