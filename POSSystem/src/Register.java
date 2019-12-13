@@ -462,6 +462,29 @@ public class Register {
 		return "Cashier "+ID+" has no shift on record \n";
 	}
   }
+  
+  public String CashierReportCondensed(int ID){
+	    Cashier c;
+		try {
+			c = store.getCashier(ID);
+		    String s = "";
+		    s+=c.getID()+" | "+c.getFirstName()+" | "+c.getLastName() + "\n";
+		    return s;
+		} catch (InvalidIDException e) {
+			return "No cashier found with that ID number";
+		} catch (NullPointerException e) {
+			return "Cashier "+ID+" has no shift on record \n";
+		}
+	  }
+  
+  public String CashierReportFullCondensed(){
+	    String s = "";
+	    ArrayList<Cashier> cashiers = store.getCashiers();
+	    for (Cashier c : cashiers) {
+	    	s+=CashierReportCondensed(c.getID()); //Z report is just an X report for all cashiers
+	    }
+	    return s;
+	  }
 
   public String CashierReportZ(){
     String s = "";
