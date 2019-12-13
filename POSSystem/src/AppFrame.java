@@ -153,12 +153,25 @@ public class AppFrame {
 		lblNewLabel.setBounds(302, 12, 111, 15);
 		cashierPanel.add(lblNewLabel);
 		
+		JPanel newSalePanel = new JPanel();
+		containerPanel.add(newSalePanel, "newSaleScreen");
+		newSalePanel.setLayout(null);
+		
+		JScrollPane scrollPane_3 = new JScrollPane();
+		scrollPane_3.setBounds(34, 56, 197, 252);
+		newSalePanel.add(scrollPane_3);
+		
+		JTextArea txtrItemUPCListNS = new JTextArea();
+		txtrItemUPCListNS.setEditable(false);
+		scrollPane_3.setViewportView(txtrItemUPCListNS);
+		
 		JButton btnNewSale = new JButton("New Sale");
 		btnNewSale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				cardLayout.show(containerPanel, "newSaleScreen");
 				register.newSale();
 				txtrReceipt.setText(register.calculateSale());
+				txtrItemUPCListNS.setText(register.inventoryList());
 			}
 		});
 		btnNewSale.setBounds(285, 94, 128, 25);
@@ -391,7 +404,7 @@ public class AppFrame {
 		inventoryMgmtPanel.add(lblItemUpcList2);
 		
 		JLabel lblEnterUpc2 = new JLabel("Enter UPC");
-		lblEnterUpc2.setBounds(260, 80, 75, 15);
+		lblEnterUpc2.setBounds(267, 82, 75, 15);
 		inventoryMgmtPanel.add(lblEnterUpc2);
 		
 		UPCinvTextField = new JTextField();
@@ -419,7 +432,7 @@ public class AppFrame {
 		inventoryMgmtPanel.add(UPCinvTextField);
 		
 		JLabel lblThreshold = new JLabel("Enter Threshold");
-		lblThreshold.setBounds(260, 133, 100, 15);
+		lblThreshold.setBounds(242, 135, 122, 15);
 		inventoryMgmtPanel.add(lblThreshold);
 		
 		setThresholdField = new JTextField();
@@ -487,6 +500,7 @@ public class AppFrame {
 		scrollPaneinvListinventory.setViewportView(txtrInvListInventory);
 		
 		JButton btnAdminNewItem1 = new JButton("Add or Remove Products");
+		btnAdminNewItem1.setFont(new Font("Dialog", Font.BOLD, 11));
 		btnAdminNewItem1.setBounds(24, 345, 200, 25);
 		btnAdminNewItem1.addActionListener(new ActionListener() {
 			/*
@@ -585,7 +599,7 @@ public class AppFrame {
 		orderMgmtPanel.add(lblAddtoOrder);
 		
 		JLabel lblAddtoOrderUPC = new JLabel("UPC:");
-		lblAddtoOrderUPC.setBounds(255, 260, 100, 15);
+		lblAddtoOrderUPC.setBounds(250, 262, 100, 15);
 		orderMgmtPanel.add(lblAddtoOrderUPC);
 		
 		UPCaddToOrderField = new JTextField();
@@ -594,7 +608,7 @@ public class AppFrame {
 		UPCaddToOrderField.setColumns(10);
 		
 		JLabel lblAddtoOrderQuantity = new JLabel("Quantity:");
-		lblAddtoOrderQuantity.setBounds(360, 260, 122, 15);
+		lblAddtoOrderQuantity.setBounds(343, 262, 122, 15);
 		orderMgmtPanel.add(lblAddtoOrderQuantity);
 		
 		QuantityaddToOrderField = new JTextField();
@@ -622,7 +636,7 @@ public class AppFrame {
 		orderMgmtPanel.add(btnAddtoOrder);
 		
 		JButton btnRemovefromOrder = new JButton("Remove Quantity from Order");
-		btnRemovefromOrder.setFont(new Font("Dialog", Font.BOLD, 10));
+		btnRemovefromOrder.setFont(new Font("Dialog", Font.BOLD, 9));
 		btnRemovefromOrder.setBounds(270, 315, 180, 25);
 		btnRemovefromOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -640,7 +654,7 @@ public class AppFrame {
 		orderMgmtPanel.add(btnRemovefromOrder);
 		
 		JButton btnReceivefromOrder = new JButton("Receive Quantity from Order");
-		btnReceivefromOrder.setFont(new Font("Dialog", Font.BOLD, 10));
+		btnReceivefromOrder.setFont(new Font("Dialog", Font.BOLD, 9));
 		btnReceivefromOrder.setBounds(270, 345, 180, 25);
 		btnReceivefromOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -679,6 +693,7 @@ public class AppFrame {
 		scrollPaneinvListorder.setViewportView(txtrInvListOrder);
 		
 		JButton btnAdminNewItem2 = new JButton("Add or Remove Products");
+		btnAdminNewItem2.setFont(new Font("Dialog", Font.BOLD, 11));
 		btnAdminNewItem2.setBounds(24, 345, 200, 25);
 		btnAdminNewItem2.addActionListener(new ActionListener() {
 			private JLabel txtrInvListnewItem;
@@ -781,7 +796,8 @@ public class AppFrame {
 		NIRemoveUPCField.setColumns(10);
 		
 		JLabel lblNewItemName= new JLabel("Product Name:");
-		lblNewItemName.setBounds(250, 80, 100, 15);
+		lblNewItemName.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblNewItemName.setBounds(228, 81, 122, 15);
 		newItemMgmtPanel.add(lblNewItemName);
 		
 		JTextField NIProductNameField = new JTextField();
@@ -790,7 +806,7 @@ public class AppFrame {
 		NIProductNameField.setColumns(50);
 		
 		JLabel lblNewItemSupplier= new JLabel("Supplier:");
-		lblNewItemSupplier.setBounds(250, 110, 100, 15);
+		lblNewItemSupplier.setBounds(267, 108, 83, 15);
 		newItemMgmtPanel.add(lblNewItemSupplier);
 		
 		JTextField NISupplierField = new JTextField();
@@ -799,7 +815,7 @@ public class AppFrame {
 		NISupplierField.setColumns(50);
 		
 		JLabel lblNewItemPrice= new JLabel("Price:");
-		lblNewItemPrice.setBounds(250, 140, 100, 15);
+		lblNewItemPrice.setBounds(284, 142, 66, 15);
 		newItemMgmtPanel.add(lblNewItemPrice);
 		
 		JTextField NIPriceField = new JTextField();
@@ -808,7 +824,7 @@ public class AppFrame {
 		NIPriceField.setColumns(50);
 		
 		JLabel lblNewItemQuantity= new JLabel("# On-Hand:");
-		lblNewItemQuantity.setBounds(250, 170, 100, 15);
+		lblNewItemQuantity.setBounds(250, 170, 88, 15);
 		newItemMgmtPanel.add(lblNewItemQuantity);
 		
 		JTextField NIQuantityField = new JTextField();
@@ -817,7 +833,7 @@ public class AppFrame {
 		NIQuantityField.setColumns(50);
 		
 		JLabel lblNewItemThreshold= new JLabel("Theshold:");
-		lblNewItemThreshold.setBounds(250, 200, 100, 15);
+		lblNewItemThreshold.setBounds(262, 202, 88, 15);
 		newItemMgmtPanel.add(lblNewItemThreshold);
 		
 		JTextField NIThresholdField = new JTextField();
@@ -943,10 +959,6 @@ public class AppFrame {
 		  //END Manager UI 
 		  //****************************************************************************************** 
 		
-		JPanel newSalePanel = new JPanel();
-		containerPanel.add(newSalePanel, "newSaleScreen");
-		newSalePanel.setLayout(null);
-		
 		lblNewSale = new JLabel("New Sale");
 		lblNewSale.setBounds(318, 12, 103, 15);
 		lblNewSale.setFont(new Font("Dialog", Font.BOLD, 14));
@@ -974,10 +986,6 @@ public class AppFrame {
 			}
 		});
 		newSalePanel.add(btnFinalizeSale);
-		
-		JLabel lblItemUpcList = new JLabel("Item UPC List");
-		lblItemUpcList.setBounds(71, 27, 122, 15);
-		newSalePanel.add(lblItemUpcList);
 		
 		JLabel lblEnterUpc = new JLabel("Enter UPC");
 		lblEnterUpc.setBounds(318, 104, 103, 15);
@@ -1033,106 +1041,6 @@ public class AppFrame {
 		});
 		newSalePanel.add(btnCancelSale_1);
 		
-		JLabel lblNewLabel_1 = new JLabel("1 - Apples");
-		lblNewLabel_1.setBounds(24, 80, 129, 15);
-		lblNewLabel_1.setFont(new Font("Dialog", Font.PLAIN, 12));
-		newSalePanel.add(lblNewLabel_1);
-		
-		JLabel lblBananas = new JLabel("2 - Bananas");
-		lblBananas.setBounds(24, 104, 129, 15);
-		lblBananas.setFont(new Font("Dialog", Font.PLAIN, 12));
-		newSalePanel.add(lblBananas);
-		
-		JLabel lblChocolate = new JLabel("3 - Chocolate");
-		lblChocolate.setBounds(24, 133, 129, 15);
-		lblChocolate.setFont(new Font("Dialog", Font.PLAIN, 12));
-		newSalePanel.add(lblChocolate);
-		
-		JLabel lblChicken = new JLabel("4 - Chicken");
-		lblChicken.setBounds(24, 157, 129, 15);
-		lblChicken.setFont(new Font("Dialog", Font.PLAIN, 12));
-		newSalePanel.add(lblChicken);
-		
-		JLabel lblAlmond = new JLabel("8 - Almond Butter");
-		lblAlmond.setBounds(24, 261, 129, 15);
-		lblAlmond.setFont(new Font("Dialog", Font.PLAIN, 12));
-		newSalePanel.add(lblAlmond);
-		
-		JLabel lblPeanut = new JLabel("7 - Peanut Butter");
-		lblPeanut.setBounds(24, 234, 129, 15);
-		lblPeanut.setFont(new Font("Dialog", Font.PLAIN, 12));
-		newSalePanel.add(lblPeanut);
-		
-		JLabel lblEggs = new JLabel("6 - Eggs");
-		lblEggs.setBounds(24, 209, 129, 15);
-		lblEggs.setFont(new Font("Dialog", Font.PLAIN, 12));
-		newSalePanel.add(lblEggs);
-		
-		JLabel lblSalmon = new JLabel("5 - Salmon");
-		lblSalmon.setBounds(24, 184, 129, 15);
-		lblSalmon.setFont(new Font("Dialog", Font.PLAIN, 12));
-		newSalePanel.add(lblSalmon);
-		
-		JLabel lblBread = new JLabel("9 - Bread");
-		lblBread.setBounds(24, 288, 129, 15);
-		lblBread.setFont(new Font("Dialog", Font.PLAIN, 12));
-		newSalePanel.add(lblBread);
-		
-		JLabel lblPizza = new JLabel("10 - Pizza");
-		lblPizza.setBounds(24, 315, 129, 15);
-		lblPizza.setFont(new Font("Dialog", Font.PLAIN, 12));
-		newSalePanel.add(lblPizza);
-		
-		JLabel lblPizza_1 = new JLabel("20 - Milk");
-		lblPizza_1.setBounds(141, 315, 129, 15);
-		lblPizza_1.setFont(new Font("Dialog", Font.PLAIN, 12));
-		newSalePanel.add(lblPizza_1);
-		
-		JLabel lblBread_1 = new JLabel("19 - Pork");
-		lblBread_1.setBounds(141, 288, 129, 15);
-		lblBread_1.setFont(new Font("Dialog", Font.PLAIN, 12));
-		newSalePanel.add(lblBread_1);
-		
-		JLabel lblAlmond_1 = new JLabel("18 - Bacon");
-		lblAlmond_1.setBounds(141, 261, 129, 15);
-		lblAlmond_1.setFont(new Font("Dialog", Font.PLAIN, 12));
-		newSalePanel.add(lblAlmond_1);
-		
-		JLabel lblBacon = new JLabel("17 - Broccoli");
-		lblBacon.setBounds(141, 234, 129, 15);
-		lblBacon.setFont(new Font("Dialog", Font.PLAIN, 12));
-		newSalePanel.add(lblBacon);
-		
-		JLabel lblRum = new JLabel("16 - Rum");
-		lblRum.setBounds(141, 209, 129, 15);
-		lblRum.setFont(new Font("Dialog", Font.PLAIN, 12));
-		newSalePanel.add(lblRum);
-		
-		JLabel lblWine = new JLabel("15 - Wine");
-		lblWine.setBounds(141, 184, 129, 15);
-		lblWine.setFont(new Font("Dialog", Font.PLAIN, 12));
-		newSalePanel.add(lblWine);
-		
-		JLabel lblChicken_1 = new JLabel("14 - Beer");
-		lblChicken_1.setBounds(141, 157, 129, 15);
-		lblChicken_1.setFont(new Font("Dialog", Font.PLAIN, 12));
-		newSalePanel.add(lblChicken_1);
-		
-		JLabel lblJuice = new JLabel("13 - Juice");
-		lblJuice.setBounds(141, 133, 129, 15);
-		lblJuice.setFont(new Font("Dialog", Font.PLAIN, 12));
-		newSalePanel.add(lblJuice);
-		
-		JLabel lblOnions = new JLabel("12 - Onions");
-		lblOnions.setBounds(141, 104, 129, 15);
-		lblOnions.setFont(new Font("Dialog", Font.PLAIN, 12));
-		newSalePanel.add(lblOnions);
-		
-		JLabel lblOranges = new JLabel("11 - Oranges");
-		lblOranges.setBounds(141, 80, 129, 15);
-		lblOranges.setFont(new Font("Dialog", Font.PLAIN, 12));
-		newSalePanel.add(lblOranges);
-		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(468, 54, 208, 223);
 		newSalePanel.add(scrollPane);
@@ -1149,6 +1057,10 @@ public class AppFrame {
 		lblLoggedInUserNS.setBounds(604, 0, 111, 15);
 		lblLoggedInUserNS.setFont(new Font("Dialog", Font.PLAIN, 12));
 		newSalePanel.add(lblLoggedInUserNS);
+		
+		JLabel label_3 = new JLabel("Item UPC List");
+		label_3.setBounds(79, 27, 122, 15);
+		newSalePanel.add(label_3);
 		
 		JPanel cancelSalePanel = new JPanel();
 		containerPanel.add(cancelSalePanel, "cancelSaleScreen");
