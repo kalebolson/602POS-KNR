@@ -3,6 +3,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -21,6 +23,7 @@ public class Register {
   DecimalFormat df = new DecimalFormat("$###,##0.00");
   private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
   private LocalDateTime now = LocalDateTime.now();
+  private static final BigDecimal SALES_TAX = new BigDecimal("0.07875");
 
   Register(double initCash, Store store){
 	  //this block is to update the running ID txt file
@@ -157,7 +160,10 @@ public class Register {
   
   // overloaded method to return just a single item
   public void finalizeReturn(int UPC) throws InvalidIDException, IOException, InsufficientFundsException {
-	  removeCash(currentTransaction.getPrice(UPC));
+	  BigDecimal itemPrice = new BigDecimal(String.valueOf(getCurrentTransaction().getPrice(UPC)));
+	  itemPrice = itemPrice.add(itemPrice.multiply(SALES_TAX));
+	  itemPrice.setScale(2, RoundingMode.HALF_UP);
+	  removeCash(itemPrice.doubleValue());
 	  currentTransaction.removeFromSale(UPC);
 	  store.updateTransactionFile();
 	  
@@ -167,7 +173,6 @@ public class Register {
 	  
 	  currentCashier.getShift().addEvent(new Event(currentTransaction.getTransactionID(), "Return"));
 	  store.updateCashierFile();
-	  
   }
   
   //****************************************************************************************** 

@@ -7,6 +7,8 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
@@ -370,9 +372,13 @@ public class AppFrame {
 		btnAdminPrintCashierX.setBounds(324, 345, 140, 25);
 		btnAdminPrintCashierX.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int ID = Integer.parseInt(cashierXField.getText());
-				System.out.println("Action Listened to");
-				txtrReporting.setText(register.CashierReportX(ID));
+				try {
+					int ID = Integer.parseInt(cashierXField.getText());
+					System.out.println("Action Listened to");
+					txtrReporting.setText(register.CashierReportX(ID));
+				} catch (NumberFormatException e) {
+					JOptionPane.showMessageDialog(frmPosSystemLogin, "Invalid Cashier No.");
+				}
 			}
 		});
 		managerPanel.add(btnAdminPrintCashierX);
@@ -1197,8 +1203,12 @@ public class AppFrame {
 		btnReturnItemRI.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
+					BigDecimal salesTax = new BigDecimal("0.07875");
+					BigDecimal itemPrice = new BigDecimal(String.valueOf(register.getCurrentTransaction().getPrice(Integer.parseInt(upcRIField.getText()))));
+					itemPrice = itemPrice.add(itemPrice.multiply(salesTax));
+					itemPrice.setScale(2, RoundingMode.HALF_UP);
 					JOptionPane.showMessageDialog(frmPosSystemLogin, "Refund "
-							+ df.format(register.getCurrentTransaction().getPrice(Integer.parseInt(upcRIField.getText()))) 
+							+ df.format(itemPrice) 
 							+ " to the customer for this transaction.");
 					register.finalizeReturn(Integer.parseInt(upcRIField.getText()));
 				} catch (NumberFormatException e) {
