@@ -48,6 +48,11 @@ public class AppFrame {
 	private JLabel lblNewSale;
 	private JLabel lblNewItemMgmtMenu;
 	private JLabel lblstoreFunctionsMenu;
+	private JLabel MPLog; 
+	private JLabel InvLog; 
+	private JLabel OrderLog; 
+	private JLabel SFLog; 
+	private JLabel NILog;
 	private JTextField UPCtextField;
 	private JTextArea txtrReceipt;
 	private JTextArea txtrSFCashier;
@@ -250,10 +255,10 @@ public class AppFrame {
 		lblLoggedInAs_1.setBounds(506, 0, 112, 15);
 		managerPanel.add(lblLoggedInAs_1);
 		
-		lblLoggedInAdmin = new JLabel("Default Admin");
-		lblLoggedInAdmin.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblLoggedInAdmin.setBounds(615, 0, 100, 15);
-		managerPanel.add(lblLoggedInAdmin);
+		MPLog = new JLabel("Default"); 
+		MPLog.setFont(new Font("Dialog", Font.PLAIN, 12));
+		MPLog.setBounds(615, 0, 100, 15);
+		managerPanel.add(MPLog);
 		
 		JButton btnStoreFunctions = new JButton("Store Functions");
 		btnStoreFunctions.setBounds(487, 240, 200, 25);
@@ -409,10 +414,10 @@ public class AppFrame {
 		lblLoggedInAs_1.setBounds(506, 0, 112, 15);
 		inventoryMgmtPanel.add(lblLoggedInAs_1);
 		
-		lblLoggedInAdmin = new JLabel("Default");
-		lblLoggedInAdmin.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblLoggedInAdmin.setBounds(615, 0, 100, 15);
-		inventoryMgmtPanel.add(lblLoggedInAdmin); 
+		InvLog = new JLabel("Default"); 
+		InvLog.setFont(new Font("Dialog", Font.PLAIN, 12));
+		InvLog.setBounds(615, 0, 100, 15);
+		inventoryMgmtPanel.add(InvLog);
 		
 		JLabel lblItemUpcList2 = new JLabel("Item UPC List");
 		lblItemUpcList2.setBounds(24, 52, 122, 15);
@@ -605,10 +610,11 @@ public class AppFrame {
 		lblLoggedInAs_1.setBounds(506, 0, 112, 15);
 		orderMgmtPanel.add(lblLoggedInAs_1);
 		
-		lblLoggedInAdmin = new JLabel("Default");
-		lblLoggedInAdmin.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblLoggedInAdmin.setBounds(615, 0, 100, 15);
-		orderMgmtPanel.add(lblLoggedInAdmin); 
+	
+		OrderLog = new JLabel("Default"); 
+		OrderLog.setFont(new Font("Dialog", Font.PLAIN, 12));
+		OrderLog.setBounds(615, 0, 100, 15);
+		orderMgmtPanel.add(OrderLog);
 		
 		JLabel lblItemUpcList3 = new JLabel("Item UPC List");
 		lblItemUpcList3.setBounds(24, 52, 122, 15);
@@ -810,10 +816,15 @@ public class AppFrame {
 		lblLoggedInAs_1.setBounds(506, 0, 112, 15);
 		newItemMgmtPanel.add(lblLoggedInAs_1);
 		
-		lblLoggedInAdmin = new JLabel("Default");
-		lblLoggedInAdmin.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblLoggedInAdmin.setBounds(615, 0, 100, 15);
-		newItemMgmtPanel.add(lblLoggedInAdmin); 
+		//lblLoggedInAdmin = new JLabel("Default");
+		//lblLoggedInAdmin.setFont(new Font("Dialog", Font.PLAIN, 12));
+		//lblLoggedInAdmin.setBounds(615, 0, 100, 15);
+		//newItemMgmtPanel.add(lblLoggedInAdmin); 
+		
+		NILog = new JLabel("Default"); 
+		NILog.setFont(new Font("Dialog", Font.PLAIN, 12));
+		NILog.setBounds(615, 0, 100, 15);
+		newItemMgmtPanel.add(NILog);
 		
 		JScrollPane scrollPaneinvListnewItems = new JScrollPane();
 		scrollPaneinvListnewItems.setBounds(24, 80, 200, 255);
@@ -1504,6 +1515,10 @@ public class AppFrame {
 					if (register.unlock(username, password) && store.getCashier(username).isAdmin()) {
 						JOptionPane.showMessageDialog(frmPosSystemLogin, "Login Successful");
 						lblLoggedInAdmin.setText(store.getCashier(username).getFirstName() + " " + store.getCashier(username).getLastName());
+						MPLog.setText(store.getCashier(username).getFirstName() + " " + store.getCashier(username).getLastName());
+						InvLog.setText(store.getCashier(username).getFirstName() + " " + store.getCashier(username).getLastName());
+						OrderLog.setText(store.getCashier(username).getFirstName() + " " + store.getCashier(username).getLastName());
+					    NILog.setText(store.getCashier(username).getFirstName() + " " + store.getCashier(username).getLastName());
 						lblLoggedInUserNS.setText(store.getCashier(username).getFirstName() + " " + store.getCashier(username).getLastName());
 						lblLoggedInUserRI.setText(store.getCashier(username).getFirstName() + " " + store.getCashier(username).getLastName());
 						lblLoggedInUserCS.setText(store.getCashier(username).getFirstName() + " " + store.getCashier(username).getLastName());
